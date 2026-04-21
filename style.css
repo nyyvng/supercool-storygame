@@ -133,16 +133,21 @@ div.info {
 
 }
 
+
+
+
+/* gameplay */
 #image {
     width: 1324px;
     height: 920px;
+    max-width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
     background-position: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: auto;
+    margin-top: 100px;
 }
 
 .dialouge {
@@ -155,6 +160,7 @@ div.info {
     margin-top: -300px;
     background-image: url(dialouge.png);
     background-size: 541px;
+    max-width: fit-content;
 }
 
 button {
@@ -173,4 +179,37 @@ button:hover {
 a {
     text-decoration: none;
     color: black;
+}
+
+
+
+/*starter/pokemon pick */
+.starter-pick {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 450px;
+    margin-right: 450px;
+}
+.litten {
+    display: block;
+    width: 900px;
+    height: 120px;
+    background-color: aquamarine;
+}
+#lit {
+    width: 95px;
+    height: 105px;
+    max-width: fit-content;
+    margin: 0;
+    
+}
+#frk {
+    width: 100px;
+    height: 90px;
+    margin: 0;
+}
+#tck {
+    width: 80px;
+    height: 95px;
+    margin: 0;
 }
