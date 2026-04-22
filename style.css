@@ -184,23 +184,25 @@ a {
 
 
 /*starter/pokemon pick */
-.starter-pick {
+#starter-pick {
     display: flex;
     justify-content: space-between;
-    margin-left: 450px;
-    margin-right: 450px;
+    align-items: center;
+    margin-left: 850px;
+    margin-right: 950px;
 }
 .litten {
     display: block;
     width: 900px;
     height: 120px;
     background-color: aquamarine;
+    
 }
 #lit {
     width: 95px;
     height: 105px;
-    max-width: fit-content;
-    margin: 0;
+    max-width: fit-content; 
+    
     
 }
 #frk {
