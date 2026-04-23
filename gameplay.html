@@ -7,44 +7,21 @@
     <title>Cart Adventure | Gameplay!</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Jersey 20' rel='stylesheet'>
-    <script src="app.js"></script>
 </head>
 
 <body class="gameplay">
-    <div class="game1">
-        <img id="image" src="bg1.png">
+    <div class="game">
+        
+        <img id="background" src="">
+        <div id="dialogueBox">
+            <h2 id="name"></h2>
+            <p id="dialogue"></p>
 
-        <dialog class="dialouge" open>
-            <p>You make your way towards the laboratory, where you meet Professor [teacher name].
-                They will let you pick your very first Pokemon.</p>
-            <form method="dialog">
-                <button onclick=""><a href="starter.html">NEXT</a></button>
-            </form>
-        </dialog>
-        <dialog class="dialouge" open>
-            <p>Today is the day you get to go out on your Pokemon journey in the CART region!
-                This is your town, [CART lab], and today is the day you leave to adventure!</p>
-            <form method="dialog">
-                <button>NEXT</button>
-            </form>
-        </dialog>
-
-
+            <div id="options"></div>
+            <button id="nextBtn">Next</button>
+        </div>
     </div>
-    <!-- <dialog class="dialouge" open>
-        <p>Who would you like to join you on your journey?</p>
-        <form method="dialog">
-        </form>
-    </dialog>
-    <dialog class="dialouge" open>
-        <p>You also meet your classmate [student] at the lab,
-            who is also starting their Pokemon journey as well.
-            [student] insists you go first to choose your partner.</p>
-        <form method="dialog">
-            <button>NEXT</button>
-        </form>
-    </dialog> --> <!-- this section will not be used for now -->
-
 </body>
+<script src="app.js"></script>
 
 </html>

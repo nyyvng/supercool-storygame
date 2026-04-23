@@ -137,31 +137,6 @@ div.info {
 
 
 /* gameplay */
-#image {
-    width: 1324px;
-    height: 920px;
-    max-width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-position: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-}
-
-.dialouge {
-    height: 130px;
-    width: 1290px;
-    font-size: 20px;
-    padding: 20px;
-    width: 500px;
-    word-wrap: break-word;
-    margin-top: -300px;
-    background-image: url(dialouge.png);
-    background-size: 541px;
-    max-width: fit-content;
-}
 
 button {
     height: 30px;
@@ -182,75 +157,35 @@ a {
 }
 
 
+#background {
+    position: relative;
+    width: 1324px;
+    height: 920px;
+    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
 
-/*starter/pokemon pick */
-/* #starter-pick {
-    display: flex;
-    justify-content: space-between;
-    justify-items: center;
+#dialogueBox {
+    position: absolute;
+    height: 120px;
+    width: 490px;
+    font-size: 20px;
+    padding: 23px;
+    margin-top: -300px;
+    background-image: url(dialouge.png);
+    background-size: 538px;
+    max-width: fit-content;
+    color: black;
     align-items: center;
-    margin-left: 700px;
-    margin-right: 700px;
-    margin-top: -700px;
-}
-.litten {
-    display: block;
-    width: 250px;
-    height: 500px;
-    background-color: rgb(255, 152, 35);
-    margin: 0;
-    display: flex;
     justify-content: center;
-    align-items: center;
+    background-position: center;
+    margin-left: auto;
+    margin-right: auto;
 
 }
-#lit {
-    width: 95px;
-    height: 105px;
-    max-width: fit-content; 
-}
-#lit:hover {
-    width: 100px;
-    height: 110px;
-    transition: 0.5s;
-}
-.froakie {
-    display: block;
-    width: 250px;
-    height: 500px;
-    background-color: rgb(255, 236, 127);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#frk {
-    width: 100px;
-    height: 90px;
-    margin: 0;
-}
-.treecko {
-    display: block;
-    width: 250px;
-    height: 500px;
-    background-color: rgb(150, 127, 255);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#frk:hover {
-    width: 105px;
-    height: 95px;
-    transition: 0.5s;
-}
-#tck {
-    width: 80px;
-    height: 95px;
-    margin: 0;
-}
-#tck:hover {
-    width: 85px;
-    height: 100px;
-    transition: 0.5s;
-} */
