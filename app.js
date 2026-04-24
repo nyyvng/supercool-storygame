@@ -142,11 +142,18 @@ const scenes = {
                 next: "runFromWynaut"
             }
         ]
+
+       
     },
     fightWynaut: {
         dialogue: `You chose to fight ...Wynaut!`,
         background: "route1.png",
     },
+
+   
+
+
+
     catchWynaut: {
         dialogue: `You chose to catch ...Wynaut!`,
         background: "route1.png",
