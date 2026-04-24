@@ -1,7 +1,16 @@
 const starterThemes = {
-    fire: "#e74c3c",   
-    water: "#3498db",  
-    grass: "#2ecc71" 
+    fire: "#e74c3c",
+    water: "#50caf6",
+    grass: "#2ecc71",
+    electric: "#ebd540",
+    ground: "#876414",
+    flying: "d8fff8",
+    dark: "#5a4a69",
+    psychic: "#b98ee0",
+    fairy: "#ffe0fd",
+    dragon: "#4f82bc",
+    normal: "#c9c9c9",
+    fighting: "#e9a125"
 };
 
 function setStarterTheme(pokemonName) {
@@ -42,7 +51,7 @@ const scenes = {
                     gameState.starter = "Litten";
                     setStarterTheme("fire");
                 },
-                next: "chosen"
+                next: "chosenStarter"
             },
             {
                 text: "Froakie",
@@ -51,7 +60,7 @@ const scenes = {
                     gameState.starter = "Froakie";
                     setStarterTheme("water");
                 },
-                next: "chosen"
+                next: "chosenStarter"
             },
             {
                 text: "Treecko",
@@ -60,14 +69,158 @@ const scenes = {
                     gameState.starter = "Treecko";
                     setStarterTheme("grass");
                 },
-                next: "chosen"
+                next: "chosenStarter" // maybe fix this soon or make a function that based on what pokemon u pick as your starter the ending is different
             }
         ]
     },
-    chosen: {
+    chosenStarter: {
         dialogue: () => `You chose a ...${gameState.starter}!`,
-        background: "bg2.png"
-    }
+        background: "bg2.png",
+        next: "intro4"
+    },
+    intro4: {
+        dialogue: () => `You picked ${gameState.starter}! After your pick, [student name] picks theirs and you both go on your separate ways.`,
+        background: "bg2.png",
+        next: "routeOne1"
+    },
+    routeOne1: {
+        dialogue: "You reach route 1: Grassy Terrains. It has a large field of yellow patches of grass.",
+        background: "route1.png",
+        next: "routeOne2"
+    },
+    routeOne2: {
+        dialogue: "You find three unique Pokemon, but you can't see them through all the tall grass! However, you could only battle one and catch one of them…",
+        background: "route1.png",
+        next: "routeOne3"
+    },
+    routeOne3: {
+        dialogue: "There are three Pokemons hiding, which one should you encounter and catch?",
+        background: "route1.png",
+        options: [
+            {
+                text: "Psychic",
+                action: () => {
+                    gameState.starter = "Wynaut";
+                    setStarterTheme("psychic");
+                },
+                next: "chosenWynaut"
+            },
+            {
+                text: "Ground",
+                action: () => {
+                    gameState.starter = "Cubone";
+                    setStarterTheme("ground");
+                },
+                next: "chosenCubone"
+            },
+            {
+                text: "Normal",
+                action: () => {
+                    gameState.starter = "Munchlax";
+                    setStarterTheme("normal");
+                },
+                next: "chosenMunchlax"
+            }
+        ]
+    },
+
+    //wynaut option
+    chosenWynaut: {
+        dialogue: "A wild Wynaut has appeared! What will you do?",
+        background: "route1.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightWynaut"
+            },
+            {
+                text: "Catch",
+                next: "catchWynaut"
+            },
+            {
+                text: "Run",
+                next: "runFromWynaut"
+            }
+        ]
+    },
+    fightWynaut: {
+        dialogue: `You chose to fight ...Wynaut!`,
+        background: "route1.png",
+    },
+    catchWynaut: {
+        dialogue: `You chose to catch ...Wynaut!`,
+        background: "route1.png",
+    },
+    runFromWynaut: {
+        dialogue: `You chose to flee from ...Wynaut!`,
+        background: "route1.png",
+    },
+
+
+    // cubone option
+    chosenCubone: {
+        dialogue: "A wild Cubone has appeared! What will you do?",
+        background: "route1.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightCubone"
+            },
+            {
+                text: "Catch",
+                next: "catchCubone"
+            },
+            {
+                text: "Run",
+                next: "runFromCubone"
+            }
+        ]
+    },
+    fightCubone: {
+        dialogue: `You chose to fight ...Cubone!`,
+        background: "route1.png",
+    },
+    catchCubone: {
+        dialogue: `You chose to catch ...Cubone!`,
+        background: "route1.png",
+    },
+    runFromCubone: {
+        dialogue: `You chose to flee from ...Cubone!`,
+        background: "route1.png",
+    },
+
+
+    // munchlax option
+    chosenMunchlax: {
+        dialogue: "A wild Munchlax has appeared! What will you do?",
+        background: "route1.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightMunchlax"
+            },
+            {
+                text: "Catch",
+                next: "catchMunchlax"
+            },
+            {
+                text: "Run",
+                next: "runFromMunchlax"
+            }
+        ]
+    },
+    fightMunchlax: {
+        dialogue: `You chose to fight ...Munchlax!`,
+        background: "route1.png",
+    },
+    catchMunchlax: {
+        dialogue: `You chose to catch ...Munchlax!`,
+        background: "route1.png",
+    },
+    runFromMunchlax: {
+        dialogue: `You chose to flee from ...Munchlax!`,
+        background: "route1.png",
+    },
 }
 
 

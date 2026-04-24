@@ -5,6 +5,27 @@
     --text-color: rgb(255, 244, 94);
     --blue-box: #83B7FF;
     --starter-color: white;
+
+
+    /*pokemon type colors listed below */
+    --fire: #e74c3c;
+    --water: #50caf6;
+    --grass: #2ecc71;
+    --electric: #ebd540;
+    --ground: #876414;
+    --flying: d8fff8;
+    --dark: #5a4a69;
+    --psychic: #b98ee0;
+    --fairy: #ffe0fd;
+    --dragon: #4f82bc;
+    --normal: #c9c9c9;
+    --fighting: #e9a125;
+    --bug: #4c8153;
+    --steel: #777777;
+    --poision: #8a139a;
+    --ice: #86ffeb;
+    --ghost: #a618ff;
+    --rock: #44413d;
 }
 
 body.title {
@@ -185,8 +206,10 @@ a {
 
 
 
-#options button {
-    background-color: var(--starter-color) !important;
+#options button:first-child {
+    background-color: var(--fire);
+    color: white;
+
 }
 
 #options {
@@ -206,7 +229,7 @@ a {
     cursor: pointer;
     font-size: 14px;
     padding: 5px;
-    
+
 }
 
 #options button img {
@@ -225,5 +248,5 @@ a {
     width: 1324px;
     height: 920px;
     margin: 100px auto 0 auto;
-    
+
 }
