@@ -1,4 +1,13 @@
+const starterThemes = {
+    fire: "#e74c3c",   
+    water: "#3498db",  
+    grass: "#2ecc71" 
+};
 
+function setStarterTheme(pokemonName) {
+    const color = starterThemes[pokemonName] || "white";
+    document.documentElement.style.setProperty("--starter-color", color);
+}
 
 const gameState = {
     starter: null
@@ -28,23 +37,35 @@ const scenes = {
         options: [
             {
                 text: "Litten",
-                action: () => gameState.starter = "Litten",
+                img: "litten.png",
+                action: () => {
+                    gameState.starter = "Litten";
+                    setStarterTheme("fire");
+                },
                 next: "chosen"
             },
             {
                 text: "Froakie",
-                action: () => gameState.starter = "Froakie",
+                img: "froakie.png",
+                action: () => {
+                    gameState.starter = "Froakie";
+                    setStarterTheme("water");
+                },
                 next: "chosen"
             },
             {
                 text: "Treecko",
-                action: () => gameState.starter = "Treecko",
+                img: "treecko.png",
+                action: () => {
+                    gameState.starter = "Treecko";
+                    setStarterTheme("grass");
+                },
                 next: "chosen"
             }
         ]
     },
     chosen: {
-        text: () => `You chose a ...${gameState.starter}!`,
+        dialogue: () => `You chose a ...${gameState.starter}!`,
         background: "bg2.png"
     }
 }
@@ -89,13 +110,17 @@ function loadScene(sceneKey) {
     if (scene.options) {
         nextBtn.style.display = "none";
 
-        scene.options.forEach(options => {
+        scene.options.forEach(option => {
             const btn = document.createElement("button");
-            btn.textContent = options.dialogue;
+            btn.innerHTML = `
+            ${option.img ? `<img src="${option.img}" style="width:80px;"><br>` : ""}
+            ${option.text}
+            `;
+
 
             btn.onclick = () => {
-                if (options.action) options.action();
-                currentScene = options.next;
+                if (option.action) option.action();
+                currentScene = option.next;
                 loadScene(currentScene);
             };
 
