@@ -299,3 +299,20 @@ nextBtn.onclick = () => {
 
 loadScene(currentScene);
 
+
+
+
+// inventory function.... doesnt wporkm right now
+// document.addEventListener("DOMContentLoaded", () => {
+//     const overlay = document.getElementById("overlay");
+//     const showBtn = document.getElementById("showOverlay");
+//     const closeBtn = document.getElementById("closeOverlay");
+
+//     showBtn.addEventListener("click", () => {
+//         overlay.classList.remove = "hidden";
+//     });
+//     closeBtn.addEventListener("click", () => {
+//         inventory.classList.add = "hidden";
+//     });
+    
+// });
