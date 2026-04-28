@@ -22,6 +22,41 @@ const gameState = {
     starter: null
 };
 const scenes = {
+    captured: {
+        dialogue: () => `${gameState.starter} was caught!`,
+        background: "route1.png",
+        next: "intro"
+    },
+    capturefailed: {
+        dialogue: () => `${gameState.starter} escaped!`,
+        background: "route1.png",
+        next: "routeOne1"
+    },
+    /* error starts here!!
+}
+    chosenWynaut: {
+        dialogue: "A wild Wynaut has appeared! What will you do?",
+        background: "route1.png",
+        options: [
+        {
+            text: "Catch",
+            action: () => {
+                if (Math.random() <0.5) {
+                    currentScene = "captured";
+                } else {
+                    currentScene = "capturefailed";
+                }
+                loadScene(currentScene);
+            },
+            next: null
+        },
+        {
+            text:"Run",
+            next: "routeOne1"
+        }
+        ]
+    },
+
     intro: {
         dialogue: "Today is the day you get to go out on your Pokemon journey in the CART region! This is your town, [CART lab], and today is the day you leave to adventure!",
         background: "bg1.png",
@@ -73,6 +108,12 @@ const scenes = {
             }
         ]
     },
+    
+   
+
+    
+
+
     chosenStarter: {
         dialogue: () => `You chose a ...${gameState.starter}!`,
         background: "bg2.png",
@@ -142,11 +183,18 @@ const scenes = {
                 next: "runFromWynaut"
             }
         ]
+
+       
     },
     fightWynaut: {
         dialogue: `You chose to fight ...Wynaut!`,
         background: "route1.png",
     },
+
+   
+
+
+
     catchWynaut: {
         dialogue: `You chose to catch ...Wynaut!`,
         background: "route1.png",
@@ -223,7 +271,7 @@ const scenes = {
     },
 }
 
-
+*/
 
 
 
@@ -273,10 +321,12 @@ function loadScene(sceneKey) {
 
             btn.onclick = () => {
                 if (option.action) option.action();
+                if (option.next) {
+                option.action();
                 currentScene = option.next;
                 loadScene(currentScene);
-            };
-
+            }
+        };
             optionsEl.appendChild(btn);
         });
 
@@ -309,7 +359,6 @@ loadScene(currentScene);
 //     const closeBtn = document.getElementById("closeOverlay");
 
 //     showBtn.addEventListener("click", () => {
-//         overlay.classList.remove = "hidden";
 //     });
 //     closeBtn.addEventListener("click", () => {
 //         inventory.classList.add = "hidden";
