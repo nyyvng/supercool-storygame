@@ -32,7 +32,7 @@ const scenes = {
         background: "route1.png",
         next: "routeOne1"
     },
-    /* error starts here
+    /* error starts here!!
 }
     chosenWynaut: {
         dialogue: "A wild Wynaut has appeared! What will you do?",
