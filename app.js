@@ -21,6 +21,17 @@ function setStarterTheme(pokemonName) {
 const gameState = {
     starter: null
 };
+
+
+function fiftyfifty() {
+    let result = 'lost';
+    if (Math.random() < .5 )  {
+        result = 'won';
+    }
+    return result;
+}
+
+
 const scenes = {
     captured: {
         dialogue: () => `${gameState.starter} was caught!`,
@@ -167,8 +178,9 @@ const scenes = {
         
         dialogue: `You chose to fight ...Wynaut!`,
         background: "route1.png",
-        next: "Wynautfightwin",
+        next: "Wynautfight",
     },
+    
 
 
     catchWynaut: {
@@ -182,20 +194,12 @@ const scenes = {
     },
 
 
-    Wynautfightwin: {
+    Wynautfight: {
 
-        dialogue: `You won against Wynaut!`,
+        dialogue: `You ${fiftyfifty()} against Wynaut!`,
         background: "route1.png",
     },
-
-    Wynautfightloss: {
-        dialogue: `You lost against Wynaut!`,
-        background: "route1.png",
-
-    },
     
-    
-   
 
 
     // cubone option
@@ -292,7 +296,7 @@ function loadScene(sceneKey) {
     const scene = scenes[sceneKey];
 
     dialogueEl.textContent =
-        typeof scene.dialogue === "function"
+        typeof scene.dialogue === `function`
             ? scene.dialogue()
             : scene.dialogue;
 
@@ -362,14 +366,3 @@ loadScene(currentScene);
 
 
 
-function fiftyfifty() {
-    let result = false;
-    if (Math.random() < .5 )  {
-        result = true;
-    }
-    return result;
-}
-
-let win = fiftyfifty()
-console.log(fiftyfifty())
-console.log(win);
