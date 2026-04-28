@@ -209,17 +209,20 @@ const scenes = {
 
         dialogue: `You ${fiftyfifty()} against Wynaut!`,
         background: "route1.png",
+        next: "routetwo1",
     },
     
     Wynautcapture: {
 
         dialogue: `You ${capture()} Wynaut!`,
         background: "route1.png",
+        next: "routetwo1",
     },
 
     RunawayWynaut: {
         dialogue: `You successfully ran away from Wynaut...`,
         background: "blackscreen.jpg",
+        next: "routetwo1",
     },
 
 
@@ -260,20 +263,22 @@ const scenes = {
 
     Cubonefight: {
         dialogue: `You ${fiftyfifty()} against Cubone!`,
-        background: "route1.png", 
+        background: "route1.png",
+        next: "routetwo1", 
     },
 
     Cubonecapture: {
 
         dialogue: `You ${capture()} Cubone!`,
         background: "route1.png", 
+        next: "routetwo1",
     },
 
     Cubonerun: {
         
         dialogue: `You successfully ran away from Cubone...`,
         background: "blackscreen.jpg",
-
+        next: "routetwo1",
     },
 
     // munchlax option
@@ -315,11 +320,13 @@ const scenes = {
 Munchlaxfight:{
     dialogue: `You ${fiftyfifty()} against Munchlax!`,
         background: "route1.png", 
+        next: "routetwo1",
 },
 
 CatchMunchlax:{
     dialogue: `You ${capture()} Munchlax!`,
         background: "route1.png", 
+        next: "routetwo1",
 },
 Munchlaxrun:{ 
 dialogue: `You successfully ran away from Munchlax...`,
@@ -329,7 +336,7 @@ dialogue: `You successfully ran away from Munchlax...`,
 
 //route 2!!!
 routetwo1:{
-dialogue: `After your first battle and getting a new comrade, you reach route 2: Berry Woods.`,
+dialogue: `After your encounter, you reach route 2: Berry Woods.`,
 background: "route2.png",
 next: "routetwo2",
 
