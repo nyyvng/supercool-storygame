@@ -32,30 +32,7 @@ const scenes = {
         background: "route1.png",
         next: "routeOne1"
     },
-    /* error starts here!!
-}
-    chosenWynaut: {
-        dialogue: "A wild Wynaut has appeared! What will you do?",
-        background: "route1.png",
-        options: [
-        {
-            text: "Catch",
-            action: () => {
-                if (Math.random() <0.5) {
-                    currentScene = "captured";
-                } else {
-                    currentScene = "capturefailed";
-                }
-                loadScene(currentScene);
-            },
-            next: null
-        },
-        {
-            text:"Run",
-            next: "routeOne1"
-        }
-        ]
-    },
+   
 
     intro: {
         dialogue: "Today is the day you get to go out on your Pokemon journey in the CART region! This is your town, [CART lab], and today is the day you leave to adventure!",
@@ -172,7 +149,7 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightWynaut"
+                next: "fightWynaut" 
             },
             {
                 text: "Catch",
@@ -187,22 +164,38 @@ const scenes = {
        
     },
     fightWynaut: {
+        
         dialogue: `You chose to fight ...Wynaut!`,
         background: "route1.png",
+        next: "Wynautfightwin",
     },
-
-   
-
 
 
     catchWynaut: {
         dialogue: `You chose to catch ...Wynaut!`,
         background: "route1.png",
     },
+
     runFromWynaut: {
         dialogue: `You chose to flee from ...Wynaut!`,
         background: "route1.png",
     },
+
+
+    Wynautfightwin: {
+
+        dialogue: `You won against Wynaut!`,
+        background: "route1.png",
+    },
+
+    Wynautfightloss: {
+        dialogue: `You lost against Wynaut!`,
+        background: "route1.png",
+
+    },
+    
+    
+   
 
 
     // cubone option
@@ -271,7 +264,7 @@ const scenes = {
     },
 }
 
-*/
+
 
 
 
@@ -322,7 +315,7 @@ function loadScene(sceneKey) {
             btn.onclick = () => {
                 if (option.action) option.action();
                 if (option.next) {
-                option.action();
+                //removed option.action(); seemed to let you continue after pressing fight.//
                 currentScene = option.next;
                 loadScene(currentScene);
             }
@@ -352,6 +345,7 @@ loadScene(currentScene);
 
 
 
+
 // inventory function.... doesnt wporkm right now
 // document.addEventListener("DOMContentLoaded", () => {
 //     const overlay = document.getElementById("overlay");
@@ -365,3 +359,17 @@ loadScene(currentScene);
 //     });
     
 // });
+
+
+
+function fiftyfifty() {
+    let result = false;
+    if (Math.random() < .5 )  {
+        result = true;
+    }
+    return result;
+}
+
+let win = fiftyfifty()
+console.log(fiftyfifty())
+console.log(win);
