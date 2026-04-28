@@ -12,7 +12,7 @@ const starterThemes = {
     normal: "#c9c9c9",
     fighting: "#e9a125"
 };
-
+ 
 function setStarterTheme(pokemonName) {
     const color = starterThemes[pokemonName] || "white";
     document.documentElement.style.setProperty("--starter-color", color);
@@ -21,6 +21,17 @@ function setStarterTheme(pokemonName) {
 const gameState = {
     starter: null
 };
+
+
+function fiftyfifty() {
+    let result = 'lost';
+    if (Math.random() < .5 )  {
+        result = 'won';
+    }
+    return result;
+}
+
+
 const scenes = {
     captured: {
         dialogue: () => `${gameState.starter} was caught!`,
@@ -32,30 +43,7 @@ const scenes = {
         background: "route1.png",
         next: "routeOne1"
     },
-    /* error starts here!! */
-}
-    chosenWynaut: {
-        dialogue: "A wild Wynaut has appeared! What will you do?",
-        background: "route1.png",
-        options: [
-        {
-            text: "Catch",
-            action: () => {
-                if (Math.random() <0.5) {
-                    currentScene = "captured";
-                } else {
-                    currentScene = "capturefailed";
-                }
-                loadScene(currentScene);
-            },
-            next: null
-        },
-        {
-            text:"Run",
-            next: "routeOne1"
-        }
-        ]
-    },
+   
 
     intro: {
         dialogue: "Today is the day you get to go out on your Pokemon journey in the CART region! This is your town, [CART lab], and today is the day you leave to adventure!",
@@ -172,7 +160,7 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightWynaut"
+                next: "fightWynaut" 
             },
             {
                 text: "Catch",
@@ -187,22 +175,31 @@ const scenes = {
        
     },
     fightWynaut: {
+        
         dialogue: `You chose to fight ...Wynaut!`,
         background: "route1.png",
+        next: "Wynautfight",   
     },
-
-   
-
+    
 
 
     catchWynaut: {
         dialogue: `You chose to catch ...Wynaut!`,
         background: "route1.png",
     },
+
     runFromWynaut: {
         dialogue: `You chose to flee from ...Wynaut!`,
         background: "route1.png",
     },
+
+
+    Wynautfight: {
+
+        dialogue: `You ${fiftyfifty()} against Wynaut!`,
+        background: "route1.png",
+    },
+    
 
 
     // cubone option
@@ -269,6 +266,7 @@ const scenes = {
         dialogue: `You chose to flee from ...Munchlax!`,
         background: "route1.png",
     },
+}
 
 
 
@@ -298,7 +296,7 @@ function loadScene(sceneKey) {
     const scene = scenes[sceneKey];
 
     dialogueEl.textContent =
-        typeof scene.dialogue === "function"
+        typeof scene.dialogue === `function`
             ? scene.dialogue()
             : scene.dialogue;
 
@@ -321,7 +319,7 @@ function loadScene(sceneKey) {
             btn.onclick = () => {
                 if (option.action) option.action();
                 if (option.next) {
-                option.action();
+                //removed option.action(); seemed to let you continue after pressing fight.//
                 currentScene = option.next;
                 loadScene(currentScene);
             }
@@ -351,6 +349,7 @@ loadScene(currentScene);
 
 
 
+
 // inventory function.... doesnt wporkm right now
 // document.addEventListener("DOMContentLoaded", () => {
 //     const overlay = document.getElementById("overlay");
@@ -364,3 +363,6 @@ loadScene(currentScene);
 //     });
     
 // });
+
+
+
