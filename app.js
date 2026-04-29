@@ -243,32 +243,36 @@ const scenes = {
 
     Wynautfight: {
 
-        dialogue: () => {
-            const result = fiftyfifty();
+        dialogue: function () {
+            const battle = battlePokemon("Wynaut", "routetwo1", "chosenWynaut");
 
-            if (result === "won") {
-                addPokemonToParty("Wynaut");
-            }
+            this.nextScene = battle.next;
 
-            return `You ${result} against Wynaut!`;
+            return  battle.text;
         },
             
         background: "route1.png",
-        next: "routetwo1",
+
+        next: function () {
+            return this.nextScene;
+        }
     },
     
     Wynautcapture: {
 
-        dialogue: () => {
-            const result = capture();
-            if (result === "caught") {
-                addPokemonToParty("Wynaut");
+        dialogue: function () {
+            const captureResult = catchPokemon("Wynaut", "routetwo1", "chosenWynaut")
 
-        }
-            return `You ${result} Wynaut!`;
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
         },
+        
         background: "route1.png",
-        next: "routetwo1",
+
+        next: function () {
+            return this.nextScene;
+        }
     },
 
     RunawayWynaut: {
@@ -483,12 +487,20 @@ function loadScene(sceneKey) {
 
 
 nextBtn.onclick = () => {
-    const next = scenes[currentScene].next;
+    const scene = scenes[currentScene];
+
+    const next =
+        typeof scene.next === "function"
+            ? scene.next()
+            : scene.next;
+    
     if (next) {
         currentScene = next;
         loadScene(currentScene);
     }
+        
 };
+
 
 loadScene(currentScene);
 
@@ -512,3 +524,32 @@ loadScene(currentScene);
 
 
 
+
+// pokemon battle thingy
+function battlePokemon(pokemonName, nextRoute, retryScene) {
+    const result = fiftyfifty()
+
+    return {
+        result,
+        next: result === "won"
+            ? nextRoute
+            : retryScene,
+        text: `You ${result} against ${pokemonName}`
+    };
+}
+
+// pokemon catch thingy
+function catchPokemon(pokemonName, nextRoute, retryScene) {
+    const result = capture();
+
+    if (result === "caught") {
+        addPokemonToParty(pokemonName);
+    }
+
+    return {
+        next: result ==="caught"
+            ? nextRoute
+            : retryScene,
+        text: `You ${result} ${pokemonName}`
+    };
+}
