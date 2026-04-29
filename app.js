@@ -202,7 +202,7 @@ const scenes = {
         next: "intro4"
     },
     intro4: {
-        dialogue: () => `You picked ${gameState.starter}! After your pick, [student name] picks theirs and you both go on your separate ways.`,
+        dialogue: () => `You picked ${gameState.starter}! After your pick, ${playerData.classmate} picks theirs and you both go on your separate ways.`,
         background: "bg2.png",
         next: "routeOne1"
     },
