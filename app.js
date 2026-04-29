@@ -18,8 +18,11 @@ function setStarterTheme(pokemonName) {
     document.documentElement.style.setProperty("--starter-color", color);
 }
 
+
 const gameState = {
-    starter: null
+    starter: null,
+    party: [],
+    currentEncounter: null
 };
 
 
@@ -39,7 +42,37 @@ function capture() {
     return result;
 }
 
+// pokemon party 
+function addPokemonToParty(pokemonName) {
+    if (gameState.party.length < 6) {
+        gameState.party.push(pokemonName);
+        updateInventory();
+    }
+}
+// pokemon inventory update
+function updateInventory() {
+    const inventory = document.getElementById("pokemonInventory");
 
+    inventory.innerHTML = "";
+
+    gameState.party.forEach((pokemon, index) => {
+        const slot = document.createElement("div");
+        slot.classList.add("pokemon-slot");
+
+        slot.textContent = pokemon;
+        
+        inventory.appendChild(slot);
+    });
+
+    // filling empty slots
+    for (let i = gameState.party.length; i < 6; i++) {
+        const emptySlot = document.createElement("div");
+        emptySlot.classList.add("pokemon-slot");
+        emptySlot.textContent = "Empty";
+        inventory.appendChild(emptySlot);
+
+    }
+}
 
 const scenes = {
     captured: {
@@ -82,6 +115,7 @@ const scenes = {
                 action: () => {
                     gameState.starter = "Litten";
                     setStarterTheme("fire");
+                    addPokemonToParty("Litten");
                 },
                 next: "chosenStarter"
             },
@@ -90,6 +124,7 @@ const scenes = {
                 img: "froakie.png",
                 action: () => {
                     gameState.starter = "Froakie";
+                    addPokemonToParty("Froakie");
                     setStarterTheme("water");
                 },
                 next: "chosenStarter"
@@ -99,6 +134,7 @@ const scenes = {
                 img: "treecko.png",
                 action: () => {
                     gameState.starter = "Treecko";
+                    addPokemonToParty("Treecko");
                     setStarterTheme("grass");
                 },
                 next: "chosenStarter" // maybe fix this soon or make a function that based on what pokemon u pick as your starter the ending is different
@@ -138,7 +174,7 @@ const scenes = {
             {
                 text: "Psychic",
                 action: () => {
-                    gameState.starter = "Wynaut";
+                    gameState.currentEncounter = "Wynaut";
                     setStarterTheme("psychic");
                 },
                 next: "chosenWynaut"
@@ -146,7 +182,7 @@ const scenes = {
             {
                 text: "Ground",
                 action: () => {
-                    gameState.starter = "Cubone";
+                    gameState.currentEncounter = "Cubone";
                     setStarterTheme("ground");
                 },
                 next: "chosenCubone"
@@ -154,7 +190,7 @@ const scenes = {
             {
                 text: "Normal",
                 action: () => {
-                    gameState.starter = "Munchlax";
+                    gameState.currentEncounter = "Munchlax";
                     setStarterTheme("normal");
                 },
                 next: "chosenMunchlax"
@@ -207,14 +243,30 @@ const scenes = {
 
     Wynautfight: {
 
-        dialogue: `You ${fiftyfifty()} against Wynaut!`,
+        dialogue: () => {
+            const result = fiftyfifty();
+
+            if (result === "won") {
+                addPokemonToParty("Wynaut");
+            }
+
+            return `You ${result} against Wynaut!`;
+        },
+            
         background: "route1.png",
         next: "routetwo1",
     },
     
     Wynautcapture: {
 
-        dialogue: `You ${capture()} Wynaut!`,
+        dialogue: () => {
+            const result = capture();
+            if (result === "caught") {
+                addPokemonToParty("Wynaut");
+
+        }
+            return `You ${result} Wynaut!`;
+        },
         background: "route1.png",
         next: "routetwo1",
     },
@@ -317,35 +369,35 @@ const scenes = {
     },
 
 
-Munchlaxfight:{
-    dialogue: `You ${fiftyfifty()} against Munchlax!`,
+    Munchlaxfight:{
+        dialogue: `You ${fiftyfifty()} against Munchlax!`,
         background: "route1.png", 
         next: "routetwo1",
 },
 
-CatchMunchlax:{
-    dialogue: `You ${capture()} Munchlax!`,
+    CatchMunchlax:{
+        dialogue: `You ${capture()} Munchlax!`,
         background: "route1.png", 
         next: "routetwo1",
 },
-Munchlaxrun:{ 
-dialogue: `You successfully ran away from Munchlax...`,
+    Munchlaxrun:{ 
+        dialogue: `You successfully ran away from Munchlax...`,
         background: "blackscreen.jpg",
         next: "routetwo1",
     },
 
 //route 2!!!
-routetwo1:{
-dialogue: `After your encounter, you reach route 2: Berry Woods.`,
-background: "route2.png",
-next: "routetwo2",
+    routetwo1:{
+        dialogue: `After your encounter, you reach route 2: Berry Woods.`,
+        background: "route2.png",
+        next: "routetwo2",
 
-}, 
+    }, 
 
-routetwo2:{
-    dialogue: `This area is a forest filled with unique Pokemon. You and your Pokemon decided to rest for a while in this nice environment, so you sit around underneath a tree. `,
-    background: "route2.png",
-    next: "routetwo3",
+    routetwo2:{
+        dialogue: `This area is a forest filled with unique Pokemon. You and your Pokemon decided to rest for a while in this nice environment, so you sit around underneath a tree. `,
+        background: "route2.png",
+        next: "routetwo3",
     }, 
 
     routetwo3: {
@@ -355,7 +407,7 @@ routetwo2:{
     },
 
     routetwo4: {
-        dialouge: `You notice there are three Pokemon hiding in the bush and preparing a battle with you! `,
+        dialogue: `You notice there are three Pokemon hiding in the bush and preparing a battle with you! `,
         background: "route2.png",
         next: "routetwo5",
     },

@@ -262,13 +262,12 @@ a {
     background-color: #EDA744;
     border: 2px solid rgb(255, 255, 255);
     padding: 20px;
-    display: block;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     left: 29.5%;
     right: 50%;
     margin-top: -800px;
-    & h2 {
+    & insideOverlay h2 {
         text-align: center;
         color: white;
         font-size: 30px;
@@ -284,7 +283,7 @@ a {
     gap: 90px;
     margin-top: 30px;
 
-    & p {
+    & inventory p {
         background-color: white;
         padding: 10px;
         border-radius: 5px;
@@ -297,6 +296,19 @@ a {
     cursor: pointer;
     transform: scale(1.02);
     transition: 0.2s;
+}
+
+#pokemonInventory {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.pokemon-slot {
+    background: white;
+    padding: 12px;
+    border-radius: 5px;
+    min-height: 50px;
+    font-size: 18px;
 }
 
 
