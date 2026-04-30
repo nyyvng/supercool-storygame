@@ -29,7 +29,8 @@ const starterThemes = {
     fighting: "#e9a125",
     rock: "#44413d",
     ghost: "#a618ff",
-    poison: "#8a139a"
+    poison: "#8a139a",
+    bug: "#9dec42"
 };
 
 function setStarterTheme(pokemonName) {
@@ -806,7 +807,7 @@ const scenes = {
         dialogue: `You chose to fight ...Nidoran!`,
         img: "nidoran.png",
         background: "route2.png",
-        next: "Nindoranfight"
+        next: "Nidoranfight"
     },
     catchNidoran: {
         dialogue: `You chose to catch ...Nidoran!`,
@@ -1190,33 +1191,350 @@ const scenes = {
         next: "routefour1",
     },
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // congrafts u get to do route 444 down heree aaayayayayyayay
+
+
+    routefour1: {
+        dialogue: `Morning has now arrived after your newest catch from last night. You packed up your things before heading out to Route 4: Sandy Beaches.`,
+        background: "route4.png",
+        next: "routefour2",
+
+    },
+
+    routefour2: {
+        dialogue: `You’re now at the beach! There’s a lot of wind and waves today, and it seems like it’s going to rain soon.`,
+        background: "route4.png",
+        next: "routefour3",
+    },
+
+    routefour3: {
+        dialogue: `Not so far away is a small cave where you can rest until this rainstorm passes by. You arrived there, but you didn’t think there were some Pokemon already hiding in the cave.`,
+        background: "route4.png",
+        next: "routefour4",
+    },
+
+    routefour4: {
+        dialogue: `You couldn’t see them– but you could hear their angry sounds as you stumbled upon their territory.`,
+        background: "route4.png",
+        next: "routefour5",
+    },
+
+    routefour5: {
+        dialogue: `Pick and choose to see who's in this cave!`,
+        background: "route4.png",
+        options: [
+            {
+                text: "Bug/Fire",
+                type: "bug",
+                action: () => {
+                    gameState.currentEncounter = "Larvesta";
+                },
+                next: "chosenLarvesta"
+            },
+            {
+                text: "Electric",
+                type: "electric",
+                action: () => {
+                    gameState.currentEncounter = "Mareep";
+                },
+                next: "chosenMareep"
+            },
+            {
+                text: "Dragon/Fighting",
+                type: "dragon",
+                action: () => {
+                    gameState.currentEncounter = "Hakamoo";
+                },
+                next: "chosenHakamoo"
+            }
+        ]
+    },
+
+    // Larvesta option
+    chosenLarvesta: {
+        dialogue: "A wild Larvesta has appeared! What will you do?",
+        img: "larvesta.png",
+        background: "route4.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightLarvesta"
+            },
+            {
+                text: "Catch",
+                next: "catchLarvesta"
+            },
+            {
+                text: "Run",
+                next: "runFromLarvesta"
+            }
+        ]
+    },
+    fightLarvesta: {
+        dialogue: `You chose to fight ...Larvesta!`,
+        img: "larvesta.png",
+        background: "route4.png",
+        next: "larvestafight"
+    },
+    catchLarvesta: {
+        dialogue: `You chose to catch ...Larvesta!`,
+        img: "larvesta.png",
+        background: "route4.png",
+        next: "larvestacapture",
+    },
+    runFromLarvesta: {
+        dialogue: `You attempted to flee from ...Larvesta!`,
+        img: "larvesta.png",
+        background: "route4.png",
+        next: "larvestarun",
+    },
+
+
+    larvestafight: {
+        dialogue: function () {
+            const battle = battlePokemon("Larvesta", "routefour1", "chosenLarvesta");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "larvesta.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    larvestacapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Larvesta", "routefour1", "chosenLarvesta")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "larvesta.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    larvestarun: {
+        dialogue: `You successfully ran away from Larvesta...`,
+        background: "blackscreen.jpg",
+        next: "routefour1",
+    },
+
+
+
+
+
+    // mareep option
+    chosenMareep: {
+        dialogue: "A wild Mareep has appeared! What will you do?",
+        img: "mareep.png",
+        background: "route4.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightMareep"
+            },
+            {
+                text: "Catch",
+                next: "catchMareep"
+            },
+            {
+                text: "Run",
+                next: "runFromMareep"
+            }
+        ]
+    },
+    fightMareep: {
+        dialogue: `You chose to fight ...Mareep!`,
+        img: "mareep.png",
+        background: "route4.png",
+        next: "mareepfight"
+    },
+    catchMareep: {
+        dialogue: `You chose to catch ...Mareep!`,
+        img: "mareep.png",
+        background: "route4.png",
+        next: "mareepcapture",
+    },
+    runFromMareep: {
+        dialogue: `You attempted to flee from ...Mareep!`,
+        img: "mareep.png",
+        background: "route4.png",
+        next: "mareeprun",
+    },
+
+
+    mareepfight: {
+        dialogue: function () {
+            const battle = battlePokemon("Mareep", "routefour1", "chosenMareep");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "mareep.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    mareepcapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Mareep", "routefour1", "chosenMareep")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "mareep.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    Mareeprun: {
+        dialogue: `You successfully ran away from Mareep...`,
+        background: "blackscreen.jpg",
+        next: "routefour1",
+    },
+
+
+
+
+    // hakamo-o option
+    chosenHakamoo: {
+        dialogue: "A wild Hakamo-o has appeared! What will you do?",
+        img: "hakamo-o.png",
+        background: "route4.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightHakamoo"
+            },
+            {
+                text: "Catch",
+                next: "catchHakamoo"
+            },
+            {
+                text: "Run",
+                next: "runFromHakamoo"
+            }
+        ]
+    },
+    fightHakamoo: {
+        dialogue: `You chose to fight ...Hakamo-o!`,
+        img: "hakamo-o.png",
+        background: "route4.png",
+        next: "Hakamoofight"
+    },
+    catchHakamoo: {
+        dialogue: `You chose to catch ...Hakamo-o!`,
+        img: "hakamo-o.png",
+        background: "route4.png",
+        next: "Hakamoocapture",
+    },
+    runFromHakamoo: {
+        dialogue: `You attempted to flee from ...Hakamo-o!`,
+        background: "route4.png",
+        next: "Hakamoorun",
+    },
+
+
+    Hakamoofight: {
+        dialogue: function () {
+            const battle = battlePokemon("Hakamo-o", "routefour1", "chosenHakamoo");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "hakamo-o.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    Hakamoocapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Hakamo-o", "routefour1", "chosenHakamoo")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "hakamo-o.png",
+        background: "route4.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    Hakamoorun: {
+        dialogue: `You successfully ran away from Hakamo-o...`,
+        background: "blackscreen.jpg",
+        next: "routefour1",
+    },
+
+
+
+
+
+
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// congrafts u get to do route four down heree aaayayayayyayay
 
 
 
