@@ -27,10 +27,13 @@ const starterThemes = {
     dragon: "#4f82bc",
     normal: "#c9c9c9",
     fighting: "#e9a125",
-    rock: "#44413d",
-    ghost: "#a618ff",
+    bug: "#4c8153",
+    steel: "#777777",
     poison: "#8a139a",
-    bug: "#9dec42"
+    ice: "#86ffeb",
+    ghost: "#a618ff",
+    rock: "#44413d",
+    bug: "#9dec42",
 };
 
 function setStarterTheme(pokemonName) {
@@ -1323,7 +1326,7 @@ const scenes = {
 
     larvestafight: {
         dialogue: function () {
-            const battle = battlePokemon("Larvesta", "routefour1", "chosenLarvesta");
+            const battle = battlePokemon("Larvesta", "routefive1", "chosenLarvesta");
 
             this.nextScene = battle.next;
 
@@ -1341,7 +1344,7 @@ const scenes = {
     larvestacapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Larvesta", "routefour1", "chosenLarvesta")
+            const captureResult = catchPokemon("Larvesta", "routefive1", "chosenLarvesta")
 
             this.nextScene = captureResult.next;
 
@@ -1358,7 +1361,7 @@ const scenes = {
     larvestarun: {
         dialogue: `You successfully ran away from Larvesta...`,
         background: "blackscreen.jpg",
-        next: "routefour1",
+        next: "routefive1",
     },
 
 
@@ -1407,7 +1410,7 @@ const scenes = {
 
     mareepfight: {
         dialogue: function () {
-            const battle = battlePokemon("Mareep", "routefour1", "chosenMareep");
+            const battle = battlePokemon("Mareep", "routefive1", "chosenMareep");
 
             this.nextScene = battle.next;
 
@@ -1425,7 +1428,7 @@ const scenes = {
     mareepcapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Mareep", "routefour1", "chosenMareep")
+            const captureResult = catchPokemon("Mareep", "routefive1", "chosenMareep")
 
             this.nextScene = captureResult.next;
 
@@ -1442,7 +1445,7 @@ const scenes = {
     Mareeprun: {
         dialogue: `You successfully ran away from Mareep...`,
         background: "blackscreen.jpg",
-        next: "routefour1",
+        next: "routefive1",
     },
 
 
@@ -1489,7 +1492,7 @@ const scenes = {
 
     Hakamoofight: {
         dialogue: function () {
-            const battle = battlePokemon("Hakamo-o", "routefour1", "chosenHakamoo");
+            const battle = battlePokemon("Hakamo-o", "routefive1", "chosenHakamoo");
 
             this.nextScene = battle.next;
 
@@ -1507,7 +1510,7 @@ const scenes = {
     Hakamoocapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Hakamo-o", "routefour1", "chosenHakamoo")
+            const captureResult = catchPokemon("Hakamo-o", "routefive1", "chosenHakamoo")
 
             this.nextScene = captureResult.next;
 
@@ -1524,11 +1527,361 @@ const scenes = {
     Hakamoorun: {
         dialogue: `You successfully ran away from Hakamo-o...`,
         background: "blackscreen.jpg",
-        next: "routefour1",
+        next: "routefive1",
     },
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // ROUTE 5 YAYA FINAL ONE I THINK
+
+
+    routefive1: {
+        dialogue: `Finally, you were able to rest for the rest of the time until the storm passed. After a few more minutes the rain has passed now, and you make your way up to Route 5: Forbidden Canyon.`,
+        background: "route5.png",
+        next: "routefive2",
+
+    },
+
+    routefive2: {
+        dialogue: `You make your way up to the Canyon, and the clouds have turned darker in the sky. You’ve become nervous as you reach the peak of the canyon but at the same time you felt a relief at the same time as you could see your whole entire region.`,
+        background: "route5a.png",
+        next: "routefive3",
+    },
+
+    routefive3: {
+        dialogue: `All of a sudden, the sky was completely covered in dark gray clouds as you could hear thunder out in the distance. You’ve noticed how this weather isn’t natural, and it seemed like a Pokemon was doing this.`,
+        background: "route5b.png",
+        next: "routefive4",
+    },
+
+    routefive4: {
+        dialogue: `You look behind, and you could see three Pokemon out in the distance. However, these aren't just any ordinary Pokemon, you’ve noticed the way they look might be a stronger Pokemon you have never fought before.`,
+        background: "route5b.png",
+        next: "routefive5",
+    },
+
+    routefive5: {
+        dialogue: `These three mysterious Pokemon are only letting you fight ONE of them and see if you have the potential to catch them. Pick wisely!`,
+        background: "route5c.png",
+        options: [
+            {
+                text: "Steel/Psychic",
+                type: "steel",
+                action: () => {
+                    gameState.currentEncounter = "Sogaleo";
+                },
+                next: "chosenSogaleo"
+            },
+            {
+                text: "Dragon/Ground",
+                type: "dragon",
+                action: () => {
+                    gameState.currentEncounter = "Zygarde";
+                },
+                next: "chosenZygarde"
+            },
+            {
+                text: "Ice/Flying",
+                type: "ice",
+                action: () => {
+                    gameState.currentEncounter = "Articuno";
+                },
+                next: "chosenArticuno"
+            }
+        ]
+    },
+
+    // Sogaleo option
+    chosenSogaleo: {
+        dialogue: "A wild- wait, IS THAT SOGALEO? What will you do!?",
+        img: "sogaleo.png",
+        background: "route5c.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightSogaleo"
+            },
+            {
+                text: "Catch",
+                next: "catchSogaleo"
+            },
+            {
+                text: "Run",
+                next: "runFromSogaleo"
+            }
+        ]
+    },
+    fightSogaleo: {
+        dialogue: `You chose to fight ...Sogaleo!`,
+        img: "sogaleo.png",
+        background: "route5c.png",
+        next: "Sogaleofight"
+    },
+    catchSogaleo: {
+        dialogue: `You chose to catch ...Sogaleo!`,
+        img: "sogaleo.png",
+        background: "route5c.png",
+        next: "Sogaleocapture",
+    },
+    runFromSogaleo: {
+        dialogue: `You attempted to flee from ...Sogaleo!`,
+        img: "sogaleo.png",
+        background: "route5c.png",
+        next: "Sogaleorun",
+    },
+
+
+    Sogaleofight: {
+        dialogue: function () {
+            const battle = battlePokemon("Sogaleo", "routefive1", "chosenSogaleo");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "sogaleo.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    Sogaleocapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Sogaleo", "routefive1", "chosenSogaleo")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "sogaleo.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    Sogaleorun: {
+        dialogue: `You successfully ran away from Sogaleo...`,
+        background: "blackscreen.jpg",
+        next: "routefive1",
+    },
+
+
+
+
+
+    // Zygarde option
+    chosenZygarde: {
+        dialogue: "A wild- wait, IS THAT ZYGARDE? What will you do!?",
+        img: "zygarde.png",
+        background: "route5c.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightZygarde"
+            },
+            {
+                text: "Catch",
+                next: "catchZygarde"
+            },
+            {
+                text: "Run",
+                next: "runFromZygarde"
+            }
+        ]
+    },
+    fightZygarde: {
+        dialogue: `You chose to fight ...Zygarde!`,
+        img: "zygarde.png",
+        background: "route5c.png",
+        next: "Zygardefight"
+    },
+    catchZygarde: {
+        dialogue: `You chose to catch ...Zygarde!`,
+        img: "zygarde.png",
+        background: "route5c.png",
+        next: "Zygardecapture",
+    },
+    runFromZygarde: {
+        dialogue: `You attempted to flee from ...Zygarde!`,
+        img: "zygarde.png",
+        background: "route5c.png",
+        next: "Zygarderun",
+    },
+
+
+    Zygardefight: {
+        dialogue: function () {
+            const battle = battlePokemon("Zygarde", "routefive1", "chosenZygarde");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "zygarde.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    Zygardecapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Zygarde", "routefive1", "chosenZygarde")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "zygarde.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    Zygarderun: {
+        dialogue: `You successfully ran away from Zygarde...`,
+        background: "blackscreen.jpg",
+        next: "routefive1",
+    },
+
+
+
+
+    // Articuno option
+    chosenArticuno: {
+        dialogue: "A wild- wait, IS THAT ARTICUNO? What will you do!?",
+        img: "articuno.png",
+        background: "route5c.png",
+        options: [
+            {
+                text: "Fight",
+                next: "fightArticuno"
+            },
+            {
+                text: "Catch",
+                next: "catchArticuno"
+            },
+            {
+                text: "Run",
+                next: "runFromArticuno"
+            }
+        ]
+    },
+    fightArticuno: {
+        dialogue: `You chose to fight ...Articuno!`,
+        img: "articuno.png",
+        background: "route5c.png",
+        next: "Articunofight"
+    },
+    catchArticuno: {
+        dialogue: `You chose to catch ...Articuno!`,
+        img: "articuno.png",
+        background: "route5c.png",
+        next: "Articunocapture",
+    },
+    runFromArticuno: {
+        dialogue: `You attempted to flee from ...Articuno!`,
+        background: "route5c.png",
+        next: "Articunorun",
+    },
+
+
+    Articunofight: {
+        dialogue: function () {
+            const battle = battlePokemon("Articuno", "routefive1", "chosenArticuno");
+
+            this.nextScene = battle.next;
+
+            return battle.text;
+        },
+
+        img: "articuno.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+
+    Articunocapture: {
+
+        dialogue: function () {
+            const captureResult = catchPokemon("Articuno", "routefive1", "chosenArticuno")
+
+            this.nextScene = captureResult.next;
+
+            return captureResult.text;
+        },
+
+        img: "articuno.png",
+        background: "route5c.png",
+
+        next: function () {
+            return this.nextScene;
+        }
+    },
+    Articunorun: {
+        dialogue: `You successfully ran away from Articuno...`,
+        background: "blackscreen.jpg",
+        next: "routefive1",
+    },
 
 
 
