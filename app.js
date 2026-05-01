@@ -1847,7 +1847,7 @@ const scenes = {
 
     Articunofight: {
         dialogue: function () {
-            const battle = battlePokemon("Articuno", " wrapup", "chosenArticuno");
+            const battle = battlePokemon("Articuno", "wrapup", "chosenArticuno");
 
             this.nextScene = battle.next;
 
@@ -1865,7 +1865,7 @@ const scenes = {
     Articunocapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Articuno", " wrapup", "chosenArticuno")
+            const captureResult = catchPokemon("Articuno", "wrapup", "chosenArticuno")
 
             this.nextScene = captureResult.next;
 
@@ -2001,7 +2001,7 @@ Friendfightp2: {
             return battle.text;
         },
 
-        img: "Friendfight!.png",
+        img: "Friend!.png",
 
         next: function () {
             return this.nextScene;
@@ -2010,13 +2010,13 @@ Friendfightp2: {
 
     Friendfightwin: {
         dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
-        background: "Friendfight!.png",
+        background: "Friend!.png",
         next: "end",
     },
 
-    Frienddightloss: {
+    Friendfightloss: {
         dialogue: `I must’ve been lucky, what a tough fight!`,
-        background: "Friendfight!.png",
+        background: "Friend!.png",
         next: "end",
     },
 
@@ -2043,20 +2043,32 @@ motherencounter1: {
 motherencounter2: {
     dialogue: `If you win you can choose dinner tonight!`,
     background: "Mother.png",
-    next: "motherencounter3",
+    next: "Fightmom",
+},
+
+
+Fightmom: {
+    background: "Mother.png",
+     options: [
+            {
+                text: "Fight",
+                next: "motherencounter3"
+            },
+        ]
+        
 },
 
 motherencounter3: {
 
  dialogue: function () {
-            const battle = battlePokemon("Mom", "motherencounterwin", "motherencounterloss");
+            const battle = battlePokemon("Mom!", "motherencounterwin", "motherencounterloss");
 
             this.nextScene = battle.next;
 
             return battle.text;
         },
 
-        img: "Friendfight!.png",
+        img: "Mother.png",
 
         next: function () {
             return this.nextScene;
@@ -2078,7 +2090,7 @@ motherencounterloss:{
 
 
 end: {
-    background: "THANKYOU.png",
+    background: "Pokemonthankyou.png",
 },
 
 
