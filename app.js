@@ -1847,7 +1847,7 @@ const scenes = {
 
     Articunofight: {
         dialogue: function () {
-            const battle = battlePokemon("Articuno", " wrapup", "chosenArticuno");
+            const battle = battlePokemon("Articuno", "wrapup", "chosenArticuno");
 
             this.nextScene = battle.next;
 
@@ -1865,7 +1865,7 @@ const scenes = {
     Articunocapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Articuno", " wrapup", "chosenArticuno")
+            const captureResult = catchPokemon("Articuno", "wrapup", "chosenArticuno")
 
             this.nextScene = captureResult.next;
 
