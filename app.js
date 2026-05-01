@@ -1919,7 +1919,7 @@ endingv1:{
 },
 
 Professorend:{
-    dialogue: `Is that ${playerData.teacher}... !?!?!`,
+    dialogue: `Is that... ${playerData.teacher}!?!`,
         background: "Professor-ending.png",
         next: "Professoralt",
 
@@ -2161,6 +2161,7 @@ function loadScene(sceneKey) {
 
     optionsEl.innerHTML = "";
 
+
     if (scene.options) {
         nextBtn.style.display = "none";
 
@@ -2239,3 +2240,14 @@ overlay.onclick = (e) => {
         closeOverlay();
     }
 }; 
+
+
+
+// play again button
+
+const playAgain = document.getElementById("playAgain");
+    
+
+    playAgain.onclick = () => {
+        window.location.href = "index.html"
+    }
