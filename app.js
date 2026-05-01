@@ -1532,11 +1532,31 @@ const scenes = {
 
 
 
+wrapup:{
+    dialogue: "You reached the end of your adventure, now it is time to return home",
+    background: "blackscreen.png",
+    next: function(){
+        if (gameState.starter === "Litten") {
+            return "endingv1";
+            } else if (gameState.starter === "Froakie") {
+            return "endingv2";
+            } else if (gameState.starter === "Treecko") {
+            return "endingv3";
+            return "end";
+    }
+    }
+
+
+
+},
+
+
+
 
 //endingv1//
 
 endingv1:{
-    dialogue: "You reached the end of your adventure.. Now you're on your way back to your hometown and notice a familiar figure in the distance",
+    dialogue: "Now you're on your way back to your hometown and notice a familiar figure in the distance",
     background: "blackscreen.png",
     next: "Professorend"
 },
@@ -1595,7 +1615,7 @@ Fightteach: {
 //endingv2//
 
 endingv2: {
- dialogue: "You reached the end of your adventure.. Now you're on your way back to your hometown and notice a familiar figure in the distance",
+ dialogue: "Now you're on your way back to your hometown and notice a familiar figure in the distance",
     background: "blackscreen.png",
     next: "Friendending1",
 },
@@ -1644,7 +1664,7 @@ Friendfightp2: {
     //ending3//
 
     endingv3:{
-        dialogue: "You reached the end of your adventure.. Now you're on your way back to your hometown and notice a familiar figure in the distance",
+        dialogue: "Now you're on your way back to your hometown and notice a familiar figure in the distance",
         background: "blackscreen.png",
         next: "motherencounter",
     },
@@ -1704,9 +1724,6 @@ end: {
 
 
 
-//ending links
-
-//if (gameState.starter === "Litten") { return "endingv1"; // Professor Ending } else if (gameState.starter === "Froakie") { return "endingv2"; // Friend Ending } else if (gameState.starter === "Treecko") { return "endingv3"; // Mother Ending } return "end"; // Fallback } }, //
 
 
 
@@ -2210,4 +2227,4 @@ overlay.onclick = (e) => {
     if (e.target === overlay) {
         closeOverlay();
     }
-};
+}; 
