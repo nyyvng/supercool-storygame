@@ -206,9 +206,12 @@ a {
     top: 70px;
     right: 80px;
     width: 250px;
-    height: 30px;
+    height: 60px;
     background: red;
     border: 3px solid white;
+    color: white;
+    font-size: 40px;
+    text-align: center;
 }
 
 #playerHealth {
@@ -216,9 +219,12 @@ a {
     bottom: 200px;
     left: 80px;
     width: 250px;
-    height: 30px;
+    height: 60px;
     background: green;
     border: 3px solid white;
+    color: white;
+    font-size: 40px;
+    text-align: center;
 }
 
 #battleOptions {

@@ -336,10 +336,10 @@ function catchPokemonAttempt() {
 
     if (Math.random() < catchRate) {
         addPokemonToParty(gameState.battle.enemyPokemon);
-        alert(`You caught ${gameState.battle.enemyPokemon}!`);
+        alert(`You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`);
         endBattle(gameState.battle.winScene);
     } else {
-        alert(`${gameState.battle.enemyPokemon} broke free!`);
+        alert(`You attempt to catch ${gameState.battle.enemyPokemon}, but it broke free!`);
     }
 }
 
