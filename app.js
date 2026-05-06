@@ -31,7 +31,6 @@ const starterThemes = {
     dragon: "#4f82bc",
     normal: "#c9c9c9",
     fighting: "#e9a125",
-    bug: "#4c8153",
     steel: "#777777",
     poison: "#8a139a",
     ice: "#86ffeb",
@@ -42,11 +41,11 @@ const starterThemes = {
 
 // pokemon stats for BATTLING MECHANIC (new and WIP)
 const pokemonStats = {
-    Litten: { attack: 115, defense: 90, speed: 60 },
-    Froakie: { attack: 80, defense: 70, speed: 110 },
-    Treecko: { attack: 85, defense: 75, speed: 100 },
+    Litten: { attack: 65, defense: 40, speed: 70 },
+    Froakie: { attack: 56, defense: 40, speed: 71 },
+    Treecko: { attack: 45, defense: 35, speed: 70 },
 
-    Wynaut: { attack: 40, defense: 95, speed: 25 },
+    Wynaut: { attack: 23, defense: 48, speed: 23 },
     Cubone: { attack: 70, defense: 95, speed: 35 },
     Munchlax: { attack: 85, defense: 100, speed: 15 },
 
@@ -64,7 +63,7 @@ const pokemonStats = {
 
 
 function setStarterTheme(pokemonName) {
-    const color = starterThemes[pokemonName] || "white";
+    const color = starterThemes[type] || "white";
     document.documentElement.style.setProperty("--starter-color", color);
 }
 
@@ -100,7 +99,7 @@ function capture() {
     return result;
 }
 
-// pokemon battle thingy (remove to avoid conflict for new code?)
+// pokemon battle thingy (remove to avoid conflict for new code?) !!!!!!!!!!!!!!!!!!!
 function battlePokemon(pokemonName, nextRoute, retryScene) {
     const result = fiftyfifty()
     if (result === "won") {
@@ -116,13 +115,96 @@ function battlePokemon(pokemonName, nextRoute, retryScene) {
     };
 }
 
+
+// battle end
+function endBattle(nextScene) {
+    document.getElementById("battleUI").style.display = "none";
+    document.getElementById("dialogueBox").style.display = "block";
+
+    currentScene = nextScene;
+    loadScene(currentScene);
+}
+
+// battle turns
+function handleBattleTurn(choice) {
+    const turn = battleTurn(choice);
+
+    alert(turn.result);
+
+    document.getElementById("playerHealth").textContent =
+        `Your HP: ${turn.playerHP}`;
+
+    document.getElementById("enemyHealth").textContent =
+        `Enemy HP: ${turn.enemyHP}`;
+
+    const result = checkBattleEnd();
+
+    if (result === "enemyFainted") {
+        endBattle(gameState.battle.winScene);
+    }
+
+    if (result === "playerFainted") {
+        endBattle(gameState.battle.loseScene);
+    }
+}
+
+// battle funtcions (WIP)
+function loadBattleOptions() {
+
+    const battleOptions = document.getElementById("battleOptions");
+
+    const playerPokemon =
+        pokemonStats[gameState.battle.playerPokemon];
+
+    battleOptions.innerHTML = `
+
+        <button onclick="handleBattleTurn('attack')">
+            Attack (${playerPokemon.attack})
+        </button>
+
+        <button onclick="handleBattleTurn('defense')">
+            Defense (${playerPokemon.defense})
+        </button>
+
+        <button onclick="handleBattleTurn('speed')">
+            Speed (${playerPokemon.speed})
+        </button>
+
+        <button onclick="catchPokemonAttempt()">
+            Catch
+        </button>
+
+        <button onclick="runAway()">
+            Run
+        </button>
+    `;
+
+    document.getElementById("playerHealth").textContent =
+        `Your HP: ${gameState.battle.playerHP}`;
+
+    document.getElementById("enemyHealth").textContent =
+        `Enemy HP: ${gameState.battle.enemyHP}`;
+}
+
 // new battle system (WIP)
-function startBattle(enemyName) {
+function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.playerPokemon = gameState.party[0];
     gameState.battle.enemyPokemon = enemyName;
 
     gameState.battle.playerHP = 4;
     gameState.battle.enemyHP = 4;
+
+    gameState.battle.winScene = winScene;
+    gameState.battle.loseScene = loseScene;
+
+    bgEl.src = "battlescene.png";
+
+    document.getElementById("battleUI").style.display = "block";
+
+    document.getElementById("dialogueBox").style.display = "none";
+    document.getElementById("options").style.display = "none";
+
+    loadBattleOptions();
 }
 
 // enemy moves (attack, defense, speed randomizer with 33% idea)
@@ -133,7 +215,7 @@ function getEnemyMove() {
     return moves[randomIndex];
 }
 
-// pokemon catch thingy
+// pokemon catch thingy (might need to remove soon!!) !!!!!!!!!!!!!!!!!!!!!
 function catchPokemon(pokemonName, nextRoute, retryScene) {
     const result = capture();
 
@@ -181,6 +263,115 @@ function updateInventory() {
 
     }
 }
+
+// battle system (WIP) battlign with stats
+function battleTurn(playerChoice) {
+    const enemyChoice = getEnemyMove();
+
+    const playerPokemonName = gameState.battle.playerPokemon;
+    const enemyPokemonName = gameState.battle.enemyPokemon;
+
+    const playerPokemon = pokemonStats[playerPokemonName];
+    const enemyPokemon = pokemonStats[enemyPokemonName];
+
+    const playerStat = playerPokemon[playerChoice];
+    const enemyStat = enemyPokemon[enemyChoice];
+
+    let result = "";
+
+    // randomness added
+    const playerRoll = playerStat + Math.floor(Math.random() * 25);
+    const enemyRoll = enemyStat + Math.floor(Math.random() * 25);
+
+    if (playerRoll > enemyRoll) {
+        gameState.battle.enemyHP--;
+
+        result =
+            `${playerPokemonName} used ${playerChoice}! ` +
+            `${enemyPokemonName} used ${enemyChoice}! ` +
+            `You won the turn!`;
+    }
+
+    else if (enemyRoll > playerRoll) {
+        gameState.battle.playerHP--;
+
+        result =
+            `${enemyPokemonName} used ${enemyChoice}! ` +
+            `${playerPokemonName} used ${playerChoice}! ` +
+            `You lost the turn!`;
+    }
+
+    else {
+        result = `Both Pokemon were evenly matched!`;
+    }
+
+    return {
+        result,
+        playerHP: gameState.battle.playerHP,
+        enemyHP: gameState.battle.enemyHP
+    };
+}
+
+// battle ending (WIP)
+function checkBattleEnd() {
+    if (gameState.battle.enemyHP <= 0) {
+        return "enemyFainted";
+    }
+
+    if (gameState.battle.playerHP <= 0) {
+        return "playerFainted";
+    }
+
+    return null;
+}
+
+// catching attempt if opponent pokemon's health bar is low = catch?
+function catchPokemonAttempt() {
+    const enemyHP = gameState.battle.enemyHP;
+
+    let catchRate = 0.25;
+
+    if (enemyHP <= 3) catchRate = 0.50;
+    if (enemyHP <= 2) catchRate = 0.75;
+
+    if (Math.random() < catchRate) {
+        addPokemonToParty(gameState.battle.enemyPokemon);
+        alert(`You caught ${gameState.battle.enemyPokemon}!`);
+        endBattle(gameState.battle.winScene);
+    } else {
+        alert(`${gameState.battle.enemyPokemon} broke free!`);
+    }
+}
+
+
+// make a new run feature instead of making it an "action"
+function runAway() {
+    alert(`You ran away from ${gameState.battle.enemyPokemon}!`);
+    endBattle(gameState.battle.loseScene);
+}
+
+
+
+//////////// NOTE: night need to remove a lot of the 
+// battling/catch/run scenes and replace with the new one in progress
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const scenes = {
     captured: {
@@ -315,9 +506,10 @@ const scenes = {
                 type: "psychic",
                 action: () => {
                     // gameState.currentEncounter = "Wynaut"; (removed to avoid conflcit?)
-                    startBattle("Wynaut");
+                    currentScene = "chosenWynaut";
+                    loadScene(currentScene);
                 },
-                next: "chosenWynaut"
+                // next: "chosenWynaut" REMOVED FOR TETSINGS STUFFS!!
             },
             {
                 text: "Ground",
@@ -346,11 +538,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightWynaut"
-            },
-            {
-                text: "Catch",
-                next: "catchWynaut"
+                action: () => {
+                    startBattle("Wynaut", "routetwo1", "chosenWynaut");
+                }
+
             },
             {
                 text: "Run",
@@ -360,67 +551,8 @@ const scenes = {
 
 
     },
-    fightWynaut: {
-        dialogue: `You chose to fight ...Wynaut!`,
-        img: "wynaut.png",
-        background: "route1.png",
-        next: "Wynautfight",
-    },
 
-
-
-    catchWynaut: {
-        dialogue: `You chose to catch ...Wynaut!`,
-        img: "wynaut.png",
-        background: "route1.png",
-        next: "Wynautcapture",
-    },
-
-    runFromWynaut: {
-        dialogue: `You attempted to flee from ...Wynaut!`,
-        img: "wynaut.png",
-        background: "route1.png",
-        next: "RunawayWynaut",
-    },
-
-
-    Wynautfight: {
-
-
-        dialogue: function () {
-            const battle = battlePokemon("Wynaut", "routetwo1", "chosenWynaut");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "wynaut.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Wynautcapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Wynaut", "routetwo1", "chosenWynaut")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "wynaut.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
     RunawayWynaut: {
         dialogue: `You successfully ran away from Wynaut... there were no consequences.`,
         background: "blackscreen.jpg",
@@ -1668,9 +1800,9 @@ const scenes = {
                 text: "Steel/Psychic",
                 type: "steel",
                 action: () => {
-                    gameState.currentEncounter = "Sogaleo";
+                    gameState.currentEncounter = "Solgaleo";
                 },
-                next: "chosenSogaleo"
+                next: "chosenSolgaleo"
             },
             {
                 text: "Dragon/Ground",
@@ -1691,56 +1823,56 @@ const scenes = {
         ]
     },
 
-    // Sogaleo option
-    chosenSogaleo: {
-        dialogue: "A wild- wait, IS THAT SOGALEO? What will you do!?",
-        img: "sogaleo.png",
+    // Solgaleo option
+    chosenSolgaleo: {
+        dialogue: "A wild- wait, IS THAT Solgaleo? What will you do!?",
+        img: "Solgaleo.png",
         background: "route5c.png",
         options: [
             {
                 text: "Fight",
-                next: "fightSogaleo"
+                next: "fightSolgaleo"
             },
             {
                 text: "Catch",
-                next: "catchSogaleo"
+                next: "catchSolgaleo"
             },
             {
                 text: "Run",
-                next: "runFromSogaleo"
+                next: "runFromSolgaleo"
             }
         ]
     },
-    fightSogaleo: {
-        dialogue: `You chose to fight ...Sogaleo!`,
-        img: "sogaleo.png",
+    fightSolgaleo: {
+        dialogue: `You chose to fight ...Solgaleo!`,
+        img: "Solgaleo.png",
         background: "route5c.png",
-        next: "Sogaleofight"
+        next: "Solgaleofight"
     },
-    catchSogaleo: {
-        dialogue: `You chose to catch ...Sogaleo!`,
-        img: "sogaleo.png",
+    catchSolgaleo: {
+        dialogue: `You chose to catch ...Solgaleo!`,
+        img: "Solgaleo.png",
         background: "route5c.png",
-        next: "Sogaleocapture",
+        next: "Solgaleocapture",
     },
-    runFromSogaleo: {
-        dialogue: `You attempted to flee from ...Sogaleo!`,
-        img: "sogaleo.png",
+    runFromSolgaleo: {
+        dialogue: `You attempted to flee from ...Solgaleo!`,
+        img: "Solgaleo.png",
         background: "route5c.png",
-        next: "Sogaleorun",
+        next: "Solgaleorun",
     },
 
 
-    Sogaleofight: {
+    Solgaleofight: {
         dialogue: function () {
-            const battle = battlePokemon("Sogaleo", "wrapup", "chosenSogaleo");
+            const battle = battlePokemon("Solgaleo", "wrapup", "chosenSolgaleo");
 
             this.nextScene = battle.next;
 
             return battle.text;
         },
 
-        img: "sogaleo.png",
+        img: "Solgaleo.png",
         background: "route5c.png",
 
         next: function () {
@@ -1748,24 +1880,24 @@ const scenes = {
         }
     },
 
-    Sogaleocapture: {
+    Solgaleocapture: {
 
         dialogue: function () {
-            const captureResult = catchPokemon("Sogaleo", "wrapup", "chosenSogaleo")
+            const captureResult = catchPokemon("Solgaleo", "wrapup", "chosenSolgaleo")
 
             this.nextScene = captureResult.next;
 
             return captureResult.text;
         },
 
-        img: "sogaleo.png",
+        img: "Solgaleo.png",
         background: "route5c.png",
 
         next: function () {
             return this.nextScene;
         }
     },
-    Sogaleorun: {
+    Solgaleorun: {
         dialogue: `You ran away from Solgaleo! It just stared at you..`,
         background: "blackscreen.jpg",
         next: "wrapup",
@@ -2313,6 +2445,8 @@ overlay.onclick = (e) => {
 const playAgain = document.getElementById("playAgain");
 
 
-playAgain.onclick = () => {
-    window.location.href = "index.html"
+if (playAgain) {
+    playAgain.onclick = () => {
+        window.location.href = "index.html";
+    };
 }
