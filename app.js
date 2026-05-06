@@ -671,6 +671,7 @@ const scenes = {
         next: "routetwo1",
     },
 
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
 
 
