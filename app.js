@@ -1,3 +1,5 @@
+
+// info stuff on info.html
 const playerData = {
     lab: localStorage.getItem("cartLab") || "Student",
     classmate: localStorage.getItem("classmateName") || "CART lab",
@@ -13,7 +15,9 @@ const playerData = {
 
 
 
-// gameplay down below
+// gameplay down below for gameplay.html
+
+// pokemon type colors???
 const starterThemes = {
     fire: "#e74c3c",
     water: "#50caf6",
@@ -36,6 +40,29 @@ const starterThemes = {
     bug: "#9dec42",
 };
 
+// pokemon stats for BATTLING MECHANIC (new and WIP)
+const pokemonStats = {
+    Litten: { attack: 115, defense: 90, speed: 60 },
+    Froakie: { attack: 80, defense: 70, speed: 110 },
+    Treecko: { attack: 85, defense: 75, speed: 100 },
+
+    Wynaut: { attack: 40, defense: 95, speed: 25 },
+    Cubone: { attack: 70, defense: 95, speed: 35 },
+    Munchlax: { attack: 85, defense: 100, speed: 15 },
+
+    Togepi: { attack: 30, defense: 65, speed: 20 },
+    Bonsly: { attack: 80, defense: 95, speed: 10 },
+    Nidoran: { attack: 65, defense: 60, speed: 50 }
+};
+
+
+
+
+
+
+
+
+
 function setStarterTheme(pokemonName) {
     const color = starterThemes[pokemonName] || "white";
     document.documentElement.style.setProperty("--starter-color", color);
@@ -48,6 +75,14 @@ const gameState = {
     currentEncounter: null
 };
 
+
+// battle gamestate (WIP)
+gameState.battle = {
+    playerHP: 4,
+    enemyHP: 4,
+    playerPokemon: null,
+    enemyPokemon: null
+};
 
 function fiftyfifty() {
     let result = 'lost';
@@ -65,7 +100,7 @@ function capture() {
     return result;
 }
 
-// pokemon battle thingy
+// pokemon battle thingy (remove to avoid conflict for new code?)
 function battlePokemon(pokemonName, nextRoute, retryScene) {
     const result = fiftyfifty()
     if (result === "won") {
@@ -79,6 +114,23 @@ function battlePokemon(pokemonName, nextRoute, retryScene) {
             : retryScene,
         text: `You ${result} against ${pokemonName}`
     };
+}
+
+// new battle system (WIP)
+function startBattle(enemyName) {
+    gameState.battle.playerPokemon = gameState.party[0];
+    gameState.battle.enemyPokemon = enemyName;
+
+    gameState.battle.playerHP = 4;
+    gameState.battle.enemyHP = 4;
+}
+
+// enemy moves (attack, defense, speed randomizer with 33% idea)
+function getEnemyMove() {
+    const moves = ["attack", "defense", "speed"];
+    const randomIndex = Math.floor(Math.random() * moves.length);
+
+    return moves[randomIndex];
 }
 
 // pokemon catch thingy
@@ -262,7 +314,8 @@ const scenes = {
                 text: "Psychic",
                 type: "psychic",
                 action: () => {
-                    gameState.currentEncounter = "Wynaut";
+                    // gameState.currentEncounter = "Wynaut"; (removed to avoid conflcit?)
+                    startBattle("Wynaut");
                 },
                 next: "chosenWynaut"
             },
@@ -1890,60 +1943,60 @@ const scenes = {
 
 
 
-    wrapup:{
+    wrapup: {
         dialogue: "You reached the end of your adventure, now it is time to return home",
         background: "blackscreen.jpg",
-        next: function(){
+        next: function () {
             if (gameState.starter === "Litten") {
                 return "endingv1";
-                } else if (gameState.starter === "Froakie") {
+            } else if (gameState.starter === "Froakie") {
                 return "endingv2";
-                } else if (gameState.starter === "Treecko") {
+            } else if (gameState.starter === "Treecko") {
                 return "endingv3";
                 return "end";
+            }
         }
-        }
-    
-    
-    
+
+
+
     },
 
 
 
     //endingv1//
 
-endingv1:{
-    dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-    background: "blackscreen.jpg",
-    next: "Professorend"
-},
+    endingv1: {
+        dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
+        background: "blackscreen.jpg",
+        next: "Professorend"
+    },
 
-Professorend:{
-    dialogue: `Is that... ${playerData.teacher}!?!`,
+    Professorend: {
+        dialogue: `Is that... ${playerData.teacher}!?!`,
         background: "Professor-ending.png",
         next: "Professoralt",
 
-},
+    },
 
-Professoralt: {
-    dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
-    background: "teachtalkstoyou.png",
-    next: "Fightteach",
-},
+    Professoralt: {
+        dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
+        background: "teachtalkstoyou.png",
+        next: "Fightteach",
+    },
 
-Fightteach: {
-    background: "teachtalkstoyou.png",
-     options: [
+    Fightteach: {
+        background: "teachtalkstoyou.png",
+        options: [
             {
                 text: "Fight",
                 next: "fightingteach"
             },
         ]
-        
-},
 
- fightingteach:{
-  dialogue: function () {
+    },
+
+    fightingteach: {
+        dialogue: function () {
             const battle = battlePokemon(`${playerData.teacher}`, "Fightingteachwin", "Fightingteachloss");
 
             this.nextScene = battle.next;
@@ -1956,44 +2009,44 @@ Fightteach: {
         next: function () {
             return this.nextScene;
         }
- },
+    },
 
- Fightingteachwin: {
-    dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
-    background: "teachtalksyou.png",
-    next: "end",
+    Fightingteachwin: {
+        dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
+        background: "teachtalksyou.png",
+        next: "end",
 
- },
+    },
 
- Fightingteachloss: {
-    dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
-    background: "teachtalksyou.png",
-    next: "end",
- },
+    Fightingteachloss: {
+        dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
+        background: "teachtalksyou.png",
+        next: "end",
+    },
 
-//endingv2//
+    //endingv2//
 
-endingv2: {
- dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-    background: "blackscreen.jpg",
-    next: "Friendending1",
-},
+    endingv2: {
+        dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
+        background: "blackscreen.jpg",
+        next: "Friendending1",
+    },
 
-Friendending1:{
-    dialogue: `Hey look it’s ${playerData.classmate}!`,
-    background: "friend!.png",
-    next: "Friendfightp2",
-},
+    Friendending1: {
+        dialogue: `Hey look it’s ${playerData.classmate}!`,
+        background: "friend!.png",
+        next: "Friendfightp2",
+    },
 
 
-Friendfightp2: {
-    dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
-    background: "friend!.png",
-    next: "Friendfightp3",
-},
+    Friendfightp2: {
+        dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
+        background: "friend!.png",
+        next: "Friendfightp3",
+    },
 
- Friendfightp3:{
-  dialogue: function () {
+    Friendfightp3: {
+        dialogue: function () {
             const battle = battlePokemon(`${playerData.classmate}`, "Friendfightwin", "Friendfightloss");
 
             this.nextScene = battle.next;
@@ -2006,7 +2059,7 @@ Friendfightp2: {
         next: function () {
             return this.nextScene;
         }
- },
+    },
 
     Friendfightwin: {
         dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
@@ -2022,45 +2075,45 @@ Friendfightp2: {
 
     //ending3//
 
-    endingv3:{
+    endingv3: {
         dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
         background: "blackscreen.jpg",
         next: "motherencounter",
     },
 
-    motherencounter:{
+    motherencounter: {
         dialogue: `What is my mom doing here?`,
         background: "Mother.png",
-        next:"motherencounter1",
+        next: "motherencounter1",
 
     },
-motherencounter1: {
-    dialogue: `It looks like your mother is challenging you... to a battle!?!`,
-    background: "Mother.png",
-    next: "motherencounter2",
-},
+    motherencounter1: {
+        dialogue: `It looks like your mother is challenging you... to a battle!?!`,
+        background: "Mother.png",
+        next: "motherencounter2",
+    },
 
-motherencounter2: {
-    dialogue: `If you win you can choose dinner tonight!`,
-    background: "Mother.png",
-    next: "Fightmom",
-},
+    motherencounter2: {
+        dialogue: `If you win you can choose dinner tonight!`,
+        background: "Mother.png",
+        next: "Fightmom",
+    },
 
 
-Fightmom: {
-    background: "Mother.png",
-     options: [
+    Fightmom: {
+        background: "Mother.png",
+        options: [
             {
                 text: "Fight",
                 next: "motherencounter3"
             },
         ]
-        
-},
 
-motherencounter3: {
+    },
 
- dialogue: function () {
+    motherencounter3: {
+
+        dialogue: function () {
             const battle = battlePokemon("Mom!", "motherencounterwin", "motherencounterloss");
 
             this.nextScene = battle.next;
@@ -2073,25 +2126,25 @@ motherencounter3: {
         next: function () {
             return this.nextScene;
         }
-},
+    },
 
 
-motherencounterwin:{
-    dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
-    background: "Mother.png",
-    next: "end",
-},
+    motherencounterwin: {
+        dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
+        background: "Mother.png",
+        next: "end",
+    },
 
-motherencounterloss:{
-    dialogue: `Well now I get to choose what’s for dinner, loser!`,
-    background: "Mother.png",
-    next: "end",
-},
+    motherencounterloss: {
+        dialogue: `Well now I get to choose what’s for dinner, loser!`,
+        background: "Mother.png",
+        next: "end",
+    },
 
 
-end: {
-    background: "Pokemonthankyou.png",
-},
+    end: {
+        background: "Pokemonthankyou.png",
+    },
 
 
 
@@ -2251,15 +2304,15 @@ overlay.onclick = (e) => {
     if (e.target === overlay) {
         closeOverlay();
     }
-}; 
+};
 
 
 
 // play again button
 
 const playAgain = document.getElementById("playAgain");
-    
 
-    playAgain.onclick = () => {
-        window.location.href = "index.html"
-    }
+
+playAgain.onclick = () => {
+    window.location.href = "index.html"
+}
