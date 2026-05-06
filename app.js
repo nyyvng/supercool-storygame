@@ -10,11 +10,6 @@ const playerData = {
 
 
 
-
-
-
-
-
 // gameplay down below for gameplay.html
 
 // pokemon type colors???
@@ -39,19 +34,180 @@ const starterThemes = {
     bug: "#9dec42",
 };
 
+
 // pokemon stats for BATTLING MECHANIC (new and WIP)
 const pokemonStats = {
+
+    // starters
     Litten: { attack: 65, defense: 40, speed: 70 },
+    Torracat: {attack: 85, defense: 50, speed: 90},
+    Incineroar: {attack: 115, defense: 90, speed: 60},
+
     Froakie: { attack: 56, defense: 40, speed: 71 },
+    Frogadier: {attack: 63, defense: 52, speed: 97},
+    Greninja: {attack: 95, defense: 67, speed: 122},
+
+
     Treecko: { attack: 45, defense: 35, speed: 70 },
+    Grovyle: {attack: 65, defense: 45, speed: 95},
+    Sceptile: {attack: 85, defense: 65, speed: 120},
 
+
+
+
+
+    // route 1 
     Wynaut: { attack: 23, defense: 48, speed: 23 },
-    Cubone: { attack: 70, defense: 95, speed: 35 },
-    Munchlax: { attack: 85, defense: 100, speed: 15 },
+    Wobbuffet: {attack: 33, defense: 58, speed: 33},
 
-    Togepi: { attack: 30, defense: 65, speed: 20 },
+    Cubone: { attack: 50, defense: 95, speed: 35 },
+    Marowak: {attack: 80, defense: 110, speed: 45},
+
+    Munchlax: { attack: 85, defense: 40, speed: 5 },
+    Snorlax: {attack: 110, defense: 65, speed: 30},
+
+    // route 1 shuffle
+    Joltik: {attack: 47, defense: 50, speed: 65},
+    Galvantula: {attack: 77, defense: 60, speed: 108},
+
+    Pancham: {attack: 82, defense: 62, speed: 43},
+    Pangoro: {attack: 124, defense: 78, speed: 58},
+
+    Vanillite: {attack: 50, defense: 50, speed: 44},
+    Vanillish: {attack: 65, defense: 65, speed: 59},
+    Vanilluxe: {attack: 95, defense: 85, speed: 79},
+
+
+
+
+
+    // route 2
+    Togepi: { attack: 20, defense: 65, speed: 20 },
+    Togetic: {attack: 40, defense: 85, speed: 40},
+
     Bonsly: { attack: 80, defense: 95, speed: 10 },
-    Nidoran: { attack: 65, defense: 60, speed: 50 }
+    Sudowoodo: {attack: 100, defense: 115, speed: 30},
+
+    Nidoran: { attack: 57, defense: 40, speed: 50 },
+    Nidorino: {attack: 72, defense: 57, speed: 65},
+    Nidoking: {attack: 102, defense: 77, speed: 85},
+
+    // route 2 shuffle
+    Noibat: {attack: 30, defense: 35, speed: 55},
+    Noivern: {attack: 70, defense: 80, speed: 123},
+
+    Larvitar: {attack: 64, defense: 50, speed: 41},
+    Pupitar: {attack: 84, defense: 70, speed: 51},
+    Tyranitar: {attack: 134, defense: 110, speed: 61},
+
+    Riolu: {attack: 70, defense: 40, speed: 60},
+    Lucario: {attack: 110, defense: 70, speed: 90},
+
+
+
+
+
+    // route 3
+    Korkorok: {attack: 82, defense: 45, speed: 74},
+    Krookodile: {attack: 117, defense: 80, speed: 92},
+
+    Lampent: {attack: 40, defense: 60, speed: 55},
+    Chandelure: {attack: 55, defense: 90, speed: 80},
+
+    Hawlucha: {attack: 92, defense: 75, speed: 118},
+
+    //route 3 shuffle
+    Clefairy: {attack: 45, defense: 48, speed: 35},
+    Clefable: {attack: 70, defense: 73, speed: 60},
+
+    Scyther: {attack: 110, defense: 80, speed: 105},
+    Scizor: {attack: 130, defense: 100, speed: 65},
+
+    Buneary: {attack: 66, defense: 44, speed: 85},
+    Lopbunny: {attack: 76, defense: 84, speed: 105},
+
+
+
+
+
+
+
+    // route 4
+    Larvesta: {attack: 85, defense: 55, speed: 60},
+    Volcarona: {attack: 60, defense: 65, speed: 100},
+
+    Mareep: {attack: 40, defense: 40, speed: 35},
+    Flaaffy: {attack: 55, defense: 55, speed: 45},
+    Ampharos: {attack: 75, defense: 85, speed: 55},
+
+    Hakamoo: {attack: 75, defense: 90, speed: 65},
+    Kommoo: {attack: 110, defense: 125, speed: 85},
+
+    // route 4 shuffle
+    Gallade: {attack: 125, defense: 65, speed: 80},
+
+    Trevenant: {attack: 110, defense: 76, speed: 56},
+
+    Lycanroc: {attack: 115, defense: 65, speed: 112},
+
+
+
+
+    // route 5
+    Solgaleo: {attack: 137, defense: 107, speed: 97},
+
+    Zygarde: {attack: 100, defense: 121, speed: 95},
+
+    Articuno: {attack: 85, defense: 100, speed: 85},
+
+    // route 5 shuffle
+    Rayquaza: {attack: 150, defense: 90, speed: 95},
+
+    Lugia: {attack: 90, defense: 130, speed: 110},
+
+    Regirock: {attack: 100, defense: 200, speed: 50},
+
+
+
+
+
+
+
+
+    // rival/friend pokemon party
+    Hariyama: {attack: 120, defense: 60, speed: 50},
+    Flareon: {attack: 130, defense: 60, speed: 65},
+    Venusaur: {attack: 82, defense: 83, speed: 80},
+    Emogla: {attack: 75, defense: 60, speed: 103},
+    Lurantis: {attack: 105, defense: 90, speed: 45},
+    Darkrai: {attack: 90, defense: 90, speed: 125},
+
+
+
+
+
+
+    // teacher/professor pokemon party
+    Weavile: {attack: 120, defense: 65, speed: 125},
+    Altaria: {attack: 70, defense: 90, speed: 80},
+    Pinsir: {attack: 125, defense: 100, speed: 85},
+    Flygon: {attack: 100, defense: 80, speed: 100},
+    Wailord: {attack: 90, defense: 45, speed: 60},
+    Groudon: {attack: 150, defense: 140, speed: 90},
+
+
+
+
+
+
+    // your mom's pokemon party
+    Dedenne: {attack: 58, defense: 57, speed: 101},
+    Sandslash: {attack: 100, defense: 110, speed: 65},
+    Meganium: {attack: 82, defense: 100, speed: 80},
+    Perisan: {attack: 70, defense: 60, speed: 115},
+    Espeon: {attack: 65, defense: 60, speed: 110},
+    Hoopa: {attack: 110, defense: 60, speed: 70},
+
 };
 
 
@@ -83,37 +239,7 @@ gameState.battle = {
     enemyPokemon: null
 };
 
-function fiftyfifty() {
-    let result = 'lost';
-    if (Math.random() < .5) {
-        result = 'won';
-    }
-    return result;
-}
 
-function capture() {
-    let result = 'failed to capture';
-    if (Math.random() < .5) {
-        result = 'caught';
-    }
-    return result;
-}
-
-// pokemon battle thingy (remove to avoid conflict for new code?) !!!!!!!!!!!!!!!!!!!
-function battlePokemon(pokemonName, nextRoute, retryScene) {
-    const result = fiftyfifty()
-    if (result === "won") {
-        addPokemonToParty(pokemonName);
-    }
-
-    return {
-        result,
-        next: result === "won"
-            ? nextRoute
-            : retryScene,
-        text: `You ${result} against ${pokemonName}`
-    };
-}
 
 
 // battle end
@@ -191,13 +317,12 @@ function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.playerPokemon = gameState.party[0];
     gameState.battle.enemyPokemon = enemyName;
 
-    gameState.battle.playerHP = 4;
+    gameState.battle.playerHP = 5;
     gameState.battle.enemyHP = 4;
 
     gameState.battle.winScene = winScene;
     gameState.battle.loseScene = loseScene;
 
-    bgEl.src = "battlescene.png";
 
     document.getElementById("battleUI").style.display = "block";
 
@@ -215,22 +340,7 @@ function getEnemyMove() {
     return moves[randomIndex];
 }
 
-// pokemon catch thingy (might need to remove soon!!) !!!!!!!!!!!!!!!!!!!!!
-function catchPokemon(pokemonName, nextRoute, retryScene) {
-    const result = capture();
 
-    if (result === "caught") {
-        addPokemonToParty(pokemonName);
-    }
-
-    return {
-        result,
-        next: result === "caught"
-            ? nextRoute
-            : retryScene,
-        text: `You ${result} ${pokemonName}`
-    };
-}
 
 // pokemon party 
 function addPokemonToParty(pokemonName) {
@@ -436,7 +546,7 @@ const scenes = {
                     gameState.starter = "Treecko";
                     addPokemonToParty("Treecko");
                 },
-                next: "chosenStarter" // maybe fix this soon or make a function that based on what pokemon u pick as your starter the ending is different
+                next: "chosenStarter"
             }
         ]
     },
@@ -448,33 +558,38 @@ const scenes = {
         next: "intro4"
     },
     intro4: {
-        dialogue: () => `You picked ${gameState.starter}! Shortly after, ${playerData.classmate} picks theirs and you both go on your separate ways.`,
+        dialogue: () => `You picked ${gameState.starter}! Shortly after, ${playerData.classmate} picks theirs.`,
+        background: "bg2.png",
+        next: "intro5"
+    },
+    intro5: {
+        dialogue: () => `Before you both parted ways, ${playerData.teacher} informs you how survive in the wild.`,
+        background: "bg2.png",
+        next: "intro6"
+    },
+    intro6: {
+        dialogue: () => `"To view your pokemon party, it will be at the top right corner!"`,
+        background: "bg2.png",
+        next: "intro7"
+    },
+    intro7: {
+        dialogue: () => `"If you ever find yourself in a battle, you will be able to fight with your pokemon's stats: attack, defense, and speed."`,
+        background: "bg2.png",
+        next: "intro8"
+    },
+    intro8: {
+        dialogue: () => `"If the opponent pokemon's health is low, catch it or defeat it!"`,
+        background: "bg2.png",
+        next: "intro9"
+    },
+    intro9: {
+        dialogue: () => `You and ${playerData.classmate} thank ${playerData.teacher} before parting ways.`,
         background: "bg2.png",
         next: "routeOne1"
     },
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //// NOTE: add a tutorial dialogue or info about how to play, add on when theres new mechanics!!
 
 
 
@@ -505,27 +620,25 @@ const scenes = {
                 text: "Psychic",
                 type: "psychic",
                 action: () => {
-                    // gameState.currentEncounter = "Wynaut"; (removed to avoid conflcit?)
                     currentScene = "chosenWynaut";
                     loadScene(currentScene);
                 },
-                // next: "chosenWynaut" REMOVED FOR TETSINGS STUFFS!!
             },
             {
                 text: "Ground",
                 type: "ground",
                 action: () => {
-                    gameState.currentEncounter = "Cubone";
+                    currentScene = "chosenCubone";
+                    loadScene(currentScene);
                 },
-                next: "chosenCubone"
             },
             {
                 text: "Normal",
                 type: "normal",
                 action: () => {
-                    gameState.currentEncounter = "Munchlax";
+                    currentScene = "chosenMunchlax";
+                    loadScene(currentScene);
                 },
-                next: "chosenMunchlax"
             }
         ]
     },
@@ -552,12 +665,13 @@ const scenes = {
 
     },
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
-    RunawayWynaut: {
+    runFromWynaut: {
         dialogue: `You successfully ran away from Wynaut... there were no consequences.`,
         background: "blackscreen.jpg",
         next: "routetwo1",
     },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
 
 
     // cubone option
@@ -571,70 +685,13 @@ const scenes = {
                 next: "fightCubone"
             },
             {
-                text: "Catch",
-                next: "catchCubone"
-            },
-            {
                 text: "Run",
                 next: "runFromCubone"
             }
         ]
     },
-    fightCubone: {
-        dialogue: `You chose to fight ...Cubone!`,
-        img: "cubone.png",
-        background: "route1.png",
-        next: "Cubonefight"
-    },
-    catchCubone: {
-        dialogue: `You chose to catch ...Cubone!`,
-        img: "cubone.png",
-        background: "route1.png",
-        next: "Cubonecapture",
-    },
+
     runFromCubone: {
-        dialogue: `You attempted to flee from ...Cubone!`,
-        img: "cubone.png",
-        background: "route1.png",
-        next: "Cubonerun",
-    },
-
-    Cubonefight: {
-        dialogue: function () {
-            const battle = battlePokemon("Cubone", "routetwo1", "chosenCubone");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "cubone.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Cubonecapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Cubone", "routetwo1", "chosenCubone")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "cubone.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Cubonerun: {
         dialogue: `Cubone got upset that you ran away... he threw his bone at you`,
         background: "blackscreen.jpg",
         next: "routetwo1",
@@ -651,69 +708,12 @@ const scenes = {
                 next: "fightMunchlax"
             },
             {
-                text: "Catch",
-                next: "catchMunchlax"
-            },
-            {
                 text: "Run",
                 next: "runFromMunchlax"
             }
         ]
     },
-    fightMunchlax: {
-        dialogue: `You chose to fight ...Munchlax!`,
-        img: "munchlax.png",
-        background: "route1.png",
-        next: "Munchlaxfight"
-    },
-    catchMunchlax: {
-        dialogue: `You chose to catch ...Munchlax!`,
-        img: "munchlax.png",
-        background: "route1.png",
-        next: "CatchMunchlax",
-    },
     runFromMunchlax: {
-        dialogue: `You attempted to flee from ...Munchlax!`,
-        img: "munchlax.png",
-        background: "route1.png",
-        next: "Munchlaxrun",
-    },
-
-
-    Munchlaxfight: {
-        dialogue: function () {
-            const battle = battlePokemon("Munchlax", "routetwo1", "chosenMunchlax");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "munchlax.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    CatchMunchlax: {
-        dialogue: function () {
-            const captureResult = catchPokemon("Munchlax", "routetwo1", "chosenMunchlax")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "munchlax.png",
-        background: "route1.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Munchlaxrun: {
         dialogue: `You ran away from Munchlax... Munchlax is developing its villain arc now.`,
         background: "blackscreen.jpg",
         next: "routetwo1",
