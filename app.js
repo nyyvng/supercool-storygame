@@ -140,8 +140,8 @@ const pokemonStats = {
     Flaaffy: { attack: 55, defense: 55, speed: 45 },
     Ampharos: { attack: 75, defense: 85, speed: 55 },
 
-    Hakamoo: { attack: 75, defense: 90, speed: 65 },
-    Kommoo: { attack: 110, defense: 125, speed: 85 },
+    Gabite: { attack: 90, defense: 65, speed: 82 },
+    Garchomp: { attack: 130, defense: 95, speed: 102 },
 
     // route 4 shuffle
     Gallade: { attack: 125, defense: 65, speed: 80 },
@@ -249,10 +249,49 @@ const evolutionMap = {
     Korkorok: "Krookodile",
 
 
-    Lampent: "Chandenlure",
+    Lampent: "Chandelure",
 
 
-    //// tis is too much move onto something else >:(
+    // route 4
+    Larvesta: "Volcarona",
+
+
+    Mareep: "Flaaffy",
+    Flaaffy: "Ampharos",
+
+
+    Gabite: "Garchomp",
+
+
+    
+
+    // random pokemon of doom and despair
+    Joltik: "Galvantula",
+
+
+    Pancham: "Pangoro",
+
+    Vanillite: "Vanillish",
+    Vanillish: "Vanilluxe",
+
+
+    Noibat: "Noivern",
+
+
+    Larvitar: "Pupitar",
+    Pupitar: "Tyranitar",
+
+
+    Riolu: "Lucario",
+
+
+    Clefairy: "Clefable",
+
+
+    Scyther: "Scizor",
+
+
+    Buneary: "Lopbunny"
 }
 
 
@@ -433,7 +472,6 @@ function addPokemonToParty(pokemonName) {
     if (gameState.party.length < 6) {
         gameState.party.push({
             name: pokemonName,
-            level: 1,
             exp: 0
         });
 
@@ -444,7 +482,7 @@ function addPokemonToParty(pokemonName) {
 // POKEMON EXP!!
 function gainPartyExp() {
     gameState.party.forEach(pokemon => {
-        pokemon.exp += 60;
+        pokemon.exp += 50;
 
         if (pokemon.exp >= 100) {
             pokemon.exp = 0;
@@ -478,10 +516,6 @@ function updateInventory() {
 
     <div class="pokemon-info">
         <h3 class="pokemon-name">${pokemon.name}</h3>
-
-        <p class="pokemon-level">
-            Level: ${pokemon.level}
-        </p>
 
         <div class="exp-bar">
             <div class="exp-fill"
@@ -534,8 +568,8 @@ function battleTurn(playerChoice) {
         gameState.battle.enemyHP--;
 
         result =
-            `${playerPokemonName} used ${playerChoice}! ` +
-            `${enemyPokemonName} used ${enemyChoice}! ` +
+            `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
+            `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
             `You won the turn!`;
     }
 
@@ -543,8 +577,8 @@ function battleTurn(playerChoice) {
         gameState.battle.playerHP--;
 
         result =
-            `${enemyPokemonName} used ${enemyChoice}! ` +
-            `${playerPokemonName} used ${playerChoice}! ` +
+            `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
+            `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
             `You lost the turn!`;
     }
 
@@ -709,20 +743,6 @@ function runAway() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//////////// NOTE: night need to remove a lot of the 
-// battling/catch/run scenes and replace with the new one in progress
 
 
 
@@ -1397,10 +1417,10 @@ const scenes = {
                 },
             },
             {
-                text: "Dragon/Fighting",
+                text: "Dragon/Ground",
                 type: "dragon",
                 action: () => {
-                    currentScene = "chosenHakamoo";
+                    currentScene = "chosenGabite";
                     loadScene(currentScene);
                 },
             }
@@ -1464,28 +1484,28 @@ const scenes = {
 
 
 
-    // hakamo-o option
-    chosenHakamoo: {
-        dialogue: "A wild Hakamo-o has appeared! What will you do?",
-        img: "Pokemon images/hakamo-o.png",
-        background: "Pokemon images/route4.png",
+    // gabite option
+    chosenGabite: {
+        dialogue: "A wild Gabite has appeared! What will you do?",
+        img: "gabite.png",
+        background: "route4.png",
         options: [
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Hakamoo", "routefive1", "chosenHakamoo");
+                    startBattle("Gabite", "routefive1", "chosenGabite");
                 }
 
             },
             {
                 text: "Run",
-                next: "runFromHakamoo"
+                next: "runFromGabite"
             }
         ]
     },
-    runFromHakamoo: {
-        dialogue: `You successfully ran away from Hakamo-o... there were no consequences.`,
-        background: "Pokemon images/blackscreen.jpg",
+    runFromGabite: {
+        dialogue: `You successfully ran away from Gabite before it erased you from existence.`,
+        background: "blackscreen.jpg",
         next: "routefive1",
     },
 
