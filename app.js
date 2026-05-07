@@ -474,7 +474,7 @@ function updateInventory() {
         slot.classList.add("pokemon-slot");
 
         slot.innerHTML = `
-    <img class="inventory-pokemon-img" src="${pokemon.name.toLowerCase()}.png">
+    <img class="Pokemon images/inventory-pokemon-img" src="${pokemon.name.toLowerCase()}.png">
 
     <div class="pokemon-info">
         <h3 class="pokemon-name">${pokemon.name}</h3>
@@ -745,42 +745,42 @@ function runAway() {
 const scenes = {
     captured: {
         dialogue: () => `${gameState.starter} was caught!`,
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         next: "intro"
     },
     capturefailed: {
         dialogue: () => `${gameState.starter} escaped!`,
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         next: "routeOne1"
     },
 
 
     intro: {
         dialogue: `This is the day you get to pick your very own pokemon in the ${playerData.lab} region and start your very own adventure!`,
-        background: "bg1.png",
+        background: "Pokemon images/bg1.png",
         next: "intro2"
     },
 
     intro2: {
         dialogue: `You make your way towards Professor ${playerData.teacher}s laboratory. This is where you choose your very first Pokemon.`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro3"
     },
 
     intro3: {
         dialogue: `You also meet your classmate ${playerData.classmate} at the lab, who is also starting their Pokemon journey as well. ${playerData.classmate} insists that you get the first pick.`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "starterOption"
     },
 
     starterOption: {
         dialogue: "Who will become your first Pokemon companion?",
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         options: [
             {
                 text: "Litten",
                 type: "fire",
-                img: "litten.png",
+                img: "Pokemon images/litten.png",
                 action: () => {
                     gameState.starter = "Litten";
                     addPokemonToParty("Litten");
@@ -790,7 +790,7 @@ const scenes = {
             {
                 text: "Froakie",
                 type: "water",
-                img: "froakie.png",
+                img: "Pokemon images/froakie.png",
                 action: () => {
                     gameState.starter = "Froakie";
                     addPokemonToParty("Froakie");
@@ -800,7 +800,7 @@ const scenes = {
             {
                 text: "Treecko",
                 type: "grass",
-                img: "treecko.png",
+                img: "Pokemon images/treecko.png",
                 action: () => {
                     gameState.starter = "Treecko";
                     addPokemonToParty("Treecko");
@@ -813,37 +813,37 @@ const scenes = {
 
     chosenStarter: {
         dialogue: () => `You chose a ...${gameState.starter}!`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro4"
     },
     intro4: {
         dialogue: () => `You picked ${gameState.starter}! Shortly after, ${playerData.classmate} picks theirs.`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro5"
     },
     intro5: {
         dialogue: () => `Before you both parted ways, ${playerData.teacher} informs you how survive in the wild.`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro6"
     },
     intro6: {
         dialogue: () => `"To view your pokemon party, it will be at the top right corner!"`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro7"
     },
     intro7: {
         dialogue: () => `"If you ever find yourself in a battle, you will be able to fight with your pokemon's stats: attack, defense, and speed."`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro8"
     },
     intro8: {
         dialogue: () => `"If the opponent pokemon's health is low, catch it or defeat it!"`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "intro9"
     },
     intro9: {
         dialogue: () => `You and ${playerData.classmate} thank ${playerData.teacher} before parting ways.`,
-        background: "bg2.png",
+        background: "Pokemon images/bg2.png",
         next: "routeOne1"
     },
 
@@ -864,17 +864,17 @@ const scenes = {
     //route 1!!!!
     routeOne1: {
         dialogue: "You reach route 1: Grassy Terrains. Its a large field with tall yellow patches of grass throughout the route.",
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         next: "routeOne2"
     },
     routeOne2: {
         dialogue: "You find three unique Pokemon, but you can't see them through all the tall grass!",
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         next: "routeOne3"
     },
     routeOne3: {
         dialogue: "You must investigate... Which Pokemon will you encounter?",
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         options: [
             {
                 text: "Psychic",
@@ -906,8 +906,8 @@ const scenes = {
     //wynaut option
     chosenWynaut: {
         dialogue: "A wild Wynaut has appeared! What will you do?",
-        img: "wynaut.png",
-        background: "route1.png",
+        img: "Pokemon images/wynaut.png",
+        background: "Pokemon images/route1.png",
         options: [
             {
                 text: "Fight",
@@ -927,7 +927,7 @@ const scenes = {
 
     runFromWynaut: {
         dialogue: `You successfully ran away from Wynaut... there were no consequences.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routetwo1",
     },
 
@@ -938,8 +938,8 @@ const scenes = {
     // cubone option
     chosenCubone: {
         dialogue: "A wild Cubone has appeared! What will you do?",
-        img: "cubone.png",
-        background: "route1.png",
+        img: "Pokemon images/cubone.png",
+        background: "Pokemon images/route1.png",
         options: [
             {
                 text: "Fight",
@@ -957,14 +957,14 @@ const scenes = {
 
     runFromCubone: {
         dialogue: `Cubone got upset that you ran away... he threw his bone at you`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routetwo1",
     },
 
     // munchlax option
     chosenMunchlax: {
         dialogue: "A wild Munchlax has appeared! What will you do?",
-        img: "munchlax.png",
+        img: "Pokemon images/munchlax.png",
         background: "route1.png",
         options: [
             {
@@ -982,7 +982,7 @@ const scenes = {
     },
     runFromMunchlax: {
         dialogue: `You ran away from Munchlax... Munchlax is developing its villain arc now.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routetwo1",
     },
 
@@ -1017,32 +1017,32 @@ const scenes = {
     //route 2!!!
     routetwo1: {
         dialogue: `You offically made it out of the Grassy Terrains, you have now arrived at route 2: Berry Woods.`,
-        background: "route2.png",
+        background: "Pokemon images/route2.png",
         next: "routetwo2",
 
     },
 
     routetwo2: {
         dialogue: `This area is a forest that's filled with many unique Pokemon. You and your Pokemon decide to rest for a while in this nice environment, so you sit underneath a tree and relax. `,
-        background: "route2.png",
+        background: "Pokemon images/route2.png",
         next: "routetwo3",
     },
 
     routetwo3: {
         dialogue: `Your rest comes to a stop, as you hear the bushes rustling close by.`,
-        background: "route2.png",
+        background: "Pokemon images/route2.png",
         next: "routetwo4",
     },
 
     routetwo4: {
         dialogue: `You notice that thre are three Pokemon in the bush, preparing to attack you! `,
-        background: "route2.png",
+        background: "Pokemon images/route2.png",
         next: "routetwo5",
     },
 
     routetwo5: {
         dialogue: `However, you can only fight one of them, so which would it be?`,
-        background: "route2.png",
+        background: "Pokemon images/route2.png",
         options: [
             {
                 text: "Fairy",
@@ -1074,8 +1074,8 @@ const scenes = {
     // togepi option
     chosenTogepi: {
         dialogue: "A wild Togepi has appeared! What will you do?",
-        img: "togepi.png",
-        background: "route2.png",
+        img: "Pokemon images/togepi.png",
+        background: "Pokemon images/route2.png",
         options: [
             {
                 text: "Fight",
@@ -1092,7 +1092,7 @@ const scenes = {
     },
     runFromTogepi: {
         dialogue: `Togepi successfully ran away from you...`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
 
@@ -1103,8 +1103,8 @@ const scenes = {
     // Bonsly option
     chosenBonsly: {
         dialogue: "A wild Bonsly has appeared! What will you do?",
-        img: "bonsly.png",
-        background: "route2.png",
+        img: "Pokemon images/bonsly.png",
+        background: "Pokemon images/route2.png",
         options: [
             {
                 text: "Fight",
@@ -1121,7 +1121,7 @@ const scenes = {
     },
     runFromBonsly: {
         dialogue: `You ran away from Bonsly? Bonsly cried👎`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
 
@@ -1131,8 +1131,8 @@ const scenes = {
     // Nidoran option
     chosenNidoran: {
         dialogue: "A wild Nidoran has appeared! What will you do?",
-        img: "nidoran.png",
-        background: "route2.png",
+        img: "Pokemon images/nidoran.png",
+        background: "Pokemon images/route2.png",
         options: [
             {
                 text: "Fight",
@@ -1150,7 +1150,7 @@ const scenes = {
     runFromNidoran: {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
 
@@ -1181,32 +1181,32 @@ const scenes = {
     //route THREEEEEEEE!!!
     routethree1: {
         dialogue: `After a very intense battle you reach route 3: Flatlands.`,
-        background: "route3.png",
+        background: "Pokemon images/route3.png",
         next: "routethree2",
 
     },
 
     routethree2: {
         dialogue: `This route has a large green field that's next to a river. The sun is setting and you decided to set up camp for the night. The light sky finally fades. And you and your pokemon rest under the stars.`,
-        background: "route3.png",
+        background: "Pokemon images/route3.png",
         next: "routethree3",
     },
 
     routethree3: {
         dialogue: `suddenly, an unexpected rustling in the tall grass near you wakes you and your pokemon. `,
-        background: "route3.png",
+        background: "Pokemon images/route3.png",
         next: "routethree4",
     },
 
     routethree4: {
         dialogue: `It's hard to notice, but 3 pokemon are surrounding you, ready for a battle. But you could only battle one of them.`,
-        background: "route3.png",
+        background: "Pokemon images/route3.png",
         next: "routethree5",
     },
 
     routethree5: {
         dialogue: `Which one would you choose?`,
-        background: "route3.png",
+        background: "Pokemon images/route3.png",
         options: [
             {
                 text: "Ground/Dark",
@@ -1238,8 +1238,8 @@ const scenes = {
     // Krokorok option
     chosenKrokorok: {
         dialogue: "A wild Krokorok has appeared! What will you do?",
-        img: "krokorok.png",
-        background: "route3.png",
+        img: "Pokemon images/krokorok.png",
+        background: "Pokemon images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -1256,7 +1256,7 @@ const scenes = {
     },
     runFromKrokorok: {
         dialogue: `You ran away from Krokorok! It chased you across the Flatlands`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefour1",
     },
 
@@ -1267,8 +1267,8 @@ const scenes = {
     // Lampent option
     chosenLampent: {
         dialogue: "A wild Lampent has appeared! What will you do?",
-        img: "lampent.png",
-        background: "route3.png",
+        img: "Pokemon images/lampent.png",
+        background: "Pokemon images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -1285,7 +1285,7 @@ const scenes = {
     },
     runFromLampent: {
         dialogue: `You ran away from Lampent! It tried to chase you but ultimately gave up!`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefour1",
     },
 
@@ -1295,8 +1295,8 @@ const scenes = {
     // Hawlucha option
     chosenHawlucha: {
         dialogue: "A wild Hawlucha has appeared! What will you do?",
-        img: "hawlucha.png",
-        background: "route3.png",
+        img: "Pokemon images/hawlucha.png",
+        background: "Pokemon images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -1313,7 +1313,7 @@ const scenes = {
     },
     runFromHawlucha: {
         dialogue: `You ran away from Hawlucha before it could body slam you!`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefour1",
     },
 
@@ -1353,32 +1353,32 @@ const scenes = {
 
     routefour1: {
         dialogue: `Morning has now arrived after your newest catch from last night. You packed up your things before heading out to Route 4: Sandy Beaches.`,
-        background: "route4.png",
+        background: "Pokemon images/route4.png",
         next: "routefour2",
 
     },
 
     routefour2: {
         dialogue: `You’re now at the beach! There’s a lot of wind and waves today, and it seems like it’s going to rain soon.`,
-        background: "route4.png",
+        background: "Pokemon images/route4.png",
         next: "routefour3",
     },
 
     routefour3: {
         dialogue: `Not so far away is a small cave where you can rest until this rainstorm passes by. You arrived there, but you didn’t think there were some Pokemon already hiding in the cave.`,
-        background: "route4.png",
+        background: "Pokemon images/route4.png",
         next: "routefour4",
     },
 
     routefour4: {
         dialogue: `You couldn’t see them– but you could hear their angry sounds as you stumbled upon their territory.`,
-        background: "route4.png",
+        background: "Pokemon images/route4.png",
         next: "routefour5",
     },
 
     routefour5: {
         dialogue: `Pick and choose to see who's in this cave!`,
-        background: "route4.png",
+        background: "Pokemon images/route4.png",
         options: [
             {
                 text: "Bug/Fire",
@@ -1410,8 +1410,8 @@ const scenes = {
     // Larvesta option
     chosenLarvesta: {
         dialogue: "A wild Larvesta has appeared! What will you do?",
-        img: "larvesta.png",
-        background: "route4.png",
+        img: "Pokemon images/larvesta.png",
+        background: "Pokemon images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -1428,7 +1428,7 @@ const scenes = {
     },
     runFromLarvesta: {
         dialogue: `You ran away from Larvesta... it attacked you with Ember.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefive1",
     },
 
@@ -1439,8 +1439,8 @@ const scenes = {
     // mareep option
     chosenMareep: {
         dialogue: "A wild Mareep has appeared! What will you do?",
-        img: "mareep.png",
-        background: "route4.png",
+        img: "Pokemon images/mareep.png",
+        background: "Pokemon images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -1457,7 +1457,7 @@ const scenes = {
     },
     runFromMareep: {
         dialogue: `You ran away from Mareep? Why would you do that..`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefive1",
     },
 
@@ -1467,8 +1467,8 @@ const scenes = {
     // hakamo-o option
     chosenHakamoo: {
         dialogue: "A wild Hakamo-o has appeared! What will you do?",
-        img: "hakamo-o.png",
-        background: "route4.png",
+        img: "Pokemon images/hakamo-o.png",
+        background: "Pokemon images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -1485,7 +1485,7 @@ const scenes = {
     },
     runFromHakamoo: {
         dialogue: `You successfully ran away from Hakamo-o... there were no consequences.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefive1",
     },
 
@@ -1543,32 +1543,32 @@ const scenes = {
 
     routefive1: {
         dialogue: `Finally, you were able to rest for the rest of the time until the storm passed. After a few more minutes the rain has passed now, and you make your way up to Route 5: Forbidden Canyon.`,
-        background: "route5.png",
+        background: "Pokemon images/route5.png",
         next: "routefive2",
 
     },
 
     routefive2: {
         dialogue: `You make your way up to the Canyon, and the clouds have turned darker in the sky. You’ve become nervous as you reach the peak of the canyon but at the same time you felt a relief at the same time as you could see your whole entire region.`,
-        background: "route5a.png",
+        background: "Pokemon images/route5a.png",
         next: "routefive3",
     },
 
     routefive3: {
         dialogue: `All of a sudden, the sky was completely covered in dark gray clouds as you could hear thunder out in the distance. You’ve noticed how this weather isn’t natural, and it seemed like a Pokemon was doing this.`,
-        background: "route5b.png",
+        background: "Pokemon images/route5b.png",
         next: "routefive4",
     },
 
     routefive4: {
         dialogue: `You look behind, and you could see three Pokemon out in the distance. However, these aren't just any ordinary Pokemon, you’ve noticed the way they look might be a stronger Pokemon you have never fought before.`,
-        background: "route5b.png",
+        background: "Pokemon images/route5b.png",
         next: "routefive5",
     },
 
     routefive5: {
         dialogue: `These three mysterious Pokemon are only letting you fight ONE of them and see if you have the potential to catch them. Pick wisely!`,
-        background: "route5c.png",
+        background: "Pokemon images/route5c.png",
         options: [
             {
                 text: "Steel/Psychic",
@@ -1600,7 +1600,7 @@ const scenes = {
     // Solgaleo option
     chosenSolgaleo: {
         dialogue: "A wild- wait, IS THAT Solgaleo? What will you do!?",
-        img: "solgaleo.png",
+        img: "Pokemon images/solgaleo.png",
         background: "route5c.png",
         options: [
             {
@@ -1618,7 +1618,7 @@ const scenes = {
     },
     runFromSolgaleo: {
         dialogue: `You ran away from Solgaleo! It just stared at you... and then decided to nap in victory.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "wrapup",
     },
 
@@ -1629,8 +1629,8 @@ const scenes = {
     // Zygarde option
     chosenZygarde: {
         dialogue: "A wild- wait, IS THAT ZYGARDE? What will you do!?",
-        img: "zygarde.png",
-        background: "route5c.png",
+        img: "Pokemon images/zygarde.png",
+        background: "Pokemon images/route5c.png",
         options: [
             {
                 text: "Fight",
@@ -1647,7 +1647,7 @@ const scenes = {
     },
     runFromZygarde: {
         dialogue: `You ran from Zygarde! It laughed at you. ☹️`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "wrapup",
     },
 
@@ -1657,8 +1657,8 @@ const scenes = {
     // Articuno option
     chosenArticuno: {
         dialogue: "A wild- wait, IS THAT ARTICUNO? What will you do!?",
-        img: "articuno.png",
-        background: "route5c.png",
+        img: "Pokemon images/articuno.png",
+        background: "Pokemon images/route5c.png",
         options: [
             {
                 text: "Fight",
@@ -1675,7 +1675,7 @@ const scenes = {
     },
     runFromArticuno: {
         dialogue: `You ran away from a Articuno! It’s... Confused why you ran?`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "wrapup",
     },
 
@@ -1683,7 +1683,7 @@ const scenes = {
 
     wrapup: {
         dialogue: "You reached the end of your adventure, now it is time to return home",
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: function () {
             if (gameState.starter === "Litten") {
                 return "endingv1";
@@ -1705,25 +1705,25 @@ const scenes = {
 
     endingv1: {
         dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "Professorend"
     },
 
     Professorend: {
         dialogue: `Is that... ${playerData.teacher}!?!`,
-        background: "Professor-ending.png",
+        background: "Pokemon images/Professor-ending.png",
         next: "Professoralt",
 
     },
 
     Professoralt: {
         dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
-        background: "teachtalkstoyou.png",
+        background: "Pokemon images/teachtalkstoyou.png",
         next: "Fightteach",
     },
 
     Fightteach: {
-        background: "teachtalkstoyou.png",
+        background: "Pokemon images/teachtalkstoyou.png",
         options: [
             {
                 text: "Fight",
@@ -1751,14 +1751,14 @@ const scenes = {
 
     Fightingteachwin: {
         dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
-        background: "teachtalksyou.png",
+        background: "Pokemon images/teachtalksyou.png",
         next: "end",
 
     },
 
     Fightingteachloss: {
         dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
-        background: "teachtalksyou.png",
+        background: "Pokemon images/teachtalksyou.png",
         next: "end",
     },
 
@@ -1766,20 +1766,20 @@ const scenes = {
 
     endingv2: {
         dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "Friendending1",
     },
 
     Friendending1: {
         dialogue: `Hey look it’s ${playerData.classmate}!`,
-        background: "friend!.png",
+        background: "Pokemon images/friend!.png",
         next: "Friendfightp2",
     },
 
 
     Friendfightp2: {
         dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
-        background: "friend!.png",
+        background: "Pokemon images/friend!.png",
         next: "Friendfightp3",
     },
 
@@ -1792,7 +1792,7 @@ const scenes = {
             return battle.text;
         },
 
-        img: "Friend!.png",
+        img: "Pokemon images/Friend!.png",
 
         next: function () {
             return this.nextScene;
@@ -1801,13 +1801,13 @@ const scenes = {
 
     Friendfightwin: {
         dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
-        background: "Friend!.png",
+        background: "Pokemon images/Friend!.png",
         next: "end",
     },
 
     Friendfightloss: {
         dialogue: `I must’ve been lucky, what a tough fight!`,
-        background: "Friend!.png",
+        background: "Pokemon images/Friend!.png",
         next: "end",
     },
 
@@ -1815,31 +1815,31 @@ const scenes = {
 
     endingv3: {
         dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "motherencounter",
     },
 
     motherencounter: {
         dialogue: `What is my mom doing here?`,
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         next: "motherencounter1",
 
     },
     motherencounter1: {
         dialogue: `It looks like your mother is challenging you... to a battle!?!`,
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         next: "motherencounter2",
     },
 
     motherencounter2: {
         dialogue: `If you win you can choose dinner tonight!`,
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         next: "Fightmom",
     },
 
 
     Fightmom: {
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         options: [
             {
                 text: "Fight",
@@ -1859,7 +1859,7 @@ const scenes = {
             return battle.text;
         },
 
-        img: "Mother.png",
+        img: "Pokemon images/Mother.png",
 
         next: function () {
             return this.nextScene;
@@ -1869,13 +1869,13 @@ const scenes = {
 
     motherencounterwin: {
         dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         next: "end",
     },
 
     motherencounterloss: {
         dialogue: `Well now I get to choose what’s for dinner, loser!`,
-        background: "Mother.png",
+        background: "Pokemon images/Mother.png",
         next: "end",
     },
 
