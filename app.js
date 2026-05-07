@@ -108,7 +108,7 @@ const pokemonStats = {
 
 
     // route 3
-    Korkorok: { attack: 82, defense: 45, speed: 74 },
+    Krokorok: { attack: 82, defense: 45, speed: 74 },
     Krookodile: { attack: 117, defense: 80, speed: 92 },
 
     Lampent: { attack: 40, defense: 60, speed: 55 },
@@ -211,6 +211,51 @@ const pokemonStats = {
 };
 
 
+// pokemon evolution (seeing in this javascript is such a nightmare)
+const evolutionMap = {
+    // starter pick
+    Litten: "Torracat",
+    Torracat: "Incineroar",
+
+    Froakie: "Frogadier",
+    Frogadier: "Greninja",
+
+    Treecko: "Grovyle",
+    Grovyle: "Sceptile",
+
+
+    // route 1
+    Wynaut: "Wobbuffet",
+
+
+    Cubone: "Marowak",
+
+
+    Munchlax: "Snorlax",
+
+
+    // route 2
+    Togepi: "Togetic",
+
+
+    Bonsly: "Sudowoodo",
+
+
+    Nidoran: "Nidorino",
+    Nidorino: "Nidoking",
+
+
+    // route 3
+    Korkorok: "Krookodile",
+
+
+    Lampent: "Chandenlure",
+
+
+    //// tis is too much move onto something else >:(
+}
+
+
 
 
 
@@ -273,6 +318,7 @@ function handleBattleTurn(choice) {
     const result = checkBattleEnd();
 
     if (result === "enemyFainted") {
+        gainPartyExp();
         endBattle(gameState.battle.winScene);
     }
 
@@ -350,8 +396,9 @@ function loadBattleOptions() {
 // new battle system (WIP)
 function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.activeIndex = 0;
-    gameState.battle.playerPokemon = gameState.party[gameState.battle.activeIndex];
-    gameState.battle.faintedPokemon = []; gameState.battle.enemyPokemon = enemyName;
+    gameState.battle.playerPokemon = gameState.party[gameState.battle.activeIndex].name;
+    gameState.battle.faintedPokemon = [];
+    gameState.battle.enemyPokemon = enemyName;
 
     gameState.battle.playerHP = 5;
     gameState.battle.enemyHP = 4;
@@ -384,9 +431,33 @@ function getEnemyMove() {
 // pokemon party 
 function addPokemonToParty(pokemonName) {
     if (gameState.party.length < 6) {
-        gameState.party.push(pokemonName);
+        gameState.party.push({
+            name: pokemonName,
+            level: 1,
+            exp: 0
+        });
+
         updateInventory();
     }
+}
+
+// POKEMON EXP!!
+function gainPartyExp() {
+    gameState.party.forEach(pokemon => {
+        pokemon.exp += 40;
+
+        if (pokemon.exp >= 100) {
+            pokemon.exp = 0;
+            pokemon.level++;
+
+            if (evolutionMap[pokemon.name]) {
+                pokemon.name = evolutionMap[pokemon.name];
+                alert(`${pokemon.name} evolved!`);
+            }
+        }
+    });
+
+    updateInventory();
 }
 
 
@@ -396,25 +467,42 @@ function addPokemonToParty(pokemonName) {
 // pokemon inventory update
 function updateInventory() {
     const inventory = document.getElementById("pokemonInventory");
-
     inventory.innerHTML = "";
 
-    gameState.party.forEach((pokemon, index) => {
+    gameState.party.forEach(pokemon => {
         const slot = document.createElement("div");
         slot.classList.add("pokemon-slot");
 
-        slot.textContent = pokemon;
+        slot.innerHTML = `
+    <img class="inventory-pokemon-img" src="${pokemon.name.toLowerCase()}.png">
+
+    <div class="pokemon-info">
+        <h3 class="pokemon-name">${pokemon.name}</h3>
+
+        <p class="pokemon-level">
+            Level: ${pokemon.level}
+        </p>
+
+        <div class="exp-bar">
+            <div class="exp-fill"
+                style="width:${pokemon.exp}%">
+            </div>
+        </div>
+
+        <p class="exp-text">
+            EXP: ${pokemon.exp}/100
+        </p>
+    </div>
+`;
 
         inventory.appendChild(slot);
     });
 
-    // filling empty slots
     for (let i = gameState.party.length; i < 6; i++) {
         const emptySlot = document.createElement("div");
         emptySlot.classList.add("pokemon-slot");
         emptySlot.textContent = "Empty";
         inventory.appendChild(emptySlot);
-
     }
 }
 
@@ -508,11 +596,11 @@ function showSwitchOptions() {
 
     gameState.party.forEach((pokemon, index) => {
 
-        if (!gameState.battle.faintedPokemon.includes(pokemon)) {
+        if (!gameState.battle.faintedPokemon.includes(pokemon.name)) {
 
             battleOptions.innerHTML += `
                 <button onclick="switchPokemon(${index})">
-                    ${pokemon}
+                    ${pokemon.name}
                 </button>
             `;
         }
@@ -543,7 +631,7 @@ function openBattleSwitchMenu() {
         }
 
         if (
-            pokemon === gameState.battle.playerPokemon
+            pokemon.name === gameState.battle.playerPokemon
         ) {
             return;
         }
@@ -553,7 +641,7 @@ function openBattleSwitchMenu() {
                 class="switch-pokemon-btn"
                 onclick="switchPokemon(${index})"
             >
-                ${pokemon}
+                ${pokemon.name}
             </button>
         `;
     });
@@ -577,8 +665,7 @@ function switchPokemon(index) {
 
     gameState.battle.activeIndex = index;
 
-    gameState.battle.playerPokemon =
-        gameState.party[index];
+    gameState.battle.playerPokemon = gameState.party[index].name;
 
     gameState.battle.playerHP = 4;
 
@@ -604,6 +691,10 @@ function catchPokemonAttempt() {
     if (Math.random() < catchRate) {
         addPokemonToParty(gameState.battle.enemyPokemon);
         alert(`You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`);
+        endBattle(gameState.battle.winScene);
+
+        // gain exp after catch
+        gainPartyExp();
         endBattle(gameState.battle.winScene);
     } else {
         alert(`You attempt to catch ${gameState.battle.enemyPokemon}, but it broke free!`);

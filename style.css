@@ -393,10 +393,9 @@ a {
 
 /* this might need to be in javascript instead.... */
 #inventory {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    gap: 90px;
-    margin-top: 30px;
+    margin-top: 20px;
+    flex: 1;
+    overflow: hidden;
 
 
 }
@@ -423,12 +422,37 @@ a {
 }
 
 .pokemon-slot {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     background: white;
     padding: 12px;
     border: 2px solid black;
-    min-height: 50px;
+    min-height: 80px;
     font-size: 18px;
-    background-color: var(--starter-color);
+}
+
+.inventory-pokemon-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.pokemon-slot h3,
+.pokemon-slot p {
+    margin: 2px 0;
+}
+
+.exp-bar {
+    width: 250px;
+    height: 14px;
+    background: #ddd;
+    border: 2px solid black;
+}
+
+.exp-fill {
+    height: 100%;
+    background: limegreen;
 }
 
 
