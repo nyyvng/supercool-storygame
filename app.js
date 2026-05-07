@@ -112,7 +112,7 @@ const pokemonStats = {
     Krookodile: { attack: 117, defense: 80, speed: 92 },
 
     Lampent: { attack: 40, defense: 60, speed: 55 },
-    Chandenlure: { attack: 55, defense: 90, speed: 80 },
+    Chandelure: { attack: 55, defense: 90, speed: 80 },
 
     Hawlucha: { attack: 92, defense: 75, speed: 118 },
 
@@ -249,7 +249,7 @@ const evolutionMap = {
     Korkorok: "Krookodile",
 
 
-    Lampent: "Chandenlure",
+    Lampent: "Chandelure",
 
 
     // route 4
@@ -743,20 +743,6 @@ function runAway() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//////////// NOTE: night need to remove a lot of the 
-// battling/catch/run scenes and replace with the new one in progress
 
 
 
