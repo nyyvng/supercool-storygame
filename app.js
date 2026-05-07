@@ -40,17 +40,17 @@ const pokemonStats = {
 
     // starters
     Litten: { attack: 65, defense: 40, speed: 70 },
-    Torracat: {attack: 85, defense: 50, speed: 90},
-    Incineroar: {attack: 115, defense: 90, speed: 60},
+    Torracat: { attack: 85, defense: 50, speed: 90 },
+    Incineroar: { attack: 115, defense: 90, speed: 60 },
 
     Froakie: { attack: 56, defense: 40, speed: 71 },
-    Frogadier: {attack: 63, defense: 52, speed: 97},
-    Greninja: {attack: 95, defense: 67, speed: 122},
+    Frogadier: { attack: 63, defense: 52, speed: 97 },
+    Greninja: { attack: 95, defense: 67, speed: 122 },
 
 
     Treecko: { attack: 45, defense: 35, speed: 70 },
-    Grovyle: {attack: 65, defense: 45, speed: 95},
-    Sceptile: {attack: 85, defense: 65, speed: 120},
+    Grovyle: { attack: 65, defense: 45, speed: 95 },
+    Sceptile: { attack: 85, defense: 65, speed: 120 },
 
 
 
@@ -58,24 +58,24 @@ const pokemonStats = {
 
     // route 1 
     Wynaut: { attack: 23, defense: 48, speed: 23 },
-    Wobbuffet: {attack: 33, defense: 58, speed: 33},
+    Wobbuffet: { attack: 33, defense: 58, speed: 33 },
 
     Cubone: { attack: 50, defense: 95, speed: 35 },
-    Marowak: {attack: 80, defense: 110, speed: 45},
+    Marowak: { attack: 80, defense: 110, speed: 45 },
 
     Munchlax: { attack: 85, defense: 40, speed: 5 },
-    Snorlax: {attack: 110, defense: 65, speed: 30},
+    Snorlax: { attack: 110, defense: 65, speed: 30 },
 
     // route 1 shuffle
-    Joltik: {attack: 47, defense: 50, speed: 65},
-    Galvantula: {attack: 77, defense: 60, speed: 108},
+    Joltik: { attack: 47, defense: 50, speed: 65 },
+    Galvantula: { attack: 77, defense: 60, speed: 108 },
 
-    Pancham: {attack: 82, defense: 62, speed: 43},
-    Pangoro: {attack: 124, defense: 78, speed: 58},
+    Pancham: { attack: 82, defense: 62, speed: 43 },
+    Pangoro: { attack: 124, defense: 78, speed: 58 },
 
-    Vanillite: {attack: 50, defense: 50, speed: 44},
-    Vanillish: {attack: 65, defense: 65, speed: 59},
-    Vanilluxe: {attack: 95, defense: 85, speed: 79},
+    Vanillite: { attack: 50, defense: 50, speed: 44 },
+    Vanillish: { attack: 65, defense: 65, speed: 59 },
+    Vanilluxe: { attack: 95, defense: 85, speed: 79 },
 
 
 
@@ -83,48 +83,48 @@ const pokemonStats = {
 
     // route 2
     Togepi: { attack: 20, defense: 65, speed: 20 },
-    Togetic: {attack: 40, defense: 85, speed: 40},
+    Togetic: { attack: 40, defense: 85, speed: 40 },
 
     Bonsly: { attack: 80, defense: 95, speed: 10 },
-    Sudowoodo: {attack: 100, defense: 115, speed: 30},
+    Sudowoodo: { attack: 100, defense: 115, speed: 30 },
 
     Nidoran: { attack: 57, defense: 40, speed: 50 },
-    Nidorino: {attack: 72, defense: 57, speed: 65},
-    Nidoking: {attack: 102, defense: 77, speed: 85},
+    Nidorino: { attack: 72, defense: 57, speed: 65 },
+    Nidoking: { attack: 102, defense: 77, speed: 85 },
 
     // route 2 shuffle
-    Noibat: {attack: 30, defense: 35, speed: 55},
-    Noivern: {attack: 70, defense: 80, speed: 123},
+    Noibat: { attack: 30, defense: 35, speed: 55 },
+    Noivern: { attack: 70, defense: 80, speed: 123 },
 
-    Larvitar: {attack: 64, defense: 50, speed: 41},
-    Pupitar: {attack: 84, defense: 70, speed: 51},
-    Tyranitar: {attack: 134, defense: 110, speed: 61},
+    Larvitar: { attack: 64, defense: 50, speed: 41 },
+    Pupitar: { attack: 84, defense: 70, speed: 51 },
+    Tyranitar: { attack: 134, defense: 110, speed: 61 },
 
-    Riolu: {attack: 70, defense: 40, speed: 60},
-    Lucario: {attack: 110, defense: 70, speed: 90},
+    Riolu: { attack: 70, defense: 40, speed: 60 },
+    Lucario: { attack: 110, defense: 70, speed: 90 },
 
 
 
 
 
     // route 3
-    Korkorok: {attack: 82, defense: 45, speed: 74},
-    Krookodile: {attack: 117, defense: 80, speed: 92},
+    Korkorok: { attack: 82, defense: 45, speed: 74 },
+    Krookodile: { attack: 117, defense: 80, speed: 92 },
 
-    Lampent: {attack: 40, defense: 60, speed: 55},
-    Chandelure: {attack: 55, defense: 90, speed: 80},
+    Lampent: { attack: 40, defense: 60, speed: 55 },
+    Chandelure: { attack: 55, defense: 90, speed: 80 },
 
-    Hawlucha: {attack: 92, defense: 75, speed: 118},
+    Hawlucha: { attack: 92, defense: 75, speed: 118 },
 
     //route 3 shuffle
-    Clefairy: {attack: 45, defense: 48, speed: 35},
-    Clefable: {attack: 70, defense: 73, speed: 60},
+    Clefairy: { attack: 45, defense: 48, speed: 35 },
+    Clefable: { attack: 70, defense: 73, speed: 60 },
 
-    Scyther: {attack: 110, defense: 80, speed: 105},
-    Scizor: {attack: 130, defense: 100, speed: 65},
+    Scyther: { attack: 110, defense: 80, speed: 105 },
+    Scizor: { attack: 130, defense: 100, speed: 65 },
 
-    Buneary: {attack: 66, defense: 44, speed: 85},
-    Lopbunny: {attack: 76, defense: 84, speed: 105},
+    Buneary: { attack: 66, defense: 44, speed: 85 },
+    Lopbunny: { attack: 76, defense: 84, speed: 105 },
 
 
 
@@ -133,39 +133,39 @@ const pokemonStats = {
 
 
     // route 4
-    Larvesta: {attack: 85, defense: 55, speed: 60},
-    Volcarona: {attack: 60, defense: 65, speed: 100},
+    Larvesta: { attack: 85, defense: 55, speed: 60 },
+    Volcarona: { attack: 60, defense: 65, speed: 100 },
 
-    Mareep: {attack: 40, defense: 40, speed: 35},
-    Flaaffy: {attack: 55, defense: 55, speed: 45},
-    Ampharos: {attack: 75, defense: 85, speed: 55},
+    Mareep: { attack: 40, defense: 40, speed: 35 },
+    Flaaffy: { attack: 55, defense: 55, speed: 45 },
+    Ampharos: { attack: 75, defense: 85, speed: 55 },
 
-    Hakamoo: {attack: 75, defense: 90, speed: 65},
-    Kommoo: {attack: 110, defense: 125, speed: 85},
+    Hakamoo: { attack: 75, defense: 90, speed: 65 },
+    Kommoo: { attack: 110, defense: 125, speed: 85 },
 
     // route 4 shuffle
-    Gallade: {attack: 125, defense: 65, speed: 80},
+    Gallade: { attack: 125, defense: 65, speed: 80 },
 
-    Trevenant: {attack: 110, defense: 76, speed: 56},
+    Trevenant: { attack: 110, defense: 76, speed: 56 },
 
-    Lycanroc: {attack: 115, defense: 65, speed: 112},
+    Lycanroc: { attack: 115, defense: 65, speed: 112 },
 
 
 
 
     // route 5
-    Solgaleo: {attack: 137, defense: 107, speed: 97},
+    Solgaleo: { attack: 137, defense: 107, speed: 97 },
 
-    Zygarde: {attack: 100, defense: 121, speed: 95},
+    Zygarde: { attack: 100, defense: 121, speed: 95 },
 
-    Articuno: {attack: 85, defense: 100, speed: 85},
+    Articuno: { attack: 85, defense: 100, speed: 85 },
 
     // route 5 shuffle
-    Rayquaza: {attack: 150, defense: 90, speed: 95},
+    Rayquaza: { attack: 150, defense: 90, speed: 95 },
 
-    Lugia: {attack: 90, defense: 130, speed: 110},
+    Lugia: { attack: 90, defense: 130, speed: 110 },
 
-    Regirock: {attack: 100, defense: 200, speed: 50},
+    Regirock: { attack: 100, defense: 200, speed: 50 },
 
 
 
@@ -175,12 +175,12 @@ const pokemonStats = {
 
 
     // rival/friend pokemon party
-    Hariyama: {attack: 120, defense: 60, speed: 50},
-    Flareon: {attack: 130, defense: 60, speed: 65},
-    Venusaur: {attack: 82, defense: 83, speed: 80},
-    Emogla: {attack: 75, defense: 60, speed: 103},
-    Lurantis: {attack: 105, defense: 90, speed: 45},
-    Darkrai: {attack: 90, defense: 90, speed: 125},
+    Hariyama: { attack: 120, defense: 60, speed: 50 },
+    Flareon: { attack: 130, defense: 60, speed: 65 },
+    Venusaur: { attack: 82, defense: 83, speed: 80 },
+    Emogla: { attack: 75, defense: 60, speed: 103 },
+    Lurantis: { attack: 105, defense: 90, speed: 45 },
+    Darkrai: { attack: 90, defense: 90, speed: 125 },
 
 
 
@@ -188,12 +188,12 @@ const pokemonStats = {
 
 
     // teacher/professor pokemon party
-    Weavile: {attack: 120, defense: 65, speed: 125},
-    Altaria: {attack: 70, defense: 90, speed: 80},
-    Pinsir: {attack: 125, defense: 100, speed: 85},
-    Flygon: {attack: 100, defense: 80, speed: 100},
-    Wailord: {attack: 90, defense: 45, speed: 60},
-    Groudon: {attack: 150, defense: 140, speed: 90},
+    Weavile: { attack: 120, defense: 65, speed: 125 },
+    Altaria: { attack: 70, defense: 90, speed: 80 },
+    Pinsir: { attack: 125, defense: 100, speed: 85 },
+    Flygon: { attack: 100, defense: 80, speed: 100 },
+    Wailord: { attack: 90, defense: 45, speed: 60 },
+    Groudon: { attack: 150, defense: 140, speed: 90 },
 
 
 
@@ -201,12 +201,12 @@ const pokemonStats = {
 
 
     // your mom's pokemon party
-    Dedenne: {attack: 58, defense: 57, speed: 101},
-    Sandslash: {attack: 100, defense: 110, speed: 65},
-    Meganium: {attack: 82, defense: 100, speed: 80},
-    Perisan: {attack: 70, defense: 60, speed: 115},
-    Espeon: {attack: 65, defense: 60, speed: 110},
-    Hoopa: {attack: 110, defense: 60, speed: 70},
+    Dedenne: { attack: 58, defense: 57, speed: 101 },
+    Sandslash: { attack: 100, defense: 110, speed: 65 },
+    Meganium: { attack: 82, defense: 100, speed: 80 },
+    Perisan: { attack: 70, defense: 60, speed: 115 },
+    Espeon: { attack: 65, defense: 60, speed: 110 },
+    Hoopa: { attack: 110, defense: 60, speed: 70 },
 
 };
 
@@ -236,7 +236,10 @@ gameState.battle = {
     playerHP: 4,
     enemyHP: 4,
     playerPokemon: null,
-    enemyPokemon: null
+    enemyPokemon: null,
+
+    activeIndex: 0,
+    faintedPokemon: []
 };
 
 
@@ -250,6 +253,10 @@ function endBattle(nextScene) {
     currentScene = nextScene;
     loadScene(currentScene);
 }
+
+
+
+
 
 // battle turns
 function handleBattleTurn(choice) {
@@ -270,9 +277,21 @@ function handleBattleTurn(choice) {
     }
 
     if (result === "playerFainted") {
-        endBattle(gameState.battle.loseScene);
+        gameState.battle.faintedPokemon.push(gameState.battle.playerPokemon);
+
+        if (hasAvailablePokemon()) {
+            alert(`${gameState.battle.playerPokemon} fainted! Choose another Pokemon.`);
+            showSwitchOptions();
+        } else {
+            alert("All your Pokemon fainted!");
+            endBattle(gameState.battle.loseScene);
+        }
     }
 }
+
+
+
+
 
 // battle funtcions (WIP)
 function loadBattleOptions() {
@@ -296,6 +315,10 @@ function loadBattleOptions() {
             Speed (${playerPokemon.speed})
         </button>
 
+        <button onclick="openBattleSwitchMenu()">
+            Switch
+        </button>
+
         <button onclick="catchPokemonAttempt()">
             Catch
         </button>
@@ -310,12 +333,25 @@ function loadBattleOptions() {
 
     document.getElementById("enemyHealth").textContent =
         `Enemy HP: ${gameState.battle.enemyHP}`;
+
+
+
+    document.getElementById("playerHealth").textContent =
+        `${gameState.battle.playerPokemon} HP: ${gameState.battle.playerHP}`;
+
+    document.getElementById("enemyHealth").textContent =
+        `${gameState.battle.enemyPokemon} HP: ${gameState.battle.enemyHP}`;
 }
+
+
+
+
 
 // new battle system (WIP)
 function startBattle(enemyName, winScene, loseScene) {
-    gameState.battle.playerPokemon = gameState.party[0];
-    gameState.battle.enemyPokemon = enemyName;
+    gameState.battle.activeIndex = 0;
+    gameState.battle.playerPokemon = gameState.party[gameState.battle.activeIndex];
+    gameState.battle.faintedPokemon = []; gameState.battle.enemyPokemon = enemyName;
 
     gameState.battle.playerHP = 5;
     gameState.battle.enemyHP = 4;
@@ -342,6 +378,9 @@ function getEnemyMove() {
 
 
 
+
+
+
 // pokemon party 
 function addPokemonToParty(pokemonName) {
     if (gameState.party.length < 6) {
@@ -349,6 +388,11 @@ function addPokemonToParty(pokemonName) {
         updateInventory();
     }
 }
+
+
+
+
+
 // pokemon inventory update
 function updateInventory() {
     const inventory = document.getElementById("pokemonInventory");
@@ -373,6 +417,11 @@ function updateInventory() {
 
     }
 }
+
+
+
+
+
 
 // battle system (WIP) battlign with stats
 function battleTurn(playerChoice) {
@@ -422,6 +471,10 @@ function battleTurn(playerChoice) {
     };
 }
 
+
+
+
+
 // battle ending (WIP)
 function checkBattleEnd() {
     if (gameState.battle.enemyHP <= 0) {
@@ -434,6 +487,110 @@ function checkBattleEnd() {
 
     return null;
 }
+
+
+
+
+
+// if the pokemon faints this function should help switch out pokemon?
+function hasAvailablePokemon() {
+    return gameState.party.some(pokemon => {
+        return !gameState.battle.faintedPokemon.includes(pokemon);
+    });
+}
+
+
+// lets player switch pokemon
+function showSwitchOptions() {
+    const battleOptions = document.getElementById("battleOptions");
+
+    battleOptions.innerHTML = "<h3>Choose your next Pokemon:</h3>";
+
+    gameState.party.forEach((pokemon, index) => {
+
+        if (!gameState.battle.faintedPokemon.includes(pokemon)) {
+
+            battleOptions.innerHTML += `
+                <button onclick="switchPokemon(${index})">
+                    ${pokemon}
+                </button>
+            `;
+        }
+    });
+}
+
+
+
+
+
+// opens pokemon party during battle
+function openBattleSwitchMenu() {
+
+    const battleOptions =
+        document.getElementById("battleOptions");
+
+    battleOptions.innerHTML =
+        `<div class="switch-title">
+            Choose a Pokemon
+        </div>`;
+
+    gameState.party.forEach((pokemon, index) => {
+
+        if (
+            gameState.battle.faintedPokemon.includes(pokemon)
+        ) {
+            return;
+        }
+
+        if (
+            pokemon === gameState.battle.playerPokemon
+        ) {
+            return;
+        }
+
+        battleOptions.innerHTML += `
+            <button 
+                class="switch-pokemon-btn"
+                onclick="switchPokemon(${index})"
+            >
+                ${pokemon}
+            </button>
+        `;
+    });
+
+    battleOptions.innerHTML += `
+        <button 
+            class="switch-back-btn"
+            onclick="loadBattleOptions()"
+        >
+            Back
+        </button>
+    `;
+}
+
+
+
+
+
+// switches active pokemon
+function switchPokemon(index) {
+
+    gameState.battle.activeIndex = index;
+
+    gameState.battle.playerPokemon =
+        gameState.party[index];
+
+    gameState.battle.playerHP = 4;
+
+    alert(`Go, ${gameState.battle.playerPokemon}!`);
+
+    loadBattleOptions();
+}
+
+
+
+
+
 
 // catching attempt if opponent pokemon's health bar is low = catch?
 function catchPokemonAttempt() {
@@ -459,6 +616,17 @@ function runAway() {
     alert(`You ran away from ${gameState.battle.enemyPokemon}!`);
     endBattle(gameState.battle.loseScene);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -671,7 +839,7 @@ const scenes = {
         next: "routetwo1",
     },
 
-    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
 
 
@@ -683,7 +851,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightCubone"
+                action: () => {
+                    startBattle("Cubone", "routetwo1", "chosenCubone");
+                }
+
             },
             {
                 text: "Run",
@@ -706,7 +877,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightMunchlax"
+                action: () => {
+                    startBattle("Munchlax", "routetwo1", "chosenMunchlax");
+                }
+
             },
             {
                 text: "Run",
@@ -782,25 +956,25 @@ const scenes = {
                 text: "Fairy",
                 type: "fairy",
                 action: () => {
-                    gameState.currentEncounter = "Togepi";
+                    currentScene = "chosenTogepi";
+                    loadScene(currentScene);
                 },
-                next: "chosenTogepi"
             },
             {
                 text: "Rock",
                 type: "rock",
                 action: () => {
-                    gameState.currentEncounter = "Bonsly";
+                    currentScene = "chosenBonsly";
+                    loadScene(currentScene);
                 },
-                next: "chosenBonsly"
             },
             {
                 text: "Poison",
                 type: "poison",
                 action: () => {
-                    gameState.currentEncounter = "Nidoran";
+                    currentScene = "chosenNidoran";
+                    loadScene(currentScene);
                 },
-                next: "chosenNidoran"
             }
         ]
     },
@@ -813,11 +987,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightTogepi"
-            },
-            {
-                text: "Catch",
-                next: "catchTogepi"
+                action: () => {
+                    startBattle("Togepi", "routethree1", "chosenTogepi");
+                }
+
             },
             {
                 text: "Run",
@@ -825,61 +998,7 @@ const scenes = {
             }
         ]
     },
-    fightTogepi: {
-        dialogue: `You chose to fight ...Togepi!`,
-        img: "togepi.png",
-        background: "route2.png",
-        next: "Togepifight"
-    },
-    catchTogepi: {
-        dialogue: `You chose to catch ...Togepi!`,
-        img: "togepi.png",
-        background: "route2.png",
-        next: "Togepicapture",
-    },
     runFromTogepi: {
-        dialogue: `You attempted to flee from ...Togepi!`,
-        img: "togepi.png",
-        background: "route2.png",
-        next: "Togepirun",
-    },
-
-
-    Togepifight: {
-        dialogue: function () {
-            const battle = battlePokemon("Togepi", "routethree1", "chosenTogepi");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "togepi.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Togepicapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Togepi", "routethree1", "chosenTogepi")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "togepi.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Togepirun: {
         dialogue: `Togepi successfully ran away from you...`,
         background: "blackscreen.jpg",
         next: "routethree1",
@@ -897,11 +1016,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightBonsly"
-            },
-            {
-                text: "Catch",
-                next: "catchBonsly"
+                action: () => {
+                    startBattle("Bonsly", "routethree1", "chosenBonsly");
+                }
+
             },
             {
                 text: "Run",
@@ -909,61 +1027,7 @@ const scenes = {
             }
         ]
     },
-    fightBonsly: {
-        dialogue: `You chose to fight ...Bonsly!`,
-        img: "bonsly.png",
-        background: "route2.png",
-        next: "Bonslyfight"
-    },
-    catchBonsly: {
-        dialogue: `You chose to catch ...Bonsly!`,
-        img: "bonsly.png",
-        background: "route2.png",
-        next: "Bonslycapture",
-    },
     runFromBonsly: {
-        dialogue: `You attempted to flee from ...Bonsly!`,
-        img: "bonsly.png",
-        background: "route2.png",
-        next: "Bonslyrun",
-    },
-
-
-    Bonslyfight: {
-        dialogue: function () {
-            const battle = battlePokemon("Bonsly", "routethree1", "chosenBonsly");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "bonsly.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Bonslycapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Bonsly", "routethree1", "chosenBonsly")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "bonsly.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Bonslyrun: {
         dialogue: `You ran away from Bonsly? Bonsly cried👎`,
         background: "blackscreen.jpg",
         next: "routethree1",
@@ -980,11 +1044,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightNidoran"
-            },
-            {
-                text: "Catch",
-                next: "catchNidoran"
+                action: () => {
+                    startBattle("Nidoran", "routethree1", "chosenNidoran");
+                }
+
             },
             {
                 text: "Run",
@@ -992,61 +1055,7 @@ const scenes = {
             }
         ]
     },
-    fightNidoran: {
-        dialogue: `You chose to fight ...Nidoran!`,
-        img: "nidoran.png",
-        background: "route2.png",
-        next: "Nidoranfight"
-    },
-    catchNidoran: {
-        dialogue: `You chose to catch ...Nidoran!`,
-        img: "nidoran.png",
-        background: "route2.png",
-        next: "Nidorancapture",
-    },
     runFromNidoran: {
-        dialogue: `You attempted to flee from ...Nidoran!`,
-        img: "nidoran.png",
-        background: "route2.png",
-        next: "Nidoranrun",
-    },
-
-
-    Nidoranfight: {
-        dialogue: function () {
-            const battle = battlePokemon("Nidoran", "routethree1", "chosenNidoran");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "nidoran.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Nidorancapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Nidoran", "routethree1", "chosenNidoran")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "nidoran.png",
-        background: "route2.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Nidoranrun: {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
         background: "blackscreen.jpg",
@@ -1111,25 +1120,25 @@ const scenes = {
                 text: "Ground/Dark",
                 type: "dark",
                 action: () => {
-                    gameState.currentEncounter = "Krokorok";
+                    currentScene = "chosenKrokorok";
+                    loadScene(currentScene);
                 },
-                next: "chosenKrokorok"
             },
             {
                 text: "Ghost/Fire",
                 type: "ghost",
                 action: () => {
-                    gameState.currentEncounter = "Lampent";
+                    currentScene = "chosenLampent";
+                    loadScene(currentScene);
                 },
-                next: "chosenLampent"
             },
             {
                 text: "Fighting/Flying",
                 type: "fighting",
                 action: () => {
-                    gameState.currentEncounter = "Hawlucha";
+                    currentScene = "chosenHawlucha";
+                    loadScene(currentScene);
                 },
-                next: "chosenHawlucha"
             }
         ]
     },
@@ -1142,11 +1151,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightKrokorok"
-            },
-            {
-                text: "Catch",
-                next: "catchKrokorok"
+                action: () => {
+                    startBattle("Krokorok", "routefour1", "chosenKrokorok");
+                }
+
             },
             {
                 text: "Run",
@@ -1154,61 +1162,7 @@ const scenes = {
             }
         ]
     },
-    fightKrokorok: {
-        dialogue: `You chose to fight ...Krokorok!`,
-        img: "krokorok.png",
-        background: "route3.png",
-        next: "Krokorokfight"
-    },
-    catchKrokorok: {
-        dialogue: `You chose to catch ...Krokorok!`,
-        img: "krokorok.png",
-        background: "route3.png",
-        next: "Krokorokcapture",
-    },
     runFromKrokorok: {
-        dialogue: `You attempted to flee from ...Krokorok!`,
-        img: "krokorok.png",
-        background: "route3.png",
-        next: "Krokorokrun",
-    },
-
-
-    Krokorokfight: {
-        dialogue: function () {
-            const battle = battlePokemon("Krokorok", "routefour1", "chosenKrokorok");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "krokorok.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Krokorokcapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Krokorok", "routefour1", "chosenKrokorok")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "krokorok.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Krokorokrun: {
         dialogue: `You ran away from Krokorok! It chased you across the Flatlands`,
         background: "blackscreen.jpg",
         next: "routefour1",
@@ -1226,11 +1180,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightLampent"
-            },
-            {
-                text: "Catch",
-                next: "catchLampent"
+                action: () => {
+                    startBattle("Lampent", "routefour1", "chosenLampent");
+                }
+
             },
             {
                 text: "Run",
@@ -1238,61 +1191,7 @@ const scenes = {
             }
         ]
     },
-    fightLampent: {
-        dialogue: `You chose to fight ...Lampent!`,
-        img: "lampent.png",
-        background: "route3.png",
-        next: "Lampentfight"
-    },
-    catchLampent: {
-        dialogue: `You chose to catch ...Lampent!`,
-        img: "lampent.png",
-        background: "route3.png",
-        next: "Lampentcapture",
-    },
     runFromLampent: {
-        dialogue: `You attempted to flee from ...Lampent!`,
-        img: "lampent.png",
-        background: "route3.png",
-        next: "Lampentrun",
-    },
-
-
-    Lampentfight: {
-        dialogue: function () {
-            const battle = battlePokemon("Lampent", "routefour1", "chosenLampent");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "lampent.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Lampentcapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Lampent", "routefour1", "chosenLampent")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "lampent.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Lampentrun: {
         dialogue: `You ran away from Lampent! It tried to chase you but ultimately gave up!`,
         background: "blackscreen.jpg",
         next: "routefour1",
@@ -1309,11 +1208,10 @@ const scenes = {
         options: [
             {
                 text: "Fight",
-                next: "fightHawlucha"
-            },
-            {
-                text: "Catch",
-                next: "catchHawlucha"
+                action: () => {
+                    startBattle("Hawlucha", "routefour1", "chosenHawlucha");
+                }
+
             },
             {
                 text: "Run",
@@ -1321,60 +1219,7 @@ const scenes = {
             }
         ]
     },
-    fightHawlucha: {
-        dialogue: `You chose to fight ...Hawlucha!`,
-        img: "hawlucha.png",
-        background: "route3.png",
-        next: "Hawluchafight"
-    },
-    catchHawlucha: {
-        dialogue: `You chose to catch ...Hawlucha!`,
-        img: "hawlucha.png",
-        background: "route3.png",
-        next: "Hawluchacapture",
-    },
     runFromHawlucha: {
-        dialogue: `You attempted to flee from ...Hawlucha!`,
-        background: "route3.png",
-        next: "Hawlucharun",
-    },
-
-
-    Hawluchafight: {
-        dialogue: function () {
-            const battle = battlePokemon("Hawlucha", "routefour1", "chosenHawlucha");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "hawlucha.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-
-    Hawluchacapture: {
-
-        dialogue: function () {
-            const captureResult = catchPokemon("Hawlucha", "routefour1", "chosenHawlucha")
-
-            this.nextScene = captureResult.next;
-
-            return captureResult.text;
-        },
-
-        img: "hawlucha.png",
-        background: "route3.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
-    Hawlucharun: {
         dialogue: `You ran away from Hawlucha before it could body slam you!`,
         background: "blackscreen.jpg",
         next: "routefour1",
@@ -2361,6 +2206,7 @@ function loadScene(sceneKey) {
 
 
     if (scene.options) {
+        optionsEl.style.display = "flex";
         nextBtn.style.display = "none";
 
         scene.options.forEach(option => {
@@ -2388,6 +2234,7 @@ function loadScene(sceneKey) {
         });
 
     } else {
+        optionsEl.style.display = "none";
         nextBtn.style.display = "block";
     }
 }
