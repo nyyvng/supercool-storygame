@@ -851,6 +851,9 @@ const scenes = {
     //// NOTE: add a tutorial dialogue or info about how to play, add on when theres new mechanics!!
 
 
+    //////MORE NOTE: storyline doesnt seem to have any other character interactions until the end, 
+    // hopefully later in the future we can make more character dialogue between story so that way it doesnt feel repetitive!!
+
 
 
 
