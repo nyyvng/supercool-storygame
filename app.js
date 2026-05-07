@@ -861,8 +861,6 @@ const scenes = {
 
 
 
-
-
     //route 1!!!!
     routeOne1: {
         dialogue: "You reach route 1: Grassy Terrains. Its a large field with tall yellow patches of grass throughout the route.",
@@ -934,7 +932,7 @@ const scenes = {
     },
 
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were moved for battle system!!!
+    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were removed for battle system!!!
 
 
     // cubone option
