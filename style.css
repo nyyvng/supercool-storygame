@@ -60,6 +60,7 @@ body.gameplay {
 }
 
 /* title  page */
+
 h1 {
     background-image: url(title.png);
     width: 872px;
@@ -93,6 +94,7 @@ h1 {
 
 /* info page */
 /* input stuff */
+
 #lab {
     width: 570px;
     height: 50px;
@@ -152,7 +154,6 @@ div.info {
     margin-left: auto;
     margin-right: auto;
     font-size: 40px;
-
 }
 
 
@@ -174,14 +175,16 @@ div.info {
 #img {
     display: none;
     position: absolute;
-    width: 900px;
-    height: 400px;
+    width: 500px;
+    height: 300px;
     object-fit: contain;
     bottom: 300px;
-    left: 50%;
+    left: 80%;
     transform: translateX(-50%);
+    top: 20%;
 }
 
+/* attempt at displaying your pokemon in encounters */
 
 
 /* gameplay */
@@ -192,8 +195,9 @@ div.info {
     background-color: white;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -10px;
+    margin-top: -15px;
     display: block;
+    position:sticky;
 }
 
 button:hover {
@@ -217,7 +221,7 @@ a {
 #enemyHealth {
     position: absolute;
     top: 70px;
-    right: 100px;
+    right: 135px;
     width: 250px;
     height: 60px;
     background: red;
@@ -229,8 +233,8 @@ a {
 
 #playerHealth {
     position: absolute;
-    bottom: 248px;
-    left: 50px;
+    top: 120px;
+    left: 135px;
     width: 250px;
     height: 60px;
     background: green;
@@ -320,7 +324,6 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
-
 }
 
 
@@ -331,7 +334,6 @@ a {
     width: 490px;
     font-size: 20px;
     padding: 20px;
-
     background-image: url(dialouge.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -339,14 +341,11 @@ a {
     transform: translateX(75%);
     bottom: 20px;
     background-color: var(--starter-color);
-
 }
 
 #dialogue {
     margin-top: 0;
 }
-
-
 
 
 #options {
@@ -387,7 +386,6 @@ a {
     width: 1324px;
     height: 920px;
     margin: 100px auto 0 auto;
-
 }
 
 
@@ -403,9 +401,6 @@ a {
     display: flex;
     flex-direction: column;
     position: relative;
-
-
-
 }
 
 #insideOverlay h2 {
@@ -547,10 +542,8 @@ a {
 #battleOptions button {
     width: 100%;
     height: 100%;
-
     font-size: 22px;
     font-weight: bold;
-
     background-color: rgba(255, 255, 255, 0.9);
     border: 4px solid black;
     border-radius: 6px;
