@@ -299,12 +299,12 @@ const evolutionMap = {
 // this is so much pokemon naming pls send help for naylia shes dying
 const routePokemonShuffle = {
     route1: [
-        { name: "Espurr", type: "psychic", nextRoute: "routetwo1" },
-        { name: "Cubone", type: "ground", nextRoute: "routetwo1" },
-        { name: "Munchlax", type: "normal", nextRoute: "routetwo1" },
-        { name: "Joltik", type: "bug", nextRoute: "routetwo1" },
-        { name: "Pancham", type: "fighting", nextRoute: "routetwo1" },
-        { name: "Vanillite", type: "ice", nextRoute: "routetwo1" }
+        { name: "Espurr", type: "psychic", nextRoute: "kidScene1" },
+        { name: "Cubone", type: "ground", nextRoute: "kidScene1" },
+        { name: "Munchlax", type: "normal", nextRoute: "kidScene1" },
+        { name: "Joltik", type: "bug", nextRoute: "kidScene1" },
+        { name: "Pancham", type: "fighting", nextRoute: "kidScene1" },
+        { name: "Vanillite", type: "ice", nextRoute: "kidScene1" }
     ],
 
     route2: [
@@ -1089,7 +1089,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Espurr", "routetwo1", "routeOne3");
+                    startBattle("Espurr", "kidScene1", "routeOne3");
                 }
 
             },
@@ -1105,7 +1105,7 @@ const scenes = {
     runFromEspurr: {
         dialogue: `You successfully ran away from Espurr... there were no consequences.`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
 
@@ -1119,7 +1119,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Cubone", "routetwo1", "chosenCubone");
+                    startBattle("Cubone", "kidScene1", "chosenCubone");
                 }
 
             },
@@ -1133,7 +1133,7 @@ const scenes = {
     runFromCubone: {
         dialogue: `Cubone got upset that you ran away... he threw his bone at you`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
     // munchlax option
@@ -1145,7 +1145,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Munchlax", "routetwo1", "chosenMunchlax");
+                    startBattle("Munchlax", "kidScene1", "chosenMunchlax");
                 }
 
             },
@@ -1158,7 +1158,7 @@ const scenes = {
     runFromMunchlax: {
         dialogue: `You ran away from Munchlax... Munchlax is developing its villain arc now.`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
     // joltik option
@@ -1170,7 +1170,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Joltik", "routetwo1", "chosenJoltik");
+                    startBattle("Joltik", "kidScene1", "chosenJoltik");
                 }
 
             },
@@ -1183,7 +1183,7 @@ const scenes = {
     runFromJoltik: {
         dialogue: `You ran away from Joltik! There were no consenquences.`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
 
@@ -1196,7 +1196,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Pancham", "routetwo1", "chosenPancham");
+                    startBattle("Pancham", "kidScene1", "chosenPancham");
                 }
 
             },
@@ -1209,7 +1209,7 @@ const scenes = {
     runFromPancham: {
         dialogue: `You ran away from Pancham! It didn't like that you ran without giving it a treat...`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
     // vanillite option
@@ -1221,7 +1221,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Vanillite", "routetwo1", "chosenVanillite");
+                    startBattle("Vanillite", "kidScene1", "chosenVanillite");
                 }
 
             },
@@ -1234,19 +1234,120 @@ const scenes = {
     runFromVanillite: {
         dialogue: `You ran away from Vanillite! What's an ice type doing here anyway?`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
 
 
+    kidScene1: {
+        dialogue: `???: "Hello? Excuse me!"`,
+        background: "Pokemon images/route1.png",
+        next: "kidScene2",
+    },
+
+    kidScene2: {
+        dialogue: `Who's that?`,
+        background: "Pokemon images/route1.png",
+        next: "kidScene3",
+    },
+
+    kidScene3: {
+        dialogue: `Oh! It's a kid! What is this little girl doing out here?`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene4",
+    },
+
+    kidScene4: {
+        dialogue: `Kid: "Do you have time to help me find my best friend? We were playing hide and seek, but I can't find them!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene5",
+    },
+
+    kidScene5: {
+        dialogue: `Kid: "Pleaaasssee pretty pleaaasseee! Help me find my best friend!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene6",
+        options: [
+            {
+                text: "Help the kid",
+                next: "kidHelp1"
+            },
+            {
+                text: "Ignore and leave",
+                next: "kidLeave1"
+            }
+
+        ]
+    },
 
 
+    kidHelp1: {
+        dialogue: `You chose to help the kid! How nice of you :)`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp2",
+    },
+    kidHelp2: {
+        dialogue: `You helped the kid find her best friend...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidHelp3",
+    },
+    kidHelp3: {
+        dialogue: `15 minutes passed by...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidHelp4",
+    },
+    kidHelp4: {
+        dialogue: `Kid: "You found my best friend! Thank you so much!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp5",
+    },
+    kidHelp5: {
+        dialogue: `Kid: "Hey bestie, do you want to say thank you?"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp6",
+    },
+    kidHelp6: {
+        dialogue: `Kid's Bsf: "Ci-ci!🥹"`,
+        img: "Pokemon images/celebi.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp7",
+    },
+    kidHelp7: {
+        dialogue: `Kid: "Have a good day!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp8",
+    },
+    kidHelp8: {
+        dialogue: `For helping the kid, your pokemon gained exp!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
 
 
-
-
-
-
+    kidLeave1: {
+        dialogue: `You chose to leave the kid!`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidLeave2",
+    },
+    kidLeave2: {
+        dialogue: `Kid: " :( "`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidLeave3",
+    },
+    kidLeave3: {
+        dialogue: `You now advance to route 2...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
 
 
 
@@ -2097,19 +2198,20 @@ const scenes = {
 
     Professorend: {
         dialogue: `Is that... ${playerData.teacher}!?!`,
-        background: "Pokemon images/Professor-ending.png",
+
+        background: "Pokemon images/endingPROFESSOR.png",
         next: "Professoralt",
 
     },
 
     Professoralt: {
         dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
-        background: "Pokemon images/teachtalkstoyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
         next: "Fightteach",
     },
 
     Fightteach: {
-        background: "Pokemon images/teachtalkstoyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
         options: [
             {
                 text: "Fight",
@@ -2128,7 +2230,7 @@ const scenes = {
             return battle.text;
         },
 
-        img: "teachtalkstoyou.png",
+        background: "endingPROFESSOR.png",
 
         next: function () {
             return this.nextScene;
@@ -2137,14 +2239,14 @@ const scenes = {
 
     Fightingteachwin: {
         dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
-        background: "Pokemon images/teachtalksyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
         next: "end",
 
     },
 
     Fightingteachloss: {
         dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
-        background: "Pokemon images/teachtalksyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
         next: "end",
     },
 
@@ -2158,14 +2260,14 @@ const scenes = {
 
     Friendending1: {
         dialogue: `Hey look it’s ${playerData.classmate}!`,
-        background: "Pokemon images/friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
         next: "Friendfightp2",
     },
 
 
     Friendfightp2: {
         dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
-        background: "Pokemon images/friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
         next: "Friendfightp3",
     },
 
@@ -2178,7 +2280,7 @@ const scenes = {
             return battle.text;
         },
 
-        img: "Pokemon images/Friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
 
         next: function () {
             return this.nextScene;
@@ -2187,13 +2289,13 @@ const scenes = {
 
     Friendfightwin: {
         dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
-        background: "Pokemon images/Friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
         next: "end",
     },
 
     Friendfightloss: {
         dialogue: `I must’ve been lucky, what a tough fight!`,
-        background: "Pokemon images/Friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
         next: "end",
     },
 
@@ -2201,31 +2303,31 @@ const scenes = {
 
     endingv3: {
         dialogue: `Now you're on your way back to your hometown and notice a familiar figure in the distance`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "Pokemon images/endingMOM.jpg",
         next: "motherencounter",
     },
 
     motherencounter: {
         dialogue: `What is my mom doing here?`,
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         next: "motherencounter1",
 
     },
     motherencounter1: {
         dialogue: `It looks like your mother is challenging you... to a battle!?!`,
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         next: "motherencounter2",
     },
 
     motherencounter2: {
         dialogue: `If you win you can choose dinner tonight!`,
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         next: "Fightmom",
     },
 
 
     Fightmom: {
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         options: [
             {
                 text: "Fight",
@@ -2245,7 +2347,7 @@ const scenes = {
             return battle.text;
         },
 
-        img: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
 
         next: function () {
             return this.nextScene;
@@ -2255,13 +2357,13 @@ const scenes = {
 
     motherencounterwin: {
         dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         next: "end",
     },
 
     motherencounterloss: {
         dialogue: `Well now I get to choose what’s for dinner, loser!`,
-        background: "Pokemon images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
         next: "end",
     },
 
@@ -2459,6 +2561,6 @@ const navBtn = document.querySelector("#navBtn")
 navBtn.addEventListener("click", () => {
     console.log(navInput);
     const input = navInput.value;
-    
+
     loadScene(input);
 })
