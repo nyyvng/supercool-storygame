@@ -2452,3 +2452,13 @@ if (playAgain) {
         window.location.href = "index.html";
     };
 }
+
+const navInput = document.querySelector("#navId");
+const navBtn = document.querySelector("#navBtn")
+
+navBtn.addEventListener("click", () => {
+    console.log(navInput);
+    const input = navInput.value;
+    
+    loadScene(input);
+})
