@@ -299,21 +299,48 @@ const evolutionMap = {
 // this is so much pokemon naming pls send help for naylia shes dying
 const routePokemonShuffle = {
     route1: [
-        { name: "Espurr", type: "psychic", nextRoute: "routetwo1" },
-        { name: "Cubone", type: "ground", nextRoute: "routetwo1" },
-        { name: "Munchlax", type: "normal", nextRoute: "routetwo1" },
-        { name: "Joltik", type: "bug", nextRoute: "routetwo1" },
-        { name: "Pancham", type: "fighting", nextRoute: "routetwo1" },
-        { name: "Vanillite", type: "ice", nextRoute: "routetwo1" }
+        { name: "Espurr", type: "psychic", nextRoute: "kidScene1" },
+        { name: "Cubone", type: "ground", nextRoute: "kidScene1" },
+        { name: "Munchlax", type: "normal", nextRoute: "kidScene1" },
+        { name: "Joltik", type: "bug", nextRoute: "kidScene1" },
+        { name: "Pancham", type: "fighting", nextRoute: "kidScene1" },
+        { name: "Vanillite", type: "ice", nextRoute: "kidScene1" }
     ],
 
     route2: [
-        { name: "Togepi", type: "fairy", nextRoute: "routethree1" },
-        { name: "Pumpkaboo", type: "ghost", nextRoute: "routethree1" },
-        { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
-        { name: "Noibat", type: "flying", nextRoute: "routethree1" },
-        { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
-        { name: "Riolu", type: "fighting", nextRoute: "routethree1" },
+        { name: "Togepi", type: "fairy", nextRoute: "grandmaScene1" },
+        { name: "Pumpkaboo", type: "ghost", nextRoute: "grandmaScene1" },
+        { name: "Nidoran", type: "poison", nextRoute: "grandmaScene1" },
+        { name: "Noibat", type: "flying", nextRoute: "grandmaScene1" },
+        { name: "Larvitar", type: "rock", nextRoute: "grandmaScene1" },
+        { name: "Riolu", type: "fighting", nextRoute: "grandmaScene1" }
+    ],
+
+    route3: [
+        { name: "Krokorok", type: "ground", nextRoute: "routefour1" },
+        { name: "Lampent", type: "ghost", nextRoute: "routefour1" },
+        { name: "Hawlucha", type: "fighting", nextRoute: "routefour1" },
+        { name: "Clefairy", type: "fairy", nextRoute: "routefour1" },
+        { name: "Scyther", type: "bug", nextRoute: "routefour1" },
+        { name: "Buneary", type: "normal", nextRoute: "routefour1" }
+    ],
+
+    route4: [
+        { name: "Larvesta", type: "fire", nextRoute: "routefive1" },
+        { name: "Mareep", type: "electric", nextRoute: "routefive1" },
+        { name: "Gabite", type: "dragon", nextRoute: "routefive1" },
+        { name: "Gallade", type: "psychic", nextRoute: "routefive1" },
+        { name: "Trevenant", type: "ghost", nextRoute: "routefive1" },
+        { name: "Lycanroc", type: "rock", nextRoute: "routefive1" }
+    ],
+
+    route5: [
+        { name: "Solgaleo", type: "steel", nextRoute: "wrapup" },
+        { name: "Zygarde", type: "ground", nextRoute: "wrapup" },
+        { name: "Articuno", type: "ice", nextRoute: "wrapup" },
+        { name: "Rayquaza", type: "flying", nextRoute: "wrapup" },
+        { name: "Lugia", type: "psychic", nextRoute: "wrapup" },
+        { name: "Regirock", type: "rock", nextRoute: "wrapup" }
     ],
 };
 
@@ -1336,16 +1363,6 @@ const scenes = {
         next: "routethree1",
     },
 
-<<<<<<< Updated upstream
-
-
-
-
-
-
-
-
-=======
     grandmaLeave1: {
         dialogue: `You chose to leave Grandma! Sorry Gran, gotta continue my journey!`,
         img: "Pokemon images/CharGrandma.png",
@@ -1363,7 +1380,6 @@ const scenes = {
         background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
->>>>>>> Stashed changes
 
 
 
