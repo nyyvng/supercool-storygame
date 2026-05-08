@@ -313,8 +313,8 @@ const routePokemonShuffle = {
         { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
         { name: "Noibat", type: "flying", nextRoute: "routethree1" },
         { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
-        { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
-    ]
+        { name: "Riolu", type: "fighting", nextRoute: "routethree1" },
+    ],
 };
 
 // this should shuffle the pokemon and thier type
@@ -358,7 +358,11 @@ function loadWildPokemonScene(pokemon, routeName) {
                     if (scenes[runSceneKey]) {
                         currentScene = runSceneKey;
                         loadScene(currentScene);
-                    } else {
+                    } else { 
+                        function runAway() {
+                            // showBattleDialogue(`You ran away from ${gameState.battle.enemyPokemon}!`);
+                            endBattle(gameState.battle.loseScene);
+                        }
                         console.log(`Missing run scene: ${runSceneKey}`);
                     }
                 }
@@ -1048,7 +1052,7 @@ const scenes = {
     },
     routeOne3: {
         dialogue: "You must investigate... Which Pokemon will you encounter?",
-        background: "Pokemon images/route1.png",
+        background: "Pokemon images/route1fight.png",
         options: () => getShuffledRouteOptions("route1")
 
         // options: [ //THIS IS REMOVED FOR TESTING PURPOSES !!! :))))
@@ -1083,7 +1087,7 @@ const scenes = {
     chosenEspurr: {
         dialogue: "A wild Espurr has appeared! What will you do?",
         img: "Pokemon images/espurr.png",
-        background: "Pokemon images/route1.png",
+        background: "Pokemon images/route1fight.png",
         options: [
             {
                 text: "Fight",
@@ -1115,7 +1119,7 @@ const scenes = {
     chosenCubone: {
         dialogue: "A wild Cubone has appeared! What will you do?",
         img: "Pokemon images/cubone.png",
-        background: "Pokemon images/route1.png",
+        background: "Pokemon images/route1fight.png",
         options: [
             {
                 text: "Fight",
@@ -1141,7 +1145,7 @@ const scenes = {
     chosenMunchlax: {
         dialogue: "A wild Munchlax has appeared! What will you do?",
         img: "Pokemon images/munchlax.png",
-        background: "Pokemon images/route1.png",
+        background: "Pokemon images/route1fight.png",
         options: [
             {
                 text: "Fight",
@@ -1218,7 +1222,7 @@ const scenes = {
 
     routetwo5: {
         dialogue: `However, you can only fight one of them, so which would it be?`,
-        background: "Pokemon images/route2.png",
+        background: "Pokemon images/route2enc.png",
         options: () => getShuffledRouteOptions("route2")
 
         // options: [ //THIS IS REMOVED/COMMENTED OFF FOR TESTING PURPOSES
@@ -1556,7 +1560,7 @@ const scenes = {
 
     routefour5: {
         dialogue: `Pick and choose to see who's in this cave!`,
-        background: "Pokemon images/route4.png",
+        background: "Pokemon images/finalroute.png",
         options: [
             {
                 text: "Bug/Fire",
@@ -1779,7 +1783,7 @@ const scenes = {
     chosenSolgaleo: {
         dialogue: "A wild- wait, IS THAT Solgaleo? What will you do!?",
         img: "Pokemon images/solgaleo.png",
-        background: "Pokemon images/route5c.png",
+        background: "Pokemon images/finalroute.png",
         options: [
             {
                 text: "Fight",
@@ -1808,7 +1812,7 @@ const scenes = {
     chosenZygarde: {
         dialogue: "A wild- wait, IS THAT ZYGARDE? What will you do!?",
         img: "Pokemon images/zygarde.png",
-        background: "Pokemon images/route5c.png",
+        background: "Pokemon images/finalroute.png",
         options: [
             {
                 text: "Fight",
@@ -1836,7 +1840,7 @@ const scenes = {
     chosenArticuno: {
         dialogue: "A wild- wait, IS THAT ARTICUNO? What will you do!?",
         img: "Pokemon images/articuno.png",
-        background: "Pokemon images/route5c.png",
+        background: "Pokemon images/finalroute.png",
         options: [
             {
                 text: "Fight",
