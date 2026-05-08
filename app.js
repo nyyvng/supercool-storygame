@@ -57,8 +57,8 @@ const pokemonStats = {
 
 
     // route 1 
-    Wynaut: { attack: 23, defense: 48, speed: 23 },
-    Wobbuffet: { attack: 33, defense: 58, speed: 33 },
+    Espurr: { attack: 48, defense: 54, speed: 68},
+    Meowstic: { attack: 48, defense: 76, speed: 104},
 
     Cubone: { attack: 50, defense: 95, speed: 35 },
     Marowak: { attack: 80, defense: 110, speed: 45 },
@@ -225,7 +225,7 @@ const evolutionMap = {
 
 
     // route 1
-    Wynaut: "Wobbuffet",
+    Espurr: "Meowstic",
 
 
     Cubone: "Marowak",
@@ -302,7 +302,7 @@ const evolutionMap = {
 
 
 
-function setStarterTheme(pokemonName) {
+function setStarterTheme(type) {
     const color = starterThemes[type] || "white";
     document.documentElement.style.setProperty("--starter-color", color);
 }
@@ -446,6 +446,9 @@ function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.loseScene = loseScene;
 
 
+    bgEl.src = "Pokemon images/battlescene.png";
+
+
     document.getElementById("battleUI").style.display = "block";
 
     document.getElementById("dialogueBox").style.display = "none";
@@ -512,7 +515,7 @@ function updateInventory() {
         slot.classList.add("pokemon-slot");
 
         slot.innerHTML = `
-    <img class="Pokemon images/inventory-pokemon-img" src="${pokemon.name.toLowerCase()}.png">
+    <img class="inventory-pokemon-img" src="Pokemon images/${pokemon.name.toLowerCase()}.png">
 
     <div class="pokemon-info">
         <h3 class="pokemon-name">${pokemon.name}</h3>
@@ -900,7 +903,7 @@ const scenes = {
                 text: "Psychic",
                 type: "psychic",
                 action: () => {
-                    currentScene = "chosenWynaut";
+                    currentScene = "chosenEspurr";
                     loadScene(currentScene);
                 },
             },
@@ -923,30 +926,30 @@ const scenes = {
         ]
     },
 
-    //wynaut option
-    chosenWynaut: {
-        dialogue: "A wild Wynaut has appeared! What will you do?",
-        img: "Pokemon images/wynaut.png",
+    //espurr option
+    chosenEspurr: {
+        dialogue: "A wild Espurr has appeared! What will you do?",
+        img: "Pokemon images/espurr.png",
         background: "Pokemon images/route1.png",
         options: [
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Wynaut", "routetwo1", "chosenWynaut");
+                    startBattle("Espurr", "routetwo1", "chosenEspurr");
                 }
 
             },
             {
                 text: "Run",
-                next: "runFromWynaut"
+                next: "runFromEspurr"
             }
         ]
 
 
     },
 
-    runFromWynaut: {
-        dialogue: `You successfully ran away from Wynaut... there were no consequences.`,
+    runFromEspurr: {
+        dialogue: `You successfully ran away from Espurr... there were no consequences.`,
         background: "Pokemon images/blackscreen.jpg",
         next: "routetwo1",
     },
@@ -985,7 +988,7 @@ const scenes = {
     chosenMunchlax: {
         dialogue: "A wild Munchlax has appeared! What will you do?",
         img: "Pokemon images/munchlax.png",
-        background: "route1.png",
+        background: "Pokemon images/route1.png",
         options: [
             {
                 text: "Fight",
@@ -1487,8 +1490,8 @@ const scenes = {
     // gabite option
     chosenGabite: {
         dialogue: "A wild Gabite has appeared! What will you do?",
-        img: "gabite.png",
-        background: "route4.png",
+        img: "Pokemon images/gabite.png",
+        background: "Pokemon images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -1505,7 +1508,7 @@ const scenes = {
     },
     runFromGabite: {
         dialogue: `You successfully ran away from Gabite before it erased you from existence.`,
-        background: "blackscreen.jpg",
+        background: "Pokemon images/blackscreen.jpg",
         next: "routefive1",
     },
 
@@ -1621,7 +1624,7 @@ const scenes = {
     chosenSolgaleo: {
         dialogue: "A wild- wait, IS THAT Solgaleo? What will you do!?",
         img: "Pokemon images/solgaleo.png",
-        background: "route5c.png",
+        background: "Pokemon images/route5c.png",
         options: [
             {
                 text: "Fight",
@@ -1901,7 +1904,7 @@ const scenes = {
 
 
     end: {
-        background: "Pokemonthankyou.png",
+        background: "Pokemon images/Pokemonthankyou.png",
     },
 
 
