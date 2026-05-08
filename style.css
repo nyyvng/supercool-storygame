@@ -157,6 +157,19 @@ div.info {
 }
 
 
+/* nav button input stuff */
+#navBtn {
+    width: 30px;
+    height: 15px;
+}
+
+#playAgain {
+    background-image: url(grass-texture.png);
+    background-size: 1px;
+    color: rgb(25, 145, 99);
+    border-color: rgb(25, 145, 99);
+}
+
 
 /* pokemon encounter img??? doesnt work. fix later */
 #img {
