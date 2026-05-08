@@ -1336,6 +1336,7 @@ const scenes = {
         next: "routethree1",
     },
 
+<<<<<<< Updated upstream
 
 
 
@@ -1344,6 +1345,25 @@ const scenes = {
 
 
 
+=======
+    grandmaLeave1: {
+        dialogue: `You chose to leave Grandma! Sorry Gran, gotta continue my journey!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave2",
+    },
+    grandmaLeave2: {
+        dialogue: `Grandma: "Aw... Okay..."`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave3",
+    },
+    grandmaLeave3: {
+        dialogue: `You now advance to route 4...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+>>>>>>> Stashed changes
 
 
 
@@ -1507,6 +1527,33 @@ const scenes = {
 
 
 
+
+
+
+    // hiker scene!!!!
+    hikerScene1: {
+        dialogue: `???: "Hey! You there!"`,
+        background: "Pokemon images/route3.png",
+        next: "hikerScene2",
+    },
+    hikerScene2: {
+        dialogue: `What the? Who's hiding in the tall grass? You can't tell who it is...`,
+        background: "Pokemon images/route3.png",
+        next: "hikerScene3",
+    },
+    hikerScene3: {
+        dialogue: `Some Hiker Dude: "Hey kid! I need help with directions! Ya'know where Route 5 is?"`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        next: "hikerScene4",
+    },
+    hikerScene4: {
+        dialogue: `Should you tell this guy the directions?`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        
+        next: "hikerScene5",
+    },
 
 
 
