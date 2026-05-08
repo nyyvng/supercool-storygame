@@ -57,8 +57,8 @@ const pokemonStats = {
 
 
     // route 1 
-    Espurr: { attack: 48, defense: 54, speed: 68},
-    Meowstic: { attack: 48, defense: 76, speed: 104},
+    Espurr: { attack: 48, defense: 54, speed: 68 },
+    Meowstic: { attack: 48, defense: 76, speed: 104 },
 
     Cubone: { attack: 50, defense: 95, speed: 35 },
     Marowak: { attack: 80, defense: 110, speed: 45 },
@@ -85,8 +85,8 @@ const pokemonStats = {
     Togepi: { attack: 20, defense: 65, speed: 20 },
     Togetic: { attack: 40, defense: 85, speed: 40 },
 
-    Bonsly: { attack: 80, defense: 95, speed: 10 },
-    Sudowoodo: { attack: 100, defense: 115, speed: 30 },
+    Pumpkaboo: { attack: 66, defense: 70, speed: 51 },
+    Gourgeist: { attack: 90, defense: 122, speed: 84 },
 
     Nidoran: { attack: 57, defense: 40, speed: 50 },
     Nidorino: { attack: 72, defense: 57, speed: 65 },
@@ -238,7 +238,7 @@ const evolutionMap = {
     Togepi: "Togetic",
 
 
-    Bonsly: "Sudowoodo",
+    Pumpkaboo: "Gourgeist",
 
 
     Nidoran: "Nidorino",
@@ -263,7 +263,7 @@ const evolutionMap = {
     Gabite: "Garchomp",
 
 
-    
+
 
     // random pokemon of doom and despair
     Joltik: "Galvantula",
@@ -294,6 +294,81 @@ const evolutionMap = {
     Buneary: "Lopbunny"
 }
 
+
+// shuffle deck mwahhaa but its only in testing mode :]
+// this is so much pokemon naming pls send help for naylia shes dying
+const routePokemonShuffle = {
+    route1: [
+        { name: "Espurr", type: "psychic", nextRoute: "routetwo1" },
+        { name: "Cubone", type: "ground", nextRoute: "routetwo1" },
+        { name: "Munchlax", type: "normal", nextRoute: "routetwo1" },
+        { name: "Joltik", type: "bug", nextRoute: "routetwo1" },
+        { name: "Pancham", type: "fighting", nextRoute: "routetwo1" },
+        { name: "Vanillite", type: "ice", nextRoute: "routetwo1" }
+    ],
+
+    route2: [
+        { name: "Togepi", type: "fairy", nextRoute: "routethree1" },
+        { name: "Pumpkaboo", type: "ghost", nextRoute: "routethree1" },
+        { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
+        { name: "Noibat", type: "flying", nextRoute: "routethree1" },
+        { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
+        { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
+    ]
+};
+
+// this should shuffle the pokemon and thier type
+function getShuffledRouteOptions(routeName) {
+    const pool = [...routePokemonShuffle[routeName]];
+
+    pool.sort(() => Math.random() - 0.5);
+
+    return pool.slice(0, 3).map(pokemon => {
+        return {
+            text: pokemon.type,
+            type: pokemon.type,
+            action: () => {
+                gameState.currentEncounter = pokemon.name;
+                loadWildPokemonScene(pokemon, routeName);
+            }
+        };
+    });
+}
+
+// this should load in the pokemon, kinda similar with the actions in the story scenes right now, except there variables now (?)
+function loadWildPokemonScene(pokemon, routeName) {
+    const sceneKey = `chosen${pokemon.name}`;
+
+    scenes[sceneKey] = {
+        dialogue: `A wild ${pokemon.name} has appeared! What will you do?`,
+        img: `Pokemon images/${pokemon.name.toLowerCase()}.png`,
+        background: bgEl.src,
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle(pokemon.name, pokemon.nextRoute, sceneKey);
+                }
+            },
+            {
+                text: "Run",
+                action: () => {
+                    const runSceneKey = `runFrom${pokemon.name}`;
+
+                    if (scenes[runSceneKey]) {
+                        currentScene = runSceneKey;
+                        loadScene(currentScene);
+                    } else {
+                        console.log(`Missing run scene: ${runSceneKey}`);
+                    }
+                }
+            }
+        ]
+    };
+
+    currentScene = sceneKey;
+    loadScene(currentScene);
+}
 
 
 
@@ -446,8 +521,6 @@ function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.loseScene = loseScene;
 
 
-    bgEl.src = "Pokemon images/battlescene.png";
-
 
     document.getElementById("battleUI").style.display = "block";
 
@@ -574,6 +647,7 @@ function battleTurn(playerChoice) {
             `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
             `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
             `You won the turn!`;
+            console.log(`You and ${playerPokemonName} won because ${playerStat} > ${enemyStat}`);
     }
 
     else if (enemyRoll > playerRoll) {
@@ -583,6 +657,8 @@ function battleTurn(playerChoice) {
             `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
             `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
             `You lost the turn!`;
+            console.log(`The wild ${enemyPokemonName} won because ${enemyStat} > ${playerStat}`);
+
     }
 
     else {
@@ -662,7 +738,7 @@ function openBattleSwitchMenu() {
     gameState.party.forEach((pokemon, index) => {
 
         if (
-            gameState.battle.faintedPokemon.includes(pokemon)
+            gameState.battle.faintedPokemon.includes(pokemon.name)
         ) {
             return;
         }
@@ -728,7 +804,6 @@ function catchPokemonAttempt() {
     if (Math.random() < catchRate) {
         addPokemonToParty(gameState.battle.enemyPokemon);
         alert(`You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`);
-        endBattle(gameState.battle.winScene);
 
         // gain exp after catch
         gainPartyExp();
@@ -898,32 +973,34 @@ const scenes = {
     routeOne3: {
         dialogue: "You must investigate... Which Pokemon will you encounter?",
         background: "Pokemon images/route1.png",
-        options: [
-            {
-                text: "Psychic",
-                type: "psychic",
-                action: () => {
-                    currentScene = "chosenEspurr";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Ground",
-                type: "ground",
-                action: () => {
-                    currentScene = "chosenCubone";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Normal",
-                type: "normal",
-                action: () => {
-                    currentScene = "chosenMunchlax";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        options: () => getShuffledRouteOptions("route1")
+
+        // options: [ //THIS IS REMOVED FOR TESTING PURPOSES !!! :))))
+        //     {
+        //         text: "Psychic",
+        //         type: "psychic",
+        //         action: () => {
+        //             currentScene = "chosenEspurr";
+        //             loadScene(currentScene);
+        //         },
+        //     },
+        //     {
+        //         text: "Ground",
+        //         type: "ground",
+        //         action: () => {
+        //             currentScene = "chosenCubone";
+        //             loadScene(currentScene);
+        //         },
+        //     },
+        //     {
+        //         text: "Normal",
+        //         type: "normal",
+        //         action: () => {
+        //             currentScene = "chosenMunchlax";
+        //             loadScene(currentScene);
+        //         },
+        //     }
+        // ]
     },
 
     //espurr option
@@ -935,7 +1012,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Espurr", "routetwo1", "chosenEspurr");
+                    startBattle("Espurr", "routetwo1", "routeOne3");
                 }
 
             },
@@ -1066,32 +1143,34 @@ const scenes = {
     routetwo5: {
         dialogue: `However, you can only fight one of them, so which would it be?`,
         background: "Pokemon images/route2.png",
-        options: [
-            {
-                text: "Fairy",
-                type: "fairy",
-                action: () => {
-                    currentScene = "chosenTogepi";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Rock",
-                type: "rock",
-                action: () => {
-                    currentScene = "chosenBonsly";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Poison",
-                type: "poison",
-                action: () => {
-                    currentScene = "chosenNidoran";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        options: () => getShuffledRouteOptions("route2")
+
+        // options: [ //THIS IS REMOVED/COMMENTED OFF FOR TESTING PURPOSES
+        //     {
+        //         text: "Fairy",
+        //         type: "fairy",
+        //         action: () => {
+        //             currentScene = "chosenTogepi";
+        //             loadScene(currentScene);
+        //         },
+        //     },
+        //     {
+        //         text: "Rock",
+        //         type: "rock",
+        //         action: () => {
+        //             currentScene = "chosenPumpkaboo";
+        //             loadScene(currentScene);
+        //         },
+        //     },
+        //     {
+        //         text: "Poison",
+        //         type: "poison",
+        //         action: () => {
+        //             currentScene = "chosenNidoran";
+        //             loadScene(currentScene);
+        //         },
+        //     }
+        // ]
     },
 
     // togepi option
@@ -1123,27 +1202,27 @@ const scenes = {
 
 
 
-    // Bonsly option
-    chosenBonsly: {
-        dialogue: "A wild Bonsly has appeared! What will you do?",
-        img: "Pokemon images/bonsly.png",
+    // Pumpkaboo option
+    chosenPumpkaboo: {
+        dialogue: "A wild Pumpkaboo has appeared! What will you do?",
+        img: "Pokemon images/pumpkaboo.png",
         background: "Pokemon images/route2.png",
         options: [
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Bonsly", "routethree1", "chosenBonsly");
+                    startBattle("Pumpkaboo", "routethree1", "chosenPumpkaboo");
                 }
 
             },
             {
                 text: "Run",
-                next: "runFromBonsly"
+                next: "runFromPumpkaboo"
             }
         ]
     },
-    runFromBonsly: {
-        dialogue: `You ran away from Bonsly? Bonsly cried👎`,
+    runFromPumpkaboo: {
+        dialogue: `You ran away from Pumpkaboo? Pumpkaboo cried👎`,
         background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
@@ -1972,7 +2051,7 @@ function loadScene(sceneKey) {
     }
 
     dialogueEl.textContent =
-        typeof scene.dialogue === `function`
+        typeof scene.dialogue === "function"
             ? scene.dialogue()
             : scene.dialogue;
 
@@ -1987,12 +2066,16 @@ function loadScene(sceneKey) {
 
     optionsEl.innerHTML = "";
 
+    const sceneOptions =
+        typeof scene.options === "function"
+            ? scene.options()
+            : scene.options;
 
-    if (scene.options) {
+    if (sceneOptions) {
         optionsEl.style.display = "flex";
         nextBtn.style.display = "none";
 
-        scene.options.forEach(option => {
+        sceneOptions.forEach(option => {
             const btn = document.createElement("button");
 
             if (option.type) {
@@ -2000,19 +2083,19 @@ function loadScene(sceneKey) {
             }
 
             btn.innerHTML = `
-            ${option.img ? `<img src="${option.img}" style="width:80px;"><br>` : ""}
-            ${option.text}
+                ${option.img ? `<img src="${option.img}" style="width:80px;"><br>` : ""}
+                ${option.text}
             `;
-
 
             btn.onclick = () => {
                 if (option.action) option.action();
+
                 if (option.next) {
-                    //removed option.action(); seemed to let you continue after pressing fight.//
                     currentScene = option.next;
                     loadScene(currentScene);
                 }
             };
+
             optionsEl.appendChild(btn);
         });
 
