@@ -308,12 +308,12 @@ const routePokemonShuffle = {
     ],
 
     route2: [
-        { name: "Togepi", type: "fairy", nextRoute: "grandmaScene1" },
-        { name: "Pumpkaboo", type: "ghost", nextRoute: "grandmaScene1" },
-        { name: "Nidoran", type: "poison", nextRoute: "grandmaScene1" },
-        { name: "Noibat", type: "flying", nextRoute: "grandmaScene1" },
-        { name: "Larvitar", type: "rock", nextRoute: "grandmaScene1" },
-        { name: "Riolu", type: "fighting", nextRoute: "grandmaScene1" }
+        { name: "Togepi", type: "fairy", nextRoute: "routethree1" },
+        { name: "Pumpkaboo", type: "ghost", nextRoute: "routethree1" },
+        { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
+        { name: "Noibat", type: "flying", nextRoute: "routethree1" },
+        { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
+        { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
     ],
 
     route3: [
@@ -1190,19 +1190,180 @@ const scenes = {
     runFromMunchlax: {
         dialogue: `You ran away from Munchlax... Munchlax is developing its villain arc now.`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+<<<<<<< HEAD
+=======
+        next: "kidScene1",
+    },
+
+    // joltik option
+    chosenJoltik: {
+        dialogue: "A wild Joltik has appeared! What will you do?",
+        img: "Pokemon images/joltik.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Joltik", "kidScene1", "chosenJoltik");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromJoltik"
+            }
+        ]
+    },
+    runFromJoltik: {
+        dialogue: `You ran away from Joltik! There were no consenquences.`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidScene1",
+    },
+
+
+    // pancham option
+    chosenPancham: {
+        dialogue: "A wild Pancham has appeared! What will you do?",
+        img: "Pokemon images/pancham.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Pancham", "kidScene1", "chosenPancham");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromPancham"
+            }
+        ]
+    },
+    runFromPancham: {
+        dialogue: `You ran away from Pancham! It didn't like that you ran without giving it a treat...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidScene1",
+    },
+
+    // vanillite option
+    chosenVanillite: {
+        dialogue: "A wild Vanillite has appeared! What will you do?",
+        img: "Pokemon images/vanillite.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Vanillite", "kidScene1", "chosenVanillite");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromVanillite"
+            }
+        ]
+    },
+    runFromVanillite: {
+        dialogue: `You ran away from Vanillite! What's an ice type doing here anyway?`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidScene1",
     },
 
 
 
+    kidScene1: {
+        dialogue: `???: "Hello? Excuse me!"`,
+        background: "Pokemon images/route1.png",
+        next: "kidScene2",
+    },
+
+    kidScene2: {
+        dialogue: `Who's that?`,
+        background: "Pokemon images/route1.png",
+        next: "kidScene3",
+    },
+
+    kidScene3: {
+        dialogue: `Oh! It's a kid! What is this little girl doing out here?`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene4",
+    },
+
+    kidScene4: {
+        dialogue: `Kid: "Do you have time to help me find my best friend? We were playing hide and seek, but I can't find them!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene5",
+    },
+
+    kidScene5: {
+        dialogue: `Kid: "Pleaaasssee pretty pleaaasseee! Help me find my best friend!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidScene6",
+        options: [
+            {
+                text: "Help the kid",
+                next: "kidHelp1"
+            },
+            {
+                text: "Ignore and leave",
+                next: "kidLeave1"
+            }
+
+        ]
+    },
 
 
-
-
-
-
-
-
+    kidHelp1: {
+        dialogue: `You chose to help the kid! How nice of you :)`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp2",
+    },
+    kidHelp2: {
+        dialogue: `You helped the kid find her best friend...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidHelp3",
+    },
+    kidHelp3: {
+        dialogue: `15 minutes passed by...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "kidHelp4",
+    },
+    kidHelp4: {
+        dialogue: `Kid: "You found my best friend! Thank you so much!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp5",
+    },
+    kidHelp5: {
+        dialogue: `Kid: "Hey bestie, do you want to say thank you?"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp6",
+    },
+    kidHelp6: {
+        dialogue: `Kid's Bsf: "Ci-ci!🥹"`,
+        img: "Pokemon images/celebi.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp7",
+    },
+    kidHelp7: {
+        dialogue: `Kid: "Have a good day!"`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidHelp8",
+    },
+    kidHelp8: {
+        dialogue: `For helping the kid, your pokemon gained exp!`,
+        background: "Pokemon images/blackscreen.jpg",
+>>>>>>> parent of 7b1a8ff (grandma scene (W))
+        next: "routetwo1",
+    },
 
 
 
@@ -1360,6 +1521,7 @@ const scenes = {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
         background: "Pokemon images/blackscreen.jpg",
+<<<<<<< HEAD
         next: "routethree1",
     },
 
@@ -1380,6 +1542,91 @@ const scenes = {
         background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
+=======
+        next: "routethree1",
+    },
+
+
+    // noibat option
+    chosenNoibat: {
+        dialogue: "A wild Noibat has appeared! What will you do?",
+        img: "Pokemon images/noibat.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Noibat", "routethree1", "chosenNoibat");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromNoibat"
+            }
+        ]
+    },
+    runFromNoibat: {
+        dialogue: `You ran away from Noibat before it cried for it's mom!`,
+
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+
+    // larvitar option
+    chosenLarvitar: {
+        dialogue: "A wild Larvitar has appeared! What will you do?",
+        img: "Pokemon images/larvitar.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Larvitar", "routethree1", "chosenLarvitar");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromLarvitar"
+            }
+        ]
+    },
+    runFromLarvitar: {
+        dialogue: `You ran away from Larvitar while it tried throwing dirt at you!`,
+
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+
+
+    // riolu option
+    chosenRiolu: {
+        dialogue: "A wild Riolu has appeared! What will you do?",
+        img: "Pokemon images/riolu.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Riolu", "routethree1", "chosenRiolu");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromRiolu"
+            }
+        ]
+    },
+    runFromRiolu: {
+        dialogue: `You ran away from Riolu because it had too much aura!`,
+
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+
+>>>>>>> parent of 7b1a8ff (grandma scene (W))
 
 
 
