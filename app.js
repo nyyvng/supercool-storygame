@@ -314,6 +314,33 @@ const routePokemonShuffle = {
         { name: "Noibat", type: "flying", nextRoute: "routethree1" },
         { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
         { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
+    ],
+
+    route3: [
+        { name: "Krokorok", type: "ground", nextRoute: "routefour1" },
+        { name: "Lampent", type: "ghost", nextRoute: "routefour1" },
+        { name: "Hawlucha", type: "fighting", nextRoute: "routefour1" },
+        { name: "Clefairy", type: "fairy", nextRoute: "routefour1" },
+        { name: "Scyther", type: "bug", nextRoute: "routefour1" },
+        { name: "Buneary", type: "normal", nextRoute: "routefour1" }
+    ],
+
+    route4: [
+        { name: "Larvesta", type: "fire", nextRoute: "routefive1" },
+        { name: "Mareep", type: "electric", nextRoute: "routefive1" },
+        { name: "Gabite", type: "dragon", nextRoute: "routefive1" },
+        { name: "Gallade", type: "psychic", nextRoute: "routefive1" },
+        { name: "Trevenant", type: "ghost", nextRoute: "routefive1" },
+        { name: "Lycanroc", type: "rock", nextRoute: "routefive1" }
+    ],
+
+    route5: [
+        { name: "Solgaleo", type: "steel", nextRoute: "wrapup" },
+        { name: "Zygarde", type: "ground", nextRoute: "wrapup" },
+        { name: "Articuno", type: "ice", nextRoute: "wrapup" },
+        { name: "Rayquaza", type: "flying", nextRoute: "wrapup" },
+        { name: "Lugia", type: "psychic", nextRoute: "wrapup" },
+        { name: "Regirock", type: "rock", nextRoute: "wrapup" }
     ]
 };
 
@@ -375,7 +402,7 @@ function loadWildPokemonScene(pokemon, routeName) {
 function showBattleDialogue(text, callback = null) {
     const battleUI = document.getElementById("battleUI");
     const battleOptions = document.getElementById("battleOptions");
-    
+
 
     dialogueBox.style.display = "grid";
     dialogueEl.textContent = text;
@@ -1051,32 +1078,6 @@ const scenes = {
         background: "Pokemon images/route1.png",
         options: () => getShuffledRouteOptions("route1")
 
-        // options: [ //THIS IS REMOVED FOR TESTING PURPOSES !!! :))))
-        //     {
-        //         text: "Psychic",
-        //         type: "psychic",
-        //         action: () => {
-        //             currentScene = "chosenEspurr";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Ground",
-        //         type: "ground",
-        //         action: () => {
-        //             currentScene = "chosenCubone";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Normal",
-        //         type: "normal",
-        //         action: () => {
-        //             currentScene = "chosenMunchlax";
-        //             loadScene(currentScene);
-        //         },
-        //     }
-        // ]
     },
 
     //espurr option
@@ -1107,8 +1108,6 @@ const scenes = {
         next: "routetwo1",
     },
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were removed for battle system!!!
 
 
     // cubone option
@@ -1162,9 +1161,81 @@ const scenes = {
         next: "routetwo1",
     },
 
+    // joltik option
+    chosenJoltik: {
+        dialogue: "A wild Joltik has appeared! What will you do?",
+        img: "Pokemon images/joltik.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Joltik", "routetwo1", "chosenJoltik");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromJoltik"
+            }
+        ]
+    },
+    runFromJoltik: {
+        dialogue: `You ran away from Joltik! There were no consenquences.`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
 
 
+    // pancham option
+    chosenPancham: {
+        dialogue: "A wild Pancham has appeared! What will you do?",
+        img: "Pokemon images/pancham.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Pancham", "routetwo1", "chosenPancham");
+                }
 
+            },
+            {
+                text: "Run",
+                next: "runFromPancham"
+            }
+        ]
+    },
+    runFromPancham: {
+        dialogue: `You ran away from Pancham! It didn't like that you ran without giving it a treat...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
+
+    // vanillite option
+    chosenVanillite: {
+        dialogue: "A wild Vanillite has appeared! What will you do?",
+        img: "Pokemon images/vanillite.png",
+        background: "Pokemon images/route1.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Vanillite", "routetwo1", "chosenVanillite");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromVanillite"
+            }
+        ]
+    },
+    runFromVanillite: {
+        dialogue: `You ran away from Vanillite! What's an ice type doing here anyway?`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
 
 
 
@@ -1221,32 +1292,6 @@ const scenes = {
         background: "Pokemon images/route2.png",
         options: () => getShuffledRouteOptions("route2")
 
-        // options: [ //THIS IS REMOVED/COMMENTED OFF FOR TESTING PURPOSES
-        //     {
-        //         text: "Fairy",
-        //         type: "fairy",
-        //         action: () => {
-        //             currentScene = "chosenTogepi";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Rock",
-        //         type: "rock",
-        //         action: () => {
-        //             currentScene = "chosenPumpkaboo";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Poison",
-        //         type: "poison",
-        //         action: () => {
-        //             currentScene = "chosenNidoran";
-        //             loadScene(currentScene);
-        //         },
-        //     }
-        // ]
     },
 
     // togepi option
@@ -1333,12 +1378,84 @@ const scenes = {
     },
 
 
+    // noibat option
+    chosenNoibat: {
+        dialogue: "A wild Noibat has appeared! What will you do?",
+        img: "Pokemon images/noibat.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Noibat", "routethree1", "chosenNoibat");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromNoibat"
+            }
+        ]
+    },
+    runFromNoibat: {
+        dialogue: `You ran away from Noibat before it cried for it's mom!`,
+
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+
+    // larvitar option
+    chosenLarvitar: {
+        dialogue: "A wild Larvitar has appeared! What will you do?",
+        img: "Pokemon images/larvitar.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Larvitar", "routethree1", "chosenLarvitar");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromLarvitar"
+            }
+        ]
+    },
+    runFromLarvitar: {
+        dialogue: `You ran away from Larvitar while it tried throwing dirt at you!`,
+
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
 
 
+    // riolu option
+    chosenRiolu: {
+        dialogue: "A wild Riolu has appeared! What will you do?",
+        img: "Pokemon images/riolu.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Riolu", "routethree1", "chosenRiolu");
+                }
 
+            },
+            {
+                text: "Run",
+                next: "runFromRiolu"
+            }
+        ]
+    },
+    runFromRiolu: {
+        dialogue: `You ran away from Riolu because it had too much aura!`,
 
-
-
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
 
 
 
@@ -1385,32 +1502,8 @@ const scenes = {
     routethree5: {
         dialogue: `Which one would you choose?`,
         background: "Pokemon images/route3.png",
-        options: [
-            {
-                text: "Ground/Dark",
-                type: "dark",
-                action: () => {
-                    currentScene = "chosenKrokorok";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Ghost/Fire",
-                type: "ghost",
-                action: () => {
-                    currentScene = "chosenLampent";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Fighting/Flying",
-                type: "fighting",
-                action: () => {
-                    currentScene = "chosenHawlucha";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        options: () => getShuffledRouteOptions("route3")
+
     },
 
     // Krokorok option
@@ -1496,13 +1589,82 @@ const scenes = {
     },
 
 
+    // clefairy option
+    chosenClefairy: {
+        dialogue: "A wild Clefairy has appeared! What will you do?",
+        img: "Pokemon images/clefairy.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Clefairy", "routefour1", "chosenClefairy");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromClefairy"
+            }
+        ]
+    },
+    runFromClefairy: {
+        dialogue: `You ran away from Clefairy before a swarm of Clefaries came and abducted you...?!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
+    // scyther option
+    chosenScyther: {
+        dialogue: "A wild Scyther has appeared! What will you do?",
+        img: "Pokemon images/scyther.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Scyther", "routefour1", "chosenScyther");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromScyther"
+            }
+        ]
+    },
+    runFromScyther: {
+        dialogue: `You ran away from Scyther before a hive of Scythers chased after you!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
+    // buneary option
+    chosenBuneary: {
+        dialogue: "A wild Buneary has appeared! What will you do?",
+        img: "Pokemon images/buneary.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Buneary", "routefour1", "chosenBuneary");
+                }
 
-
-
+            },
+            {
+                text: "Run",
+                next: "runFromBuneary"
+            }
+        ]
+    },
+    runFromBuneary: {
+        dialogue: `You ran away from Buneary because it was too adorable...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
 
@@ -1668,12 +1830,82 @@ const scenes = {
     },
 
 
+    // gallade option
+    chosenGallade: {
+        dialogue: "A wild Gallade has appeared! What will you do?",
+        img: "Pokemon images/gallade.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Gallade", "routefive1", "chosenGallade");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromGallade"
+            }
+        ]
+    },
+    runFromGallade: {
+        dialogue: `You successfully ran away from Gallade because it...? Huh...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefive1",
+    },
 
 
+    // Trevenant option
+    chosenTrevenant: {
+        dialogue: "A wild Trevenant has appeared! What will you do?",
+        img: "Pokemon images/trevenant.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Trevenant", "routefive1", "chosenTrevenant");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromTrevenant"
+            }
+        ]
+    },
+    runFromTrevenant: {
+        dialogue: `You successfully ran away from Trevenant! Yeah, I would run too if I saw that guy.`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefive1",
+    },
 
 
+    // lycanroc option
+    chosenLycanroc: {
+        dialogue: "A wild Lycanroc has appeared! What will you do?",
+        img: "Pokemon images/lycanroc.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Lycanroc", "routefive1", "chosenLycanroc");
+                }
 
-
+            },
+            {
+                text: "Run",
+                next: "runFromLycanroc"
+            }
+        ]
+    },
+    runFromLycanroc: {
+        dialogue: `You successfully ran away from Lycanroc! How could you!? Why would you run from a Lycanroc?!?!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefive1",
+    },
 
 
 
@@ -1747,32 +1979,8 @@ const scenes = {
     routefive5: {
         dialogue: `These three mysterious Pokemon are only letting you fight ONE of them and see if you have the potential to catch them. Pick wisely!`,
         background: "Pokemon images/route5c.png",
-        options: [
-            {
-                text: "Steel/Psychic",
-                type: "steel",
-                action: () => {
-                    currentScene = "chosenSolgaleo";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Dragon/Ground",
-                type: "dragon",
-                action: () => {
-                    currentScene = "chosenZygarde";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Ice/Flying",
-                type: "ice",
-                action: () => {
-                    currentScene = "chosenArticuno";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        options: () => getShuffledRouteOptions("route5")
+
     },
 
     // Solgaleo option
@@ -1870,7 +2078,7 @@ const scenes = {
             } else if (gameState.starter === "Treecko") {
                 return "endingv3";
                 return "end";
-            }
+            } // new ending add later: BAD ending if pokemon party > 6
         }
 
 
