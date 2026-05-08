@@ -371,7 +371,38 @@ function loadWildPokemonScene(pokemon, routeName) {
 }
 
 
+// dialogue battling stuff thingy magthingy
+function showBattleDialogue(text, callback = null) {
+    const battleUI = document.getElementById("battleUI");
+    const battleOptions = document.getElementById("battleOptions");
+    
 
+    dialogueBox.style.display = "grid";
+    dialogueEl.textContent = text;
+
+    battleOptions.style.display = "none";
+
+
+
+    battleUI.style.pointerEvents = "none";
+
+    nextBtn.style.display = "block";
+
+    nextBtn.onclick = () => {
+        nextBtn.style.display = "none";
+
+        if (callback) {
+            callback();
+        } else {
+            dialogueBox.style.display = "none";
+
+            battleUI.style.pointerEvents = "auto";
+            battleOptions.style.display = "block";
+
+            loadBattleOptions();
+        }
+    };
+}
 
 
 
@@ -406,8 +437,14 @@ gameState.battle = {
 
 // battle end
 function endBattle(nextScene) {
-    document.getElementById("battleUI").style.display = "none";
-    document.getElementById("dialogueBox").style.display = "block";
+    const battleUI = document.getElementById("battleUI");
+    const battleOptions = document.getElementById("battleOptions");
+
+    battleUI.style.display = "none";
+    battleUI.style.pointerEvents = "auto";
+    battleOptions.style.display = "grid";
+
+    dialogueBox.style.display = "block";
 
     currentScene = nextScene;
     loadScene(currentScene);
@@ -421,7 +458,8 @@ function endBattle(nextScene) {
 function handleBattleTurn(choice) {
     const turn = battleTurn(choice);
 
-    alert(turn.result);
+    showBattleDialogue(turn.result); //shows battle dialoge instead of making alert!
+
 
     document.getElementById("playerHealth").textContent =
         `Your HP: ${turn.playerHP}`;
@@ -432,18 +470,35 @@ function handleBattleTurn(choice) {
     const result = checkBattleEnd();
 
     if (result === "enemyFainted") {
-        gainPartyExp();
-        endBattle(gameState.battle.winScene);
+        showBattleDialogue(
+            `${gameState.battle.enemyPokemon} fainted! You won the battle!`,
+            () => {
+                const evolutionMessages = gainPartyExp();
+
+                if (evolutionMessages.length > 0) {
+                    showBattleDialogue(
+                        evolutionMessages.join(" "),
+                        () => {
+                            endBattle(gameState.battle.winScene);
+                        }
+                    );
+                } else {
+                    endBattle(gameState.battle.winScene);
+                }
+            }
+        );
+
+        return;
     }
 
     if (result === "playerFainted") {
         gameState.battle.faintedPokemon.push(gameState.battle.playerPokemon);
 
         if (hasAvailablePokemon()) {
-            alert(`${gameState.battle.playerPokemon} fainted! Choose another Pokemon.`);
+            showBattleDialogue(`${gameState.battle.playerPokemon} fainted! Choose another Pokemon.`);
             showSwitchOptions();
         } else {
-            alert("All your Pokemon fainted!");
+            showBattleDialogue("All your Pokemon fainted!");
             endBattle(gameState.battle.loseScene);
         }
     }
@@ -457,6 +512,8 @@ function handleBattleTurn(choice) {
 function loadBattleOptions() {
 
     const battleOptions = document.getElementById("battleOptions");
+
+    battleOptions.style.display = "grid";
 
     const playerPokemon =
         pokemonStats[gameState.battle.playerPokemon];
@@ -557,6 +614,8 @@ function addPokemonToParty(pokemonName) {
 
 // POKEMON EXP!!
 function gainPartyExp() {
+    let evolutionMessages = [];
+
     gameState.party.forEach(pokemon => {
         pokemon.exp += 50;
 
@@ -565,13 +624,17 @@ function gainPartyExp() {
             pokemon.level++;
 
             if (evolutionMap[pokemon.name]) {
+                const oldName = pokemon.name;
                 pokemon.name = evolutionMap[pokemon.name];
-                alert(`${pokemon.name} has evolved!`);
+
+                evolutionMessages.push(`${oldName} evolved into ${pokemon.name}!`);
             }
         }
     });
 
     updateInventory();
+
+    return evolutionMessages;
 }
 
 
@@ -647,7 +710,7 @@ function battleTurn(playerChoice) {
             `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
             `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
             `You won the turn!`;
-            console.log(`You and ${playerPokemonName} won because ${playerStat} > ${enemyStat}`);
+        console.log(`You and ${playerPokemonName} won because ${playerStat} > ${enemyStat}`);
     }
 
     else if (enemyRoll > playerRoll) {
@@ -657,7 +720,7 @@ function battleTurn(playerChoice) {
             `${enemyPokemonName} used ${enemyChoice} (${enemyStat})! ` +
             `${playerPokemonName} used ${playerChoice} (${playerStat})! ` +
             `You lost the turn!`;
-            console.log(`The wild ${enemyPokemonName} won because ${enemyStat} > ${playerStat}`);
+        console.log(`The wild ${enemyPokemonName} won because ${enemyStat} > ${playerStat}`);
 
     }
 
@@ -782,7 +845,7 @@ function switchPokemon(index) {
 
     gameState.battle.playerHP = 4;
 
-    alert(`Go, ${gameState.battle.playerPokemon}!`);
+    showBattleDialogue(`Go, ${gameState.battle.playerPokemon}!`);
 
     loadBattleOptions();
 }
@@ -803,20 +866,33 @@ function catchPokemonAttempt() {
 
     if (Math.random() < catchRate) {
         addPokemonToParty(gameState.battle.enemyPokemon);
-        alert(`You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`);
 
-        // gain exp after catch
-        gainPartyExp();
-        endBattle(gameState.battle.winScene);
-    } else {
-        alert(`You attempt to catch ${gameState.battle.enemyPokemon}, but it broke free!`);
+        showBattleDialogue(
+            `You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`,
+            () => {
+                const evolutionMessages = gainPartyExp();
+
+                if (evolutionMessages.length > 0) {
+                    showBattleDialogue(
+                        evolutionMessages.join(" "),
+                        () => {
+                            endBattle(gameState.battle.winScene);
+                        }
+                    );
+                } else {
+                    endBattle(gameState.battle.winScene);
+                }
+            }
+        );
+
+        return;
     }
 }
 
 
 // make a new run feature instead of making it an "action"
 function runAway() {
-    alert(`You ran away from ${gameState.battle.enemyPokemon}!`);
+    // showBattleDialogue(`You ran away from ${gameState.battle.enemyPokemon}!`);
     endBattle(gameState.battle.loseScene);
 }
 
@@ -2035,6 +2111,20 @@ const scenes = {
 
 let currentScene = "intro";
 
+function goToNextScene() {
+    const scene = scenes[currentScene];
+
+    const next =
+        typeof scene.next === "function"
+            ? scene.next()
+            : scene.next;
+
+    if (next) {
+        currentScene = next;
+        loadScene(currentScene);
+    }
+}
+
 
 const nameEl = document.getElementById("name");
 const dialogueEl = document.getElementById("dialogue");
@@ -2042,6 +2132,7 @@ const bgEl = document.getElementById("background");
 const optionsEl = document.getElementById("options");
 const nextBtn = document.getElementById("nextBtn");
 const pokemonImgE1 = document.getElementById("img");
+const dialogueBox = document.getElementById("dialogueBox");
 
 function loadScene(sceneKey) {
     const scene = scenes[sceneKey];
@@ -2065,6 +2156,8 @@ function loadScene(sceneKey) {
     }
 
     optionsEl.innerHTML = "";
+
+    nextBtn.onclick = goToNextScene;
 
     const sceneOptions =
         typeof scene.options === "function"
@@ -2109,20 +2202,7 @@ function loadScene(sceneKey) {
 
 
 
-nextBtn.onclick = () => {
-    const scene = scenes[currentScene];
-
-    const next =
-        typeof scene.next === "function"
-            ? scene.next()
-            : scene.next;
-
-    if (next) {
-        currentScene = next;
-        loadScene(currentScene);
-    }
-
-};
+nextBtn.onclick = goToNextScene;
 
 
 loadScene(currentScene);
