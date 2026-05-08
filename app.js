@@ -308,12 +308,12 @@ const routePokemonShuffle = {
     ],
 
     route2: [
-        { name: "Togepi", type: "fairy", nextRoute: "routethree1" },
-        { name: "Pumpkaboo", type: "ghost", nextRoute: "routethree1" },
-        { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
-        { name: "Noibat", type: "flying", nextRoute: "routethree1" },
-        { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
-        { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
+        { name: "Togepi", type: "fairy", nextRoute: "grandmaScene1" },
+        { name: "Pumpkaboo", type: "ghost", nextRoute: "grandmaScene1" },
+        { name: "Nidoran", type: "poison", nextRoute: "grandmaScene1" },
+        { name: "Noibat", type: "flying", nextRoute: "grandmaScene1" },
+        { name: "Larvitar", type: "rock", nextRoute: "grandmaScene1" },
+        { name: "Riolu", type: "fighting", nextRoute: "grandmaScene1" }
     ],
 
     route3: [
@@ -1239,6 +1239,12 @@ const scenes = {
 
 
 
+
+
+
+
+     // kid scene!!!!!
+
     kidScene1: {
         dialogue: `???: "Hello? Excuse me!"`,
         background: "Pokemon images/route1.png",
@@ -1282,6 +1288,7 @@ const scenes = {
 
         ]
     },
+
 
 
     kidHelp1: {
@@ -1362,6 +1369,17 @@ const scenes = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     //route 2!!!
     routetwo1: {
         dialogue: `You offically made it out of the Grassy Terrains, you have now arrived at route 2: Berry Woods.`,
@@ -1404,7 +1422,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Togepi", "routethree1", "chosenTogepi");
+                    startBattle("Togepi", "grandmaScene1", "chosenTogepi");
                 }
 
             },
@@ -1417,7 +1435,7 @@ const scenes = {
     runFromTogepi: {
         dialogue: `Togepi successfully ran away from you...`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1433,7 +1451,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Pumpkaboo", "routethree1", "chosenPumpkaboo");
+                    startBattle("Pumpkaboo", "grandmaScene1", "chosenPumpkaboo");
                 }
 
             },
@@ -1446,7 +1464,7 @@ const scenes = {
     runFromPumpkaboo: {
         dialogue: `You ran away from Pumpkaboo? Pumpkaboo cried👎`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1461,7 +1479,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Nidoran", "routethree1", "chosenNidoran");
+                    startBattle("Nidoran", "grandmaScene1", "chosenNidoran");
                 }
 
             },
@@ -1475,7 +1493,7 @@ const scenes = {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1488,7 +1506,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Noibat", "routethree1", "chosenNoibat");
+                    startBattle("Noibat", "grandmaScene1", "chosenNoibat");
                 }
 
             },
@@ -1502,7 +1520,7 @@ const scenes = {
         dialogue: `You ran away from Noibat before it cried for it's mom!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
     // larvitar option
@@ -1514,7 +1532,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Larvitar", "routethree1", "chosenLarvitar");
+                    startBattle("Larvitar", "grandmaScene1", "chosenLarvitar");
                 }
 
             },
@@ -1528,7 +1546,7 @@ const scenes = {
         dialogue: `You ran away from Larvitar while it tried throwing dirt at you!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1541,7 +1559,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Riolu", "routethree1", "chosenRiolu");
+                    startBattle("Riolu", "grandmaScene1", "chosenRiolu");
                 }
 
             },
@@ -1555,9 +1573,95 @@ const scenes = {
         dialogue: `You ran away from Riolu because it had too much aura!`,
 
         background: "Pokemon images/blackscreen.jpg",
+        next: "grandmaScene1",
+    },
+
+
+    // grandma scene!!
+    grandmaScene1: {
+        dialogue: `???: "Hello? Is someone there?"`,
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene2",
+    },
+    grandmaScene2: {
+        dialogue: `Huh? Who's there?`,
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene3",
+    },
+    grandmaScene3: {
+        dialogue: `Grandma: "Hello there, sweetie!"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene4",
+    },
+    grandmaScene4: {
+        dialogue: `Hey! What's Grandma doing all the way over here?!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene5",
+    },
+    grandmaScene5: {
+        dialogue: `Grandma: "Sorry to be in your way, but could you help me find my way back to the ${playerData.lab} Village?"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene6",
+    },
+    grandmaScene6: {
+        dialogue: `Would you help Grandma?`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Help Grandma!",
+                next: "grandmaHelp1"
+            },
+            {
+                text: "Ignore and leave Grandma",
+                next: "grandmaLeave1"
+            }
+
+        ]
+    },
+    grandmaHelp1: {
+        dialogue: `You chose to help Grandma!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaHelp2",
+    },
+    grandmaHelp2: {
+        dialogue: `You guided Grandma allllllll the way back to the Village...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "grandmaHelp3",
+    },
+    grandmaHelp3: {
+        dialogue: `Grandma: "Thank you so much for finding my way back! I wish you luck on your journey!"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/endingMOM.png", //usin this image bc too lazy to get more images
+        next: "grandmaHelp4",
+    },
+    grandmaHelp4: {
+        dialogue: `For helping Grandma, your pokemon gained exp!`,
+        background: "Pokemon images/blackscreen.jpg",
         next: "routethree1",
     },
 
+    grandmaLeave1: {
+        dialogue: `You chose to leave Grandma! Sorry Gran, gotta continue my journey!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave2",
+    },
+    grandmaLeave2: {
+        dialogue: `Grandma: "Aw... Okay..."`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave3",
+    },
+    grandmaLeave3: {
+        dialogue: `You now advance to route 4...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
 
