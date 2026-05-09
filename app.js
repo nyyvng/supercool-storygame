@@ -220,6 +220,41 @@ const pokemonStats = {
 };
 
 
+const opponentParties = {
+    rival: [
+        "Hariyama",
+        "Flareon",
+        "Venusaur",
+        "Emogla",
+        "Lurantis",
+        "Darkrai"
+    ],
+
+    professor: [
+        "Weavile",
+        "Altaria",
+        "Pinsir",
+        "Flygon",
+        "Wailord",
+        "Groudon"
+    ],
+
+    mom: [
+        "Dedenne",
+        "Sandslash",
+        "Meganium",
+        "Perisan",
+        "Espeon",
+        "Hoopa"
+    ]
+};
+
+
+
+
+
+
+
 // pokemon evolution (seeing in this javascript is such a nightmare)
 const evolutionMap = {
     // starter pick
@@ -335,12 +370,12 @@ const routePokemonShuffle = {
     ],
 
     route4: [
-        { name: "Larvesta", type: "fire", nextRoute: "routefive1" },
-        { name: "Mareep", type: "electric", nextRoute: "routefive1" },
-        { name: "Gabite", type: "dragon", nextRoute: "routefive1" },
-        { name: "Gallade", type: "psychic", nextRoute: "routefive1" },
-        { name: "Trevenant", type: "ghost", nextRoute: "routefive1" },
-        { name: "Lycanroc", type: "rock", nextRoute: "routefive1" }
+        { name: "Larvesta", type: "fire", nextRoute: "policeScene1" },
+        { name: "Mareep", type: "electric", nextRoute: "policeScene1" },
+        { name: "Gabite", type: "dragon", nextRoute: "policeScene1" },
+        { name: "Gallade", type: "psychic", nextRoute: "policeScene1" },
+        { name: "Trevenant", type: "ghost", nextRoute: "policeScene1" },
+        { name: "Lycanroc", type: "rock", nextRoute: "policeScene1" }
     ],
 
     route5: [
@@ -394,7 +429,7 @@ function loadWildPokemonScene(pokemon, routeName) {
                     if (scenes[runSceneKey]) {
                         currentScene = runSceneKey;
                         loadScene(currentScene);
-                    } else {    
+                    } else {
                         console.log(`Missing run scene: ${runSceneKey}`);
                     }
                 }
@@ -413,7 +448,7 @@ function showBattleDialogue(text, callback = null) {
     const battleOptions = document.getElementById("battleOptions");
 
 
-    dialogueBox.style.display = "grid";
+    dialogueBox.style.display = "block";
     dialogueEl.textContent = text;
 
     battleOptions.style.display = "none";
@@ -433,7 +468,7 @@ function showBattleDialogue(text, callback = null) {
             dialogueBox.style.display = "none";
 
             battleUI.style.pointerEvents = "auto";
-            battleOptions.style.display = "block";
+            battleOptions.style.display = "grid";
 
             loadBattleOptions();
         }
@@ -461,11 +496,16 @@ const gameState = {
 gameState.battle = {
     playerHP: 4,
     enemyHP: 4,
+
     playerPokemon: null,
     enemyPokemon: null,
 
     activeIndex: 0,
-    faintedPokemon: []
+    faintedPokemon: [],
+
+    opponentParty: [],
+    opponentIndex: 0,
+    isTrainerBattle: false
 };
 
 
@@ -506,21 +546,58 @@ function handleBattleTurn(choice) {
     const result = checkBattleEnd();
 
     if (result === "enemyFainted") {
-        showBattleDialogue(
-            `${gameState.battle.enemyPokemon} fainted! You won the battle!`,
-            () => {
-                const evolutionMessages = gainPartyExp();
 
-                if (evolutionMessages.length > 0) {
-                    showBattleDialogue(
-                        evolutionMessages.join(" "),
-                        () => {
+        const faintedEnemy = gameState.battle.enemyPokemon;
+
+        showBattleDialogue(
+            `${faintedEnemy} fainted!`,
+            () => {
+
+                if (gameState.battle.isTrainerBattle) {
+
+                    gameState.battle.opponentIndex++;
+
+                    if (
+                        gameState.battle.opponentIndex <
+                        gameState.battle.opponentParty.length
+                    ) {
+                        gameState.battle.enemyPokemon =
+                            gameState.battle.opponentParty[
+                            gameState.battle.opponentIndex
+                            ];
+
+                        gameState.battle.enemyHP = 4;
+
+                        pokemonImgE1.src =
+                            `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+
+                        pokemonImgE1.style.display = "block";
+
+                        showBattleDialogue(
+                            `${gameState.battle.enemyPokemon} was sent out!`
+                        );
+
+                        return;
+                    }
+                }
+
+                showBattleDialogue(
+                    `You won the battle!`,
+                    () => {
+                        const evolutionMessages = gainPartyExp();
+
+                        if (evolutionMessages.length > 0) {
+                            showBattleDialogue(
+                                evolutionMessages.join(" "),
+                                () => {
+                                    endBattle(gameState.battle.winScene);
+                                }
+                            );
+                        } else {
                             endBattle(gameState.battle.winScene);
                         }
-                    );
-                } else {
-                    endBattle(gameState.battle.winScene);
-                }
+                    }
+                );
             }
         );
 
@@ -531,11 +608,19 @@ function handleBattleTurn(choice) {
         gameState.battle.faintedPokemon.push(gameState.battle.playerPokemon);
 
         if (hasAvailablePokemon()) {
-            showBattleDialogue(`${gameState.battle.playerPokemon} fainted! Choose another Pokemon.`);
-            showSwitchOptions();
+            showBattleDialogue(
+                `${gameState.battle.playerPokemon} fainted! Choose another Pokemon.`,
+                () => {
+                    showSwitchOptions();
+                }
+            );
         } else {
-            showBattleDialogue("All your Pokemon fainted!");
-            endBattle(gameState.battle.loseScene);
+            showBattleDialogue(
+                "All your Pokemon fainted!",
+                () => {
+                    endBattle(gameState.battle.loseScene);
+                }
+            );
         }
     }
 }
@@ -606,7 +691,12 @@ function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.playerPokemon = gameState.party[gameState.battle.activeIndex].name;
    
     gameState.battle.enemyPokemon = enemyName;
-    
+
+    pokemonImgE1.src =
+        `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+
+    pokemonImgE1.style.display = "block";
+
     gameState.battle.playerHP = 5;
     gameState.battle.enemyHP = 4;
 
@@ -621,8 +711,47 @@ function startBattle(enemyName, winScene, loseScene) {
     document.getElementById("dialogueBox").style.display = "none";
     document.getElementById("options").style.display = "none";
 
+    gameState.battle.isTrainerBattle = false;
+
     loadBattleOptions();
 }
+
+
+// charcter battle system (ending only)
+function startTrainerBattle(opponentType, winScene, loseScene) {
+
+    gameState.battle.activeIndex = 0;
+    gameState.battle.playerPokemon = gameState.party[0].name;
+    gameState.battle.faintedPokemon = [];
+
+    gameState.battle.opponentParty = opponentParties[opponentType];
+    gameState.battle.opponentIndex = 0;
+
+    gameState.battle.enemyPokemon =
+        gameState.battle.opponentParty[0];
+
+    pokemonImgE1.src =
+        `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+
+    pokemonImgE1.style.display = "block";
+
+    gameState.battle.playerHP = 5;
+    gameState.battle.enemyHP = 4;
+
+    gameState.battle.winScene = winScene;
+    gameState.battle.loseScene = loseScene;
+
+    gameState.battle.isTrainerBattle = true;
+
+    document.getElementById("battleUI").style.display = "block";
+    document.getElementById("dialogueBox").style.display = "none";
+    document.getElementById("options").style.display = "none";
+
+    loadBattleOptions();
+}
+
+
+
 
 // enemy moves (attack, defense, speed randomizer with 33% idea)
 function getEnemyMove() {
@@ -673,6 +802,22 @@ function gainPartyExp() {
     return evolutionMessages;
 }
 
+// this below is more exp for the story
+function giveStoryExp(nextScene) {
+    const evolutionMessages = gainPartyExp();
+
+    if (evolutionMessages.length > 0) {
+        dialogueEl.textContent = evolutionMessages.join(" ");
+
+        nextBtn.onclick = () => {
+            currentScene = nextScene;
+            loadScene(currentScene);
+        };
+    } else {
+        currentScene = nextScene;
+        loadScene(currentScene);
+    }
+}
 
 
 
@@ -802,14 +947,19 @@ function hasAvailablePokemon() {
 
 // lets player switch pokemon
 function showSwitchOptions() {
+    const battleUI = document.getElementById("battleUI");
     const battleOptions = document.getElementById("battleOptions");
+
+    dialogueBox.style.display = "none";
+    nextBtn.style.display = "none";
+
+    battleUI.style.pointerEvents = "auto";
+    battleOptions.style.display = "grid";
 
     battleOptions.innerHTML = "<h3>Choose your next Pokemon:</h3>";
 
     gameState.party.forEach((pokemon, index) => {
-
         if (!gameState.battle.faintedPokemon.includes(pokemon.name)) {
-
             battleOptions.innerHTML += `
                 <button onclick="switchPokemon(${index})">
                     ${pokemon.name}
@@ -874,18 +1024,18 @@ function openBattleSwitchMenu() {
 
 // switches active pokemon
 function switchPokemon(index) {
-
     gameState.battle.activeIndex = index;
-
     gameState.battle.playerPokemon = gameState.party[index].name;
-
-    document.getElementById("playerSprite").src = `pokemon_images/${gameState.battle.playerPokemon.toLowerCase()}.png`;
-
     gameState.battle.playerHP = 4;
 
-    showBattleDialogue(`Go, ${gameState.battle.playerPokemon}!`);
+    showBattleDialogue(`Go, ${gameState.battle.playerPokemon}!`, () => {
+        dialogueBox.style.display = "none";
 
-    loadBattleOptions();
+        document.getElementById("battleUI").style.pointerEvents = "auto";
+        document.getElementById("battleOptions").style.display = "grid";
+
+        loadBattleOptions();
+    });
 }
 
 
@@ -906,7 +1056,7 @@ function catchPokemonAttempt() {
         addPokemonToParty(gameState.battle.enemyPokemon);
 
         showBattleDialogue(
-            `You attempt to catch ${gameState.battle.enemyPokemon}, and you successfully caught it!`,
+            `You attempt to catch ${gameState.battle.enemyPokemon}, and you caught it!`,
             () => {
                 const evolutionMessages = gainPartyExp();
 
@@ -923,14 +1073,16 @@ function catchPokemonAttempt() {
             }
         );
 
-        return;
+    } else {
+        showBattleDialogue(
+            `You attempt to catch ${gameState.battle.enemyPokemon}, but it broke free!`
+        );
     }
 }
 
 
 // make a new run feature instead of making it an "action"
 function runAway() {
-    // showBattleDialogue(`You ran away from ${gameState.battle.enemyPokemon}!`);
     endBattle(gameState.battle.loseScene);
 }
 
@@ -1335,8 +1487,10 @@ const scenes = {
     },
     kidHelp8: {
         dialogue: `For helping the kid, your pokemon gained exp!`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routetwo1",
+        background: "Pokemon images/blackscreen.jpg",
+        action: () => {
+            giveStoryExp("routetwo1");
+        }
     },
 
 
@@ -1415,7 +1569,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Togepi", "routethree1", "chosenTogepi");
+                    startBattle("Togepi", "grandmaScene1", "chosenTogepi");
                 }
 
             },
@@ -1427,8 +1581,8 @@ const scenes = {
     },
     runFromTogepi: {
         dialogue: `Togepi successfully ran away from you...`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routethree1",
+        background: "Pokemon images/blackscreen.jpg",
+        next: "grandmaScene1",
     },
 
 
@@ -1637,8 +1791,10 @@ const scenes = {
     },
     grandmaHelp4: {
         dialogue: `For helping Grandma, your pokemon gained exp!`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routethree1",
+        background: "Pokemon images/blackscreen.jpg",
+        action: () => {
+            giveStoryExp("routethree1");
+        }
     },
 
 
@@ -1657,8 +1813,8 @@ const scenes = {
     },
     grandmaLeave3: {
         dialogue: `You now advance to route 4...`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routefour1",
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
     },
 
 
@@ -1702,33 +1858,9 @@ const scenes = {
 
     routethree5: {
         dialogue: `Which one would you choose?`,
-        background: "pokemon_images/route3.png",
-        options: [
-            {
-                text: "Ground/Dark",
-                type: "dark",
-                action: () => {
-                    currentScene = "chosenKrokorok";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Ghost/Fire",
-                type: "ghost",
-                action: () => {
-                    currentScene = "chosenLampent";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Fighting/Flying",
-                type: "fighting",
-                action: () => {
-                    currentScene = "chosenHawlucha";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        background: "Pokemon images/route3.png",
+        options: () => getShuffledRouteOptions("route3")
+
     },
 
     // Krokorok option
@@ -1813,7 +1945,82 @@ const scenes = {
         next: "hikerScene1",
     },
 
+    // clefairy option
+    chosenClefairy: {
+        dialogue: "A wild Clefairy has appeared! What will you do?",
+        img: "Pokemon images/clefairy.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Clefairy", "hikerScene1", "chosenClefairy");
+                }
 
+            },
+            {
+                text: "Run",
+                next: "runFromClefairy"
+            }
+        ]
+    },
+    runFromClefairy: {
+        dialogue: `You ran away from Clefairy before a swarm of Clefaries came and abducted you...?!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "hikerScene1",
+    },
+
+
+    // scyther option
+    chosenScyther: {
+        dialogue: "A wild Scyther has appeared! What will you do?",
+        img: "Pokemon images/scyther.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Scyther", "hikerScene1", "chosenScyther");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromScyther"
+            }
+        ]
+    },
+    runFromScyther: {
+        dialogue: `You ran away from Scyther before a hive of Scythers chased after you!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "hikerScene1",
+    },
+
+
+    // buneary option
+    chosenBuneary: {
+        dialogue: "A wild Buneary has appeared! What will you do?",
+        img: "Pokemon images/buneary.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Buneary", "hikerScene1", "chosenBuneary");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromBuneary"
+            }
+        ]
+    },
+    runFromBuneary: {
+        dialogue: `You ran away from Buneary because it was too adorable...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "hikerScene1",
+    },
 
 
 
@@ -1843,12 +2050,66 @@ const scenes = {
     },
     hikerScene4: {
         dialogue: `Should you tell this guy the directions?`,
-        img: "pokemon_images/CharHiker.png",
-        background: "pokemon_images/route3.png",
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        options: [
+            {
+                text: "Tell him to go the opposite direction!",
+                next: "hikerLeave1"
+            },
+            {
+                text: "Tell him to go the correct direction!",
+                next: "hikerHelp1"
+            }
 
-        next: "hikerScene5",
+        ],
     },
 
+    // hiker help
+    hikerHelp1: {
+        dialogue: `You helped guide the hiker to the correct direction!`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        next: "hikerHelp2",
+    },
+    hikerHelp2: {
+        dialogue: `Some Hiker Dude: "Thanks a lot! That'll help save me some time!"`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        next: "hikerHelp3",
+    },
+    hikerHelp3: {
+        dialogue: `Because you helped the hiker, your pokemon gained exp!`,
+        background: "Pokemon images/blackscreen.jpg",
+        action: () => {
+            giveStoryExp("hikerHelp4");
+        }
+    },
+    hikerHelp4: {
+        dialogue: `Now before you advance to route 4 we need to rest! Zzzzz...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
+
+
+    // hiker leave
+    hikerLeave1: {
+        dialogue: `You helped guide the hiker to the opposite direction! (Funny purposes only)`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        next: "hikerLeave2",
+    },
+    hikerLeave2: {
+        dialogue: `Some Hiker Dude: "Thanks a lot! That'll help save me some time!"`,
+        img: "Pokemon images/CharHiker.png",
+        background: "Pokemon images/route3.png",
+        next: "hikerLeave3",
+    },
+    hikerLeave3: {
+        dialogue: `Now before you advance to route 4 we need to rest! Zzzzz...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
 
@@ -1901,33 +2162,9 @@ const scenes = {
 
     routefour5: {
         dialogue: `Pick and choose to see who's in this cave!`,
-        background: "pokemon_images/finalroute.png",
-        options: [
-            {
-                text: "Bug/Fire",
-                type: "bug",
-                action: () => {
-                    currentScene = "chosenLarvesta";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Electric",
-                type: "electric",
-                action: () => {
-                    currentScene = "chosenMareep";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Dragon/Ground",
-                type: "dragon",
-                action: () => {
-                    currentScene = "chosenGabite";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        background: "Pokemon images/finalroute.png",
+        options: () => getShuffledRouteOptions("route4")
+
     },
 
     // Larvesta option
@@ -1939,7 +2176,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Larvesta", "routefive1", "chosenLarvesta");
+                    startBattle("Larvesta", "policeScene1", "chosenLarvesta");
                 }
 
             },
@@ -1951,8 +2188,8 @@ const scenes = {
     },
     runFromLarvesta: {
         dialogue: `You ran away from Larvesta... it attacked you with Ember.`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routefive1",
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
     },
 
 
@@ -1968,7 +2205,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Mareep", "routefive1", "chosenMareep");
+                    startBattle("Mareep", "policeScene1", "chosenMareep");
                 }
 
             },
@@ -1980,8 +2217,8 @@ const scenes = {
     },
     runFromMareep: {
         dialogue: `You ran away from Mareep? Why would you do that..`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routefive1",
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
     },
 
 
@@ -1996,7 +2233,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Gabite", "routefive1", "chosenGabite");
+                    startBattle("Gabite", "policeScene1", "chosenGabite");
                 }
 
             },
@@ -2008,13 +2245,137 @@ const scenes = {
     },
     runFromGabite: {
         dialogue: `You successfully ran away from Gabite before it erased you from existence.`,
-        background: "pokemon_images/blackscreen.jpg",
-        next: "routefive1",
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
+    },
+
+
+    // gallade option
+    chosenGallade: {
+        dialogue: "A wild Gallade has appeared! What will you do?",
+        img: "Pokemon images/gallade.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Gallade", "policeScene1", "chosenGallade");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromGallade"
+            }
+        ]
+    },
+    runFromGallade: {
+        dialogue: `You successfully ran away from Gallade because it...? Huh...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
+    },
+
+
+    // Trevenant option
+    chosenTrevenant: {
+        dialogue: "A wild Trevenant has appeared! What will you do?",
+        img: "Pokemon images/trevenant.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Trevenant", "policeScene1", "chosenTrevenant");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromTrevenant"
+            }
+        ]
+    },
+    runFromTrevenant: {
+        dialogue: `You successfully ran away from Trevenant! Yeah, I would run too if I saw that guy.`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
+    },
+
+
+    // lycanroc option
+    chosenLycanroc: {
+        dialogue: "A wild Lycanroc has appeared! What will you do?",
+        img: "Pokemon images/lycanroc.png",
+        background: "Pokemon images/route4.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Lycanroc", "policeScene1", "chosenLycanroc");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromLycanroc"
+            }
+        ]
+    },
+    runFromLycanroc: {
+        dialogue: `You successfully ran away from Lycanroc! How could you!? Why would you run from a Lycanroc?!?!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "policeScene1",
     },
 
 
 
+    // polive scene!!
+    policeScene1: {
+        dialogue: `???: "HALT! STOP RIGHT THERE!"`,
+        background: "Pokemon images/route4.png",
+        next: "policeScene2",
+    },
+    policeScene2: {
+        dialogue: `Uh oh! It's the police!`,
+        background: "Pokemon images/route4.png",
+        img: "Pokemon images/CharPolice.png",
+        next: "policeScene3",
+    },
+    policeScene3: {
+        dialogue: `Police: "Hey you! Where do you think you're going?"`,
+        background: "Pokemon images/route4.png",
+        img: "Pokemon images/CharPolice.png",
+        options: [
+            {
+                text: "Going to the next route",
+                next: "policeScene4"
+            }
 
+        ],
+    },
+    policeScene4: {
+        dialogue: `Police: "Route 5 huh? You better be careful up there, kid. There might be a thunderstorm later this evening."`,
+        background: "Pokemon images/route4.png",
+        img: "Pokemon images/CharPolice.png",
+        next: "policeScene5",
+    },
+    policeScene5: {
+        dialogue: `Police: "Be careful and good luck!"`,
+        background: "Pokemon images/route4.png",
+        img: "Pokemon images/CharPolice.png",
+        next: "policeScene6",
+    },
+    policeScene5: {
+        dialogue: `Police: "Good luck!"`,
+        background: "Pokemon images/route4.png",
+        img: "Pokemon images/CharPolice.png",
+        next: "policeScene6",
+    },
+    policeScene6: {
+        dialogue: `You now advance to the next route...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefive1",
+    },
 
 
 
@@ -2091,33 +2452,9 @@ const scenes = {
 
     routefive5: {
         dialogue: `These three mysterious Pokemon are only letting you fight ONE of them and see if you have the potential to catch them. Pick wisely!`,
-        background: "pokemon_images/route5c.png",
-        options: [
-            {
-                text: "Steel/Psychic",
-                type: "steel",
-                action: () => {
-                    currentScene = "chosenSolgaleo";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Dragon/Ground",
-                type: "dragon",
-                action: () => {
-                    currentScene = "chosenZygarde";
-                    loadScene(currentScene);
-                },
-            },
-            {
-                text: "Ice/Flying",
-                type: "ice",
-                action: () => {
-                    currentScene = "chosenArticuno";
-                    loadScene(currentScene);
-                },
-            }
-        ]
+        background: "Pokemon images/route5c.png",
+        options: () => getShuffledRouteOptions("route5")
+
     },
 
     // Solgaleo option
@@ -2203,23 +2540,124 @@ const scenes = {
     },
 
 
+    // rayquaza option
+    chosenRayquaza: {
+        dialogue: "A wild- wait, IS THAT RAYQUAZA? What will you do!?",
+        img: "Pokemon images/rayquaza.png",
+        background: "Pokemon images/finalroute.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Rayquaza", "wrapup", "chosenRayquaza");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromRayquaza"
+            }
+        ]
+    },
+    runFromRayquaza: {
+        dialogue: `You ran away from a Rayquaza! Yep... run away... it's terrifying...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "wrapup",
+    },
+
+    // lugia option
+    chosenLugia: {
+        dialogue: "A wild- wait, IS THAT LUGIA? What will you do!?",
+        img: "Pokemon images/lugia.png",
+        background: "Pokemon images/finalroute.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Lugia", "wrapup", "chosenLugia");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromLugia"
+            }
+        ]
+    },
+    runFromLugia: {
+        dialogue: `You ran away from a Lugia! How dare you run from a perfect oppourtunity!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "wrapup",
+    },
+
+
+
+    // regigrock option
+    chosenRegirock: {
+        dialogue: "A wild- wait, IS THAT REGIROCK? What will you do!?",
+        img: "Pokemon images/regirock.png",
+        background: "Pokemon images/finalroute.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle("Regirock", "wrapup", "chosenRegirock");
+                }
+
+            },
+            {
+                text: "Run",
+                next: "runFromRegirock"
+            }
+        ]
+    },
+    runFromRegirock: {
+        dialogue: `You ran away from a Regirock! Do you even know this Pokemon?`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "wrapup",
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     wrapup: {
         dialogue: "You reached the end of your adventure, now it is time to return home",
         background: "pokemon_images/blackscreen.jpg",
         next: function () {
+
+            // bad edning
+            if (gameState.party.length < 4) {
+                return "badEnding1";
+            }
+
+            // mutliple endings 
             if (gameState.starter === "Litten") {
                 return "endingv1";
+
             } else if (gameState.starter === "Froakie") {
                 return "endingv2";
+
             } else if (gameState.starter === "Treecko") {
                 return "endingv3";
-                return "end";
             }
+
+            return "end";
         }
-
-
-
     },
 
 
@@ -2234,54 +2672,49 @@ const scenes = {
 
     Professorend: {
         dialogue: `Is that... ${playerData.teacher}!?!`,
-        background: "pokemon_images/Professor-ending.png",
+        background: "Pokemon images/endingPROFESSOR.png",
+        img: "Pokemon images/CharProfessor.png",
         next: "Professoralt",
 
     },
 
     Professoralt: {
         dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
-        background: "pokemon_images/teachtalkstoyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
+        img: "Pokemon images/CharProfessor.png",
         next: "Fightteach",
     },
 
     Fightteach: {
-        background: "pokemon_images/teachtalkstoyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
+        img: "Pokemon images/CharProfessor.png",
         options: [
             {
                 text: "Fight",
-                next: "fightingteach"
+                action: () => {
+                    startTrainerBattle(
+                        "professor",
+                        "Fightingteachwin",
+                        "Fightingteachloss"
+                    );
+                }
             },
         ]
-
     },
 
-    fightingteach: {
-        dialogue: function () {
-            const battle = battlePokemon(`${playerData.teacher}`, "Fightingteachwin", "Fightingteachloss");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "teachtalkstoyou.png",
-
-        next: function () {
-            return this.nextScene;
-        }
-    },
 
     Fightingteachwin: {
         dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
-        background: "pokemon_images/teachtalksyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
+        img: "Pokemon images/CharProfessor.png",
         next: "end",
 
     },
 
     Fightingteachloss: {
         dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
-        background: "pokemon_images/teachtalksyou.png",
+        background: "Pokemon images/endingPROFESSOR.png",
+        img: "Pokemon images/CharProfessor.png",
         next: "end",
     },
 
@@ -2295,42 +2728,46 @@ const scenes = {
 
     Friendending1: {
         dialogue: `Hey look it’s ${playerData.classmate}!`,
-        background: "pokemon_images/friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
+        img: "Pokemon images/CharRival.png",
         next: "Friendfightp2",
     },
 
 
     Friendfightp2: {
         dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
-        background: "pokemon_images/friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
+        img: "Pokemon images/CharRival.png",
         next: "Friendfightp3",
     },
-
     Friendfightp3: {
-        dialogue: function () {
-            const battle = battlePokemon(`${playerData.classmate}`, "Friendfightwin", "Friendfightloss");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "pokemon_images/Friend!.png",
-
-        next: function () {
-            return this.nextScene;
-        }
+        background: "Pokemon images/endingRIVAL.png",
+        img: "Pokemon images/CharRival.png",
+        options: [
+            {
+                text: "Fight",
+                action: () => {
+                    startBattle(
+                        "rival",
+                        "Friendfightwin",
+                        "Friendfightloss"
+                    );
+                }
+            }
+        ]
     },
 
     Friendfightwin: {
         dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
-        background: "pokemon_images/Friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
+        img: "Pokemon images/CharRival.png",
         next: "end",
     },
 
     Friendfightloss: {
         dialogue: `I must’ve been lucky, what a tough fight!`,
-        background: "pokemon_images/Friend!.png",
+        background: "Pokemon images/endingRIVAL.png",
+        img: "Pokemon images/CharRival.png",
         next: "end",
     },
 
@@ -2344,63 +2781,115 @@ const scenes = {
 
     motherencounter: {
         dialogue: `What is my mom doing here?`,
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         next: "motherencounter1",
 
     },
     motherencounter1: {
         dialogue: `It looks like your mother is challenging you... to a battle!?!`,
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         next: "motherencounter2",
     },
 
     motherencounter2: {
         dialogue: `If you win you can choose dinner tonight!`,
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         next: "Fightmom",
     },
 
 
     Fightmom: {
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         options: [
             {
                 text: "Fight",
-                next: "motherencounter3"
+                action: () => {
+                    startBattle("Hoopa", "motherencounterwin", "motherencounterloss");
+                }
             },
         ]
-
-    },
-
-    motherencounter3: {
-
-        dialogue: function () {
-            const battle = battlePokemon("Mom!", "motherencounterwin", "motherencounterloss");
-
-            this.nextScene = battle.next;
-
-            return battle.text;
-        },
-
-        img: "pokemon_images/Mother.png",
-
-        next: function () {
-            return this.nextScene;
-        }
     },
 
 
     motherencounterwin: {
         dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         next: "end",
     },
 
     motherencounterloss: {
         dialogue: `Well now I get to choose what’s for dinner, loser!`,
-        background: "pokemon_images/Mother.png",
+        background: "Pokemon images/endingMOM.png",
+        img: "Pokemon images/CharMom.png",
         next: "end",
     },
+
+
+
+
+
+    badEnding1: {
+        dialogue: `Now you're on your way back to your hometown...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "runtencounter1",
+    },
+    runtencounter1: {
+        dialogue: `What the? Who's this guy?`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter2",
+    },
+    runtencounter2: {
+        dialogue: `???: "Oh look! A little kid had just arrived from the mountains!"`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter3",
+    },
+    runtencounter3: {
+        dialogue: `???: "Cut the dialogue you don't need to know who I am!"`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter4",
+    },
+    runtencounter4: {
+        dialogue: `???: "I'm just a bad guy to make your day BAD >:)"`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter5",
+    },
+    runtencounter5: {
+        dialogue: `???: "Anyway I kidnapped ${playerData.classmate}, ${playerData.teacher}, and your Mom."`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter6",
+    },
+    runtencounter6: {
+        dialogue: `???: "Mwhahaha! You can't beat me and you can't battle me in this ending! Goodbye!!"`,
+        background: "Pokemon images/endingBAD.png",
+        img: "Pokemon images/CharRunt.png",
+        next: "runtencounter7",
+    },
+    runtencounter7: {
+        dialogue: `Uhm... what? Did this guy just... Kidnap everyone I knew? 😭`,
+        background: "Pokemon images/endingBAD.png",
+        next: "runtencounter8",
+    },
+    runtencounter8: {
+        dialogue: `Aw man you got the bad ending...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "end",
+    },
+
+
+
+
+
+
 
 
     end: {
@@ -2458,6 +2947,11 @@ let currentScene = "intro";
 
 function goToNextScene() {
     const scene = scenes[currentScene];
+
+    if (scene.action) {
+        scene.action();
+        return;
+    }
 
     const next =
         typeof scene.next === "function"
@@ -2594,26 +3088,9 @@ if (playAgain) {
 const navInput = document.querySelector("#navId");
 const navBtn = document.querySelector("#navBtn")
 
-navBtn.addEventListener("click", () => {
-    console.log(navInput);
-    const input = navInput.value;
-    
-    loadScene(input);
-})
-
-function offbrandquery() {
-    const game = document.querySelector('.game');
-    const screenWidth = window.innerWidth;
-    const gameWidth = 1324; 
-
-    if (screenWidth < gameWidth) {
-        const scaleRatio = screenWidth / gameWidth;
-        game.style.transform = `scale(${scaleRatio})`;
-        game.style.transformOrigin = 'top center';
-    } else {
-        game.style.transform = 'none';
-    }
+if (navBtn) {
+    navBtn.addEventListener("click", () => {
+        const input = navInput.value;
+        loadScene(input);
+    });
 }
-
-window.addEventListener('load', offbrandquery);
-window.addEventListener('resize', offbrandquery);
