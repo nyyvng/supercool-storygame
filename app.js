@@ -246,7 +246,7 @@ const evolutionMap = {
 
 
     // route 3
-    Korkorok: "Krookodile",
+    Krokorok: "Krookodile",
 
 
     Lampent: "Chandelure",
@@ -308,21 +308,21 @@ const routePokemonShuffle = {
     ],
 
     route2: [
-        { name: "Togepi", type: "fairy", nextRoute: "routethree1" },
-        { name: "Pumpkaboo", type: "ghost", nextRoute: "routethree1" },
-        { name: "Nidoran", type: "poison", nextRoute: "routethree1" },
-        { name: "Noibat", type: "flying", nextRoute: "routethree1" },
-        { name: "Larvitar", type: "rock", nextRoute: "routethree1" },
-        { name: "Riolu", type: "fighting", nextRoute: "routethree1" }
+        { name: "Togepi", type: "fairy", nextRoute: "grandmaScene1" },
+        { name: "Pumpkaboo", type: "ghost", nextRoute: "grandmaScene1" },
+        { name: "Nidoran", type: "poison", nextRoute: "grandmaScene1" },
+        { name: "Noibat", type: "flying", nextRoute: "grandmaScene1" },
+        { name: "Larvitar", type: "rock", nextRoute: "grandmaScene1" },
+        { name: "Riolu", type: "fighting", nextRoute: "grandmaScene1" }
     ],
 
     route3: [
-        { name: "Krokorok", type: "ground", nextRoute: "routefour1" },
-        { name: "Lampent", type: "ghost", nextRoute: "routefour1" },
-        { name: "Hawlucha", type: "fighting", nextRoute: "routefour1" },
-        { name: "Clefairy", type: "fairy", nextRoute: "routefour1" },
-        { name: "Scyther", type: "bug", nextRoute: "routefour1" },
-        { name: "Buneary", type: "normal", nextRoute: "routefour1" }
+        { name: "Krokorok", type: "ground", nextRoute: "hikerScene1" },
+        { name: "Lampent", type: "ghost", nextRoute: "hikerScene1" },
+        { name: "Hawlucha", type: "fighting", nextRoute: "hikerScene1" },
+        { name: "Clefairy", type: "fairy", nextRoute: "hikerScene1" },
+        { name: "Scyther", type: "bug", nextRoute: "hikerScene1" },
+        { name: "Buneary", type: "normal", nextRoute: "hikerScene1" }
     ],
 
     route4: [
@@ -385,11 +385,7 @@ function loadWildPokemonScene(pokemon, routeName) {
                     if (scenes[runSceneKey]) {
                         currentScene = runSceneKey;
                         loadScene(currentScene);
-                    } else { 
-                        function runAway() {
-                            // showBattleDialogue(`You ran away from ${gameState.battle.enemyPokemon}!`);
-                            endBattle(gameState.battle.loseScene);
-                        }
+                    } else {    
                         console.log(`Missing run scene: ${runSceneKey}`);
                     }
                 }
@@ -406,7 +402,7 @@ function loadWildPokemonScene(pokemon, routeName) {
 function showBattleDialogue(text, callback = null) {
     const battleUI = document.getElementById("battleUI");
     const battleOptions = document.getElementById("battleOptions");
-    
+
 
     dialogueBox.style.display = "grid";
     dialogueEl.textContent = text;
@@ -652,7 +648,6 @@ function gainPartyExp() {
 
         if (pokemon.exp >= 100) {
             pokemon.exp = 0;
-            pokemon.level++;
 
             if (evolutionMap[pokemon.name]) {
                 const oldName = pokemon.name;
@@ -790,7 +785,7 @@ function checkBattleEnd() {
 // if the pokemon faints this function should help switch out pokemon?
 function hasAvailablePokemon() {
     return gameState.party.some(pokemon => {
-        return !gameState.battle.faintedPokemon.includes(pokemon);
+        return !gameState.battle.faintedPokemon.includes(pokemon.name);
     });
 }
 
@@ -1190,8 +1185,6 @@ const scenes = {
     runFromMunchlax: {
         dialogue: `You ran away from Munchlax... Munchlax is developing its villain arc now.`,
         background: "Pokemon images/blackscreen.jpg",
-<<<<<<< HEAD
-=======
         next: "kidScene1",
     },
 
@@ -1317,7 +1310,7 @@ const scenes = {
         ]
     },
 
-
+    // help the kid
     kidHelp1: {
         dialogue: `You chose to help the kid! How nice of you :)`,
         img: "Pokemon images/CharKid.png",
@@ -1361,11 +1354,28 @@ const scenes = {
     kidHelp8: {
         dialogue: `For helping the kid, your pokemon gained exp!`,
         background: "Pokemon images/blackscreen.jpg",
->>>>>>> parent of 7b1a8ff (grandma scene (W))
         next: "routetwo1",
     },
 
 
+    // leave tge kid
+    kidLeave1: {
+        dialogue: `You chose to leave the kid!`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidLeave2",
+    },
+    kidLeave2: {
+        dialogue: `Kid: " :( "`,
+        img: "Pokemon images/CharKid.png",
+        background: "Pokemon images/route1.png",
+        next: "kidLeave3",
+    },
+    kidLeave3: {
+        dialogue: `You now advance to route 2...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routetwo1",
+    },
 
 
 
@@ -1412,33 +1422,6 @@ const scenes = {
         dialogue: `However, you can only fight one of them, so which would it be?`,
         background: "Pokemon images/route2enc.png",
         options: () => getShuffledRouteOptions("route2")
-
-        // options: [ //THIS IS REMOVED/COMMENTED OFF FOR TESTING PURPOSES
-        //     {
-        //         text: "Fairy",
-        //         type: "fairy",
-        //         action: () => {
-        //             currentScene = "chosenTogepi";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Rock",
-        //         type: "rock",
-        //         action: () => {
-        //             currentScene = "chosenPumpkaboo";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Poison",
-        //         type: "poison",
-        //         action: () => {
-        //             currentScene = "chosenNidoran";
-        //             loadScene(currentScene);
-        //         },
-        //     }
-        // ]
     },
 
     // togepi option
@@ -1521,28 +1504,6 @@ const scenes = {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
         background: "Pokemon images/blackscreen.jpg",
-<<<<<<< HEAD
-        next: "routethree1",
-    },
-
-    grandmaLeave1: {
-        dialogue: `You chose to leave Grandma! Sorry Gran, gotta continue my journey!`,
-        img: "Pokemon images/CharGrandma.png",
-        background: "Pokemon images/route2.png",
-        next: "grandmaLeave2",
-    },
-    grandmaLeave2: {
-        dialogue: `Grandma: "Aw... Okay..."`,
-        img: "Pokemon images/CharGrandma.png",
-        background: "Pokemon images/route2.png",
-        next: "grandmaLeave3",
-    },
-    grandmaLeave3: {
-        dialogue: `You now advance to route 4...`,
-        background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
-    },
-=======
         next: "routethree1",
     },
 
@@ -1626,9 +1587,97 @@ const scenes = {
         next: "routethree1",
     },
 
->>>>>>> parent of 7b1a8ff (grandma scene (W))
+
+    // grandma scene!!
+    grandmaScene1: {
+        dialogue: `???: "Hello? Is someone there?"`,
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene2",
+    },
+    grandmaScene2: {
+        dialogue: `Huh? Who's there?`,
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene3",
+    },
+    grandmaScene3: {
+        dialogue: `Grandma: "Hello there, sweetie!"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene4",
+    },
+    grandmaScene4: {
+        dialogue: `Hey! What's Grandma doing all the way over here?!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene5",
+    },
+    grandmaScene5: {
+        dialogue: `Grandma: "Sorry to be in your way, but could you help me find my way back to the ${playerData.lab} Village?"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaScene6",
+    },
+    grandmaScene6: {
+        dialogue: `Would you help Grandma?`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        options: [
+            {
+                text: "Help Grandma!",
+                next: "grandmaHelp1"
+            },
+            {
+                text: "Ignore and leave Grandma",
+                next: "grandmaLeave1"
+            }
+
+        ]
+    },
 
 
+    // help grandma
+    grandmaHelp1: {
+        dialogue: `You chose to help Grandma!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaHelp2",
+    },
+    grandmaHelp2: {
+        dialogue: `You guided Grandma allllllll the way back to the Village...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "grandmaHelp3",
+    },
+    grandmaHelp3: {
+        dialogue: `Grandma: "Thank you so much for finding my way back! I wish you luck on your journey!"`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/endingMOM.png", //usin this image bc too lazy to get more images
+        next: "grandmaHelp4",
+    },
+    grandmaHelp4: {
+        dialogue: `For helping Grandma, your pokemon gained exp!`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routethree1",
+    },
+
+
+    //leave grandma
+    grandmaLeave1: {
+        dialogue: `You chose to leave Grandma! Sorry Gran, gotta continue my journey!`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave2",
+    },
+    grandmaLeave2: {
+        dialogue: `Grandma: "Aw... Okay..."`,
+        img: "Pokemon images/CharGrandma.png",
+        background: "Pokemon images/route2.png",
+        next: "grandmaLeave3",
+    },
+    grandmaLeave3: {
+        dialogue: `You now advance to route 4...`,
+        background: "Pokemon images/blackscreen.jpg",
+        next: "routefour1",
+    },
 
 
 
@@ -1814,7 +1863,7 @@ const scenes = {
         dialogue: `Should you tell this guy the directions?`,
         img: "Pokemon images/CharHiker.png",
         background: "Pokemon images/route3.png",
-        
+
         next: "hikerScene5",
     },
 
