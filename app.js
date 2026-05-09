@@ -2736,7 +2736,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle(
+                    startTrainerBattle(
                         "rival",
                         "Friendfightwin",
                         "Friendfightloss"
@@ -2800,7 +2800,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle(
+                    startTrainerBattle(
                         "mom",
                         "motherencounterwin",
                         "motherencounterloss"
