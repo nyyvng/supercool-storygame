@@ -1077,32 +1077,6 @@ const scenes = {
         background: "Pokemon images/route1fight.png",
         options: () => getShuffledRouteOptions("route1")
 
-        // options: [ //THIS IS REMOVED FOR TESTING PURPOSES !!! :))))
-        //     {
-        //         text: "Psychic",
-        //         type: "psychic",
-        //         action: () => {
-        //             currentScene = "chosenEspurr";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Ground",
-        //         type: "ground",
-        //         action: () => {
-        //             currentScene = "chosenCubone";
-        //             loadScene(currentScene);
-        //         },
-        //     },
-        //     {
-        //         text: "Normal",
-        //         type: "normal",
-        //         action: () => {
-        //             currentScene = "chosenMunchlax";
-        //             loadScene(currentScene);
-        //         },
-        //     }
-        // ]
     },
 
     //espurr option
@@ -1114,7 +1088,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Espurr", "routetwo1", "routeOne3");
+                    startBattle("Espurr", "kidScene1", "routeOne3");
                 }
 
             },
@@ -1130,11 +1104,10 @@ const scenes = {
     runFromEspurr: {
         dialogue: `You successfully ran away from Espurr... there were no consequences.`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////// NOTE: battle and catch options were removed for battle system!!!
 
 
     // cubone option
@@ -1146,7 +1119,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Cubone", "routetwo1", "chosenCubone");
+                    startBattle("Cubone", "kidScene1", "chosenCubone");
                 }
 
             },
@@ -1160,7 +1133,7 @@ const scenes = {
     runFromCubone: {
         dialogue: `Cubone got upset that you ran away... he threw his bone at you`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routetwo1",
+        next: "kidScene1",
     },
 
     // munchlax option
@@ -1172,7 +1145,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Munchlax", "routetwo1", "chosenMunchlax");
+                    startBattle("Munchlax", "kidScene1", "chosenMunchlax");
                 }
 
             },
@@ -1462,7 +1435,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Pumpkaboo", "routethree1", "chosenPumpkaboo");
+                    startBattle("Pumpkaboo", "grandmaScene1", "chosenPumpkaboo");
                 }
 
             },
@@ -1475,7 +1448,7 @@ const scenes = {
     runFromPumpkaboo: {
         dialogue: `You ran away from Pumpkaboo? Pumpkaboo cried👎`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1490,7 +1463,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Nidoran", "routethree1", "chosenNidoran");
+                    startBattle("Nidoran", "grandmaScene1", "chosenNidoran");
                 }
 
             },
@@ -1504,7 +1477,7 @@ const scenes = {
         dialogue: `You ran away from Nidorino... it almost poisioned you as you ran!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1517,7 +1490,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Noibat", "routethree1", "chosenNoibat");
+                    startBattle("Noibat", "grandmaScene1", "chosenNoibat");
                 }
 
             },
@@ -1531,7 +1504,7 @@ const scenes = {
         dialogue: `You ran away from Noibat before it cried for it's mom!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
     // larvitar option
@@ -1543,7 +1516,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Larvitar", "routethree1", "chosenLarvitar");
+                    startBattle("Larvitar", "grandmaScene1", "chosenLarvitar");
                 }
 
             },
@@ -1557,7 +1530,7 @@ const scenes = {
         dialogue: `You ran away from Larvitar while it tried throwing dirt at you!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1570,7 +1543,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Riolu", "routethree1", "chosenRiolu");
+                    startBattle("Riolu", "grandmaScene1", "chosenRiolu");
                 }
 
             },
@@ -1584,7 +1557,7 @@ const scenes = {
         dialogue: `You ran away from Riolu because it had too much aura!`,
 
         background: "Pokemon images/blackscreen.jpg",
-        next: "routethree1",
+        next: "grandmaScene1",
     },
 
 
@@ -1758,7 +1731,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Krokorok", "routefour1", "chosenKrokorok");
+                    startBattle("Krokorok", "hikerScene1", "chosenKrokorok");
                 }
 
             },
@@ -1771,7 +1744,7 @@ const scenes = {
     runFromKrokorok: {
         dialogue: `You ran away from Krokorok! It chased you across the Flatlands`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routefour1",
+        next: "hikerScene1",
     },
 
 
@@ -1787,7 +1760,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Lampent", "routefour1", "chosenLampent");
+                    startBattle("Lampent", "hikerScene1", "chosenLampent");
                 }
 
             },
@@ -1800,7 +1773,7 @@ const scenes = {
     runFromLampent: {
         dialogue: `You ran away from Lampent! It tried to chase you but ultimately gave up!`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routefour1",
+        next: "hikerScene1",
     },
 
 
@@ -1815,7 +1788,7 @@ const scenes = {
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Hawlucha", "routefour1", "chosenHawlucha");
+                    startBattle("Hawlucha", "hikerScene1", "chosenHawlucha");
                 }
 
             },
@@ -1828,7 +1801,7 @@ const scenes = {
     runFromHawlucha: {
         dialogue: `You ran away from Hawlucha before it could body slam you!`,
         background: "Pokemon images/blackscreen.jpg",
-        next: "routefour1",
+        next: "hikerScene1",
     },
 
 
