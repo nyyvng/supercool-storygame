@@ -7,14 +7,14 @@ const playerData = {
     classmate: localStorage.getItem("classmateName") || "CART lab",
     teacher: localStorage.getItem("teacherName") || "Professor"
 };
-    /* attempt to preload the game for netlify */
+/* attempt to preload the game for netlify */
 const preload = [
-    'litten.png', 
-    'froakie.png', 
-    'treecko.png', 
-    'espurr.png', 
+    'litten.png',
+    'froakie.png',
+    'treecko.png',
+    'espurr.png',
     'cubone.png',
-    'route1fightfight.png' 
+    'route1fightfight.png'
 ];
 
 
@@ -187,7 +187,7 @@ const pokemonStats = {
     Hariyama: { attack: 120, defense: 60, speed: 50 },
     Flareon: { attack: 130, defense: 60, speed: 65 },
     Venusaur: { attack: 82, defense: 83, speed: 80 },
-    Emogla: { attack: 75, defense: 60, speed: 103 },
+    Emolga: { attack: 75, defense: 60, speed: 103 },
     Lurantis: { attack: 105, defense: 90, speed: 45 },
     Darkrai: { attack: 90, defense: 90, speed: 125 },
 
@@ -213,7 +213,7 @@ const pokemonStats = {
     Dedenne: { attack: 58, defense: 57, speed: 101 },
     Sandslash: { attack: 100, defense: 110, speed: 65 },
     Meganium: { attack: 82, defense: 100, speed: 80 },
-    Perisan: { attack: 70, defense: 60, speed: 115 },
+    Persian: { attack: 70, defense: 60, speed: 115 },
     Espeon: { attack: 65, defense: 60, speed: 110 },
     Hoopa: { attack: 110, defense: 60, speed: 70 },
 
@@ -225,7 +225,7 @@ const opponentParties = {
         "Hariyama",
         "Flareon",
         "Venusaur",
-        "Emogla",
+        "Emolga",
         "Lurantis",
         "Darkrai"
     ],
@@ -243,7 +243,7 @@ const opponentParties = {
         "Dedenne",
         "Sandslash",
         "Meganium",
-        "Perisan",
+        "Persian",
         "Espeon",
         "Hoopa"
     ]
@@ -569,7 +569,7 @@ function handleBattleTurn(choice) {
                         gameState.battle.enemyHP = 4;
 
                         pokemonImgE1.src =
-                            `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+                            `pokemon_images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
 
                         pokemonImgE1.style.display = "block";
 
@@ -657,22 +657,16 @@ function loadBattleOptions() {
             Switch
         </button>
 
-        <button onclick="catchPokemonAttempt()">
-            Catch
-        </button>
+        ${!gameState.battle.isTrainerBattle ? `
+            <button onclick="catchPokemonAttempt()">
+                Catch
+            </button>
 
-        <button onclick="runAway()">
-            Run
-        </button>
+            <button onclick="runAway()">
+                Run
+            </button>
+        ` : ""}
     `;
-
-    document.getElementById("playerHealth").textContent =
-        `Your HP: ${gameState.battle.playerHP}`;
-
-    document.getElementById("enemyHealth").textContent =
-        `Enemy HP: ${gameState.battle.enemyHP}`;
-
-
 
     document.getElementById("playerHealth").textContent =
         `${gameState.battle.playerPokemon} HP: ${gameState.battle.playerHP}`;
@@ -684,23 +678,25 @@ function loadBattleOptions() {
 
 
 
+function getPokemonImage(pokemonName) {
+    return `pokemon_images/${pokemonName.toLowerCase()}.png`;
+}
 
 // new battle system (WIP)
 function startBattle(enemyName, winScene, loseScene) {
     gameState.battle.activeIndex = 0;
     gameState.battle.playerPokemon = gameState.party[gameState.battle.activeIndex].name;
-   
+
     gameState.battle.enemyPokemon = enemyName;
 
-    pokemonImgE1.src =
-        `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+    pokemonImgE1.src = getPokemonImage(gameState.battle.enemyPokemon);
 
     pokemonImgE1.style.display = "block";
 
     gameState.battle.playerHP = 5;
     gameState.battle.enemyHP = 4;
 
-    
+
     gameState.battle.winScene = winScene;
     gameState.battle.loseScene = loseScene;
 
@@ -731,7 +727,7 @@ function startTrainerBattle(opponentType, winScene, loseScene) {
         gameState.battle.opponentParty[0];
 
     pokemonImgE1.src =
-        `Pokemon images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
+        `pokemon_images/${gameState.battle.enemyPokemon.toLowerCase()}.png`;
 
     pokemonImgE1.style.display = "block";
 
@@ -953,6 +949,7 @@ function showSwitchOptions() {
     dialogueBox.style.display = "none";
     nextBtn.style.display = "none";
 
+    battleUI.style.display = "block";
     battleUI.style.pointerEvents = "auto";
     battleOptions.style.display = "grid";
 
@@ -1207,14 +1204,6 @@ const scenes = {
         background: "pokemon_images/bg2.png",
         next: "routeOne1"
     },
-
-
-    //// NOTE: add a tutorial dialogue or info about how to play, add on when theres new mechanics!!
-
-
-    //////MORE NOTE: storyline doesnt seem to have any other character interactions until the end, 
-    // hopefully later in the future we can make more character dialogue between story so that way it doesnt feel repetitive!!
-
 
 
 
@@ -1487,7 +1476,7 @@ const scenes = {
     },
     kidHelp8: {
         dialogue: `For helping the kid, your pokemon gained exp!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         action: () => {
             giveStoryExp("routetwo1");
         }
@@ -1581,7 +1570,7 @@ const scenes = {
     },
     runFromTogepi: {
         dialogue: `Togepi successfully ran away from you...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "grandmaScene1",
     },
 
@@ -1791,7 +1780,7 @@ const scenes = {
     },
     grandmaHelp4: {
         dialogue: `For helping Grandma, your pokemon gained exp!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         action: () => {
             giveStoryExp("routethree1");
         }
@@ -1813,7 +1802,7 @@ const scenes = {
     },
     grandmaLeave3: {
         dialogue: `You now advance to route 4...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "routethree1",
     },
 
@@ -1858,7 +1847,7 @@ const scenes = {
 
     routethree5: {
         dialogue: `Which one would you choose?`,
-        background: "Pokemon images/route3.png",
+        background: "pokemon_images/route3.png",
         options: () => getShuffledRouteOptions("route3")
 
     },
@@ -1948,8 +1937,8 @@ const scenes = {
     // clefairy option
     chosenClefairy: {
         dialogue: "A wild Clefairy has appeared! What will you do?",
-        img: "Pokemon images/clefairy.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/clefairy.png",
+        background: "pokemon_images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -1966,7 +1955,7 @@ const scenes = {
     },
     runFromClefairy: {
         dialogue: `You ran away from Clefairy before a swarm of Clefaries came and abducted you...?!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "hikerScene1",
     },
 
@@ -1974,8 +1963,8 @@ const scenes = {
     // scyther option
     chosenScyther: {
         dialogue: "A wild Scyther has appeared! What will you do?",
-        img: "Pokemon images/scyther.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/scyther.png",
+        background: "pokemon_images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -1992,7 +1981,7 @@ const scenes = {
     },
     runFromScyther: {
         dialogue: `You ran away from Scyther before a hive of Scythers chased after you!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "hikerScene1",
     },
 
@@ -2000,8 +1989,8 @@ const scenes = {
     // buneary option
     chosenBuneary: {
         dialogue: "A wild Buneary has appeared! What will you do?",
-        img: "Pokemon images/buneary.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/buneary.png",
+        background: "pokemon_images/route3.png",
         options: [
             {
                 text: "Fight",
@@ -2018,7 +2007,7 @@ const scenes = {
     },
     runFromBuneary: {
         dialogue: `You ran away from Buneary because it was too adorable...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "hikerScene1",
     },
 
@@ -2050,8 +2039,8 @@ const scenes = {
     },
     hikerScene4: {
         dialogue: `Should you tell this guy the directions?`,
-        img: "Pokemon images/CharHiker.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/CharHiker.png",
+        background: "pokemon_images/route3.png",
         options: [
             {
                 text: "Tell him to go the opposite direction!",
@@ -2068,26 +2057,26 @@ const scenes = {
     // hiker help
     hikerHelp1: {
         dialogue: `You helped guide the hiker to the correct direction!`,
-        img: "Pokemon images/CharHiker.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/CharHiker.png",
+        background: "pokemon_images/route3.png",
         next: "hikerHelp2",
     },
     hikerHelp2: {
         dialogue: `Some Hiker Dude: "Thanks a lot! That'll help save me some time!"`,
-        img: "Pokemon images/CharHiker.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/CharHiker.png",
+        background: "pokemon_images/route3.png",
         next: "hikerHelp3",
     },
     hikerHelp3: {
         dialogue: `Because you helped the hiker, your pokemon gained exp!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         action: () => {
             giveStoryExp("hikerHelp4");
         }
     },
     hikerHelp4: {
         dialogue: `Now before you advance to route 4 we need to rest! Zzzzz...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "routefour1",
     },
 
@@ -2095,19 +2084,19 @@ const scenes = {
     // hiker leave
     hikerLeave1: {
         dialogue: `You helped guide the hiker to the opposite direction! (Funny purposes only)`,
-        img: "Pokemon images/CharHiker.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/CharHiker.png",
+        background: "pokemon_images/route3.png",
         next: "hikerLeave2",
     },
     hikerLeave2: {
         dialogue: `Some Hiker Dude: "Thanks a lot! That'll help save me some time!"`,
-        img: "Pokemon images/CharHiker.png",
-        background: "Pokemon images/route3.png",
+        img: "pokemon_images/CharHiker.png",
+        background: "pokemon_images/route3.png",
         next: "hikerLeave3",
     },
     hikerLeave3: {
         dialogue: `Now before you advance to route 4 we need to rest! Zzzzz...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "routefour1",
     },
 
@@ -2162,7 +2151,7 @@ const scenes = {
 
     routefour5: {
         dialogue: `Pick and choose to see who's in this cave!`,
-        background: "Pokemon images/finalroute.png",
+        background: "pokemon_images/finalroute.png",
         options: () => getShuffledRouteOptions("route4")
 
     },
@@ -2188,7 +2177,7 @@ const scenes = {
     },
     runFromLarvesta: {
         dialogue: `You ran away from Larvesta... it attacked you with Ember.`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2217,7 +2206,7 @@ const scenes = {
     },
     runFromMareep: {
         dialogue: `You ran away from Mareep? Why would you do that..`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2245,7 +2234,7 @@ const scenes = {
     },
     runFromGabite: {
         dialogue: `You successfully ran away from Gabite before it erased you from existence.`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2253,8 +2242,8 @@ const scenes = {
     // gallade option
     chosenGallade: {
         dialogue: "A wild Gallade has appeared! What will you do?",
-        img: "Pokemon images/gallade.png",
-        background: "Pokemon images/route4.png",
+        img: "pokemon_images/gallade.png",
+        background: "pokemon_images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -2271,7 +2260,7 @@ const scenes = {
     },
     runFromGallade: {
         dialogue: `You successfully ran away from Gallade because it...? Huh...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2279,8 +2268,8 @@ const scenes = {
     // Trevenant option
     chosenTrevenant: {
         dialogue: "A wild Trevenant has appeared! What will you do?",
-        img: "Pokemon images/trevenant.png",
-        background: "Pokemon images/route4.png",
+        img: "pokemon_images/trevenant.png",
+        background: "pokemon_images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -2297,7 +2286,7 @@ const scenes = {
     },
     runFromTrevenant: {
         dialogue: `You successfully ran away from Trevenant! Yeah, I would run too if I saw that guy.`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2305,8 +2294,8 @@ const scenes = {
     // lycanroc option
     chosenLycanroc: {
         dialogue: "A wild Lycanroc has appeared! What will you do?",
-        img: "Pokemon images/lycanroc.png",
-        background: "Pokemon images/route4.png",
+        img: "pokemon_images/lycanroc.png",
+        background: "pokemon_images/route4.png",
         options: [
             {
                 text: "Fight",
@@ -2323,7 +2312,7 @@ const scenes = {
     },
     runFromLycanroc: {
         dialogue: `You successfully ran away from Lycanroc! How could you!? Why would you run from a Lycanroc?!?!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "policeScene1",
     },
 
@@ -2332,19 +2321,19 @@ const scenes = {
     // polive scene!!
     policeScene1: {
         dialogue: `???: "HALT! STOP RIGHT THERE!"`,
-        background: "Pokemon images/route4.png",
+        background: "pokemon_images/route4.png",
         next: "policeScene2",
     },
     policeScene2: {
         dialogue: `Uh oh! It's the police!`,
-        background: "Pokemon images/route4.png",
-        img: "Pokemon images/CharPolice.png",
+        background: "pokemon_images/route4.png",
+        img: "pokemon_images/CharPolice.png",
         next: "policeScene3",
     },
     policeScene3: {
         dialogue: `Police: "Hey you! Where do you think you're going?"`,
-        background: "Pokemon images/route4.png",
-        img: "Pokemon images/CharPolice.png",
+        background: "pokemon_images/route4.png",
+        img: "pokemon_images/CharPolice.png",
         options: [
             {
                 text: "Going to the next route",
@@ -2355,25 +2344,25 @@ const scenes = {
     },
     policeScene4: {
         dialogue: `Police: "Route 5 huh? You better be careful up there, kid. There might be a thunderstorm later this evening."`,
-        background: "Pokemon images/route4.png",
-        img: "Pokemon images/CharPolice.png",
+        background: "pokemon_images/route4.png",
+        img: "pokemon_images/CharPolice.png",
         next: "policeScene5",
     },
     policeScene5: {
         dialogue: `Police: "Be careful and good luck!"`,
-        background: "Pokemon images/route4.png",
-        img: "Pokemon images/CharPolice.png",
+        background: "pokemon_images/route4.png",
+        img: "pokemon_images/CharPolice.png",
         next: "policeScene6",
     },
     policeScene5: {
         dialogue: `Police: "Good luck!"`,
-        background: "Pokemon images/route4.png",
-        img: "Pokemon images/CharPolice.png",
+        background: "pokemon_images/route4.png",
+        img: "pokemon_images/CharPolice.png",
         next: "policeScene6",
     },
     policeScene6: {
         dialogue: `You now advance to the next route...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "routefive1",
     },
 
@@ -2452,7 +2441,7 @@ const scenes = {
 
     routefive5: {
         dialogue: `These three mysterious Pokemon are only letting you fight ONE of them and see if you have the potential to catch them. Pick wisely!`,
-        background: "Pokemon images/route5c.png",
+        background: "pokemon_images/route5c.png",
         options: () => getShuffledRouteOptions("route5")
 
     },
@@ -2543,8 +2532,8 @@ const scenes = {
     // rayquaza option
     chosenRayquaza: {
         dialogue: "A wild- wait, IS THAT RAYQUAZA? What will you do!?",
-        img: "Pokemon images/rayquaza.png",
-        background: "Pokemon images/finalroute.png",
+        img: "pokemon_images/rayquaza.png",
+        background: "pokemon_images/finalroute.png",
         options: [
             {
                 text: "Fight",
@@ -2561,15 +2550,15 @@ const scenes = {
     },
     runFromRayquaza: {
         dialogue: `You ran away from a Rayquaza! Yep... run away... it's terrifying...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "wrapup",
     },
 
     // lugia option
     chosenLugia: {
         dialogue: "A wild- wait, IS THAT LUGIA? What will you do!?",
-        img: "Pokemon images/lugia.png",
-        background: "Pokemon images/finalroute.png",
+        img: "pokemon_images/lugia.png",
+        background: "pokemon_images/finalroute.png",
         options: [
             {
                 text: "Fight",
@@ -2586,7 +2575,7 @@ const scenes = {
     },
     runFromLugia: {
         dialogue: `You ran away from a Lugia! How dare you run from a perfect oppourtunity!`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "wrapup",
     },
 
@@ -2595,8 +2584,8 @@ const scenes = {
     // regigrock option
     chosenRegirock: {
         dialogue: "A wild- wait, IS THAT REGIROCK? What will you do!?",
-        img: "Pokemon images/regirock.png",
-        background: "Pokemon images/finalroute.png",
+        img: "pokemon_images/regirock.png",
+        background: "pokemon_images/finalroute.png",
         options: [
             {
                 text: "Fight",
@@ -2613,7 +2602,7 @@ const scenes = {
     },
     runFromRegirock: {
         dialogue: `You ran away from a Regirock! Do you even know this Pokemon?`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "wrapup",
     },
 
@@ -2672,22 +2661,22 @@ const scenes = {
 
     Professorend: {
         dialogue: `Is that... ${playerData.teacher}!?!`,
-        background: "Pokemon images/endingPROFESSOR.png",
-        img: "Pokemon images/CharProfessor.png",
+        background: "pokemon_images/endingPROFESSOR.png",
+        img: "pokemon_images/CharProfessor.png",
         next: "Professoralt",
 
     },
 
     Professoralt: {
-        dialogue: `I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!`,
-        background: "Pokemon images/endingPROFESSOR.png",
-        img: "Pokemon images/CharProfessor.png",
+        dialogue: `${playerData.teacher}: "I’ve  heard about your recent journey! Battle me, I want to see how strong you’ve become!"`,
+        background: "pokemon_images/endingPROFESSOR.png",
+        img: "pokemon_images/CharProfessor.png",
         next: "Fightteach",
     },
 
     Fightteach: {
-        background: "Pokemon images/endingPROFESSOR.png",
-        img: "Pokemon images/CharProfessor.png",
+        background: "pokemon_images/endingPROFESSOR.png",
+        img: "pokemon_images/CharProfessor.png",
         options: [
             {
                 text: "Fight",
@@ -2704,17 +2693,17 @@ const scenes = {
 
 
     Fightingteachwin: {
-        dialogue: `wow you and your Pokemon are really in sync! You have grown exponentially!`,
-        background: "Pokemon images/endingPROFESSOR.png",
-        img: "Pokemon images/CharProfessor.png",
+        dialogue: `${playerData.teacher}: "Wow, you and your Pokemon are really in sync! You have grown exponentially!"`,
+        background: "pokemon_images/endingPROFESSOR.png",
+        img: "pokemon_images/CharProfessor.png",
         next: "end",
 
     },
 
     Fightingteachloss: {
-        dialogue: `You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!`,
-        background: "Pokemon images/endingPROFESSOR.png",
-        img: "Pokemon images/CharProfessor.png",
+        dialogue: `${playerData.teacher}: "You were really tough! It seems like you have more to learn but you’re not far from competing with the best of the best, keep going kid!"`,
+        background: "pokemon_images/endingPROFESSOR.png",
+        img: "pokemon_images/CharProfessor.png",
         next: "end",
     },
 
@@ -2728,21 +2717,21 @@ const scenes = {
 
     Friendending1: {
         dialogue: `Hey look it’s ${playerData.classmate}!`,
-        background: "Pokemon images/endingRIVAL.png",
-        img: "Pokemon images/CharRival.png",
+        background: "pokemon_images/endingRIVAL.png",
+        img: "pokemon_images/CharRival.png",
         next: "Friendfightp2",
     },
 
 
     Friendfightp2: {
-        dialogue: `Hey! Let’s have a battle, I want to see how strong you’ve become!`,
-        background: "Pokemon images/endingRIVAL.png",
-        img: "Pokemon images/CharRival.png",
+        dialogue: `${playerData.classmate}: "Hey! Let’s have a battle, I want to see how strong you’ve become!"`,
+        background: "pokemon_images/endingRIVAL.png",
+        img: "pokemon_images/CharRival.png",
         next: "Friendfightp3",
     },
     Friendfightp3: {
-        background: "Pokemon images/endingRIVAL.png",
-        img: "Pokemon images/CharRival.png",
+        background: "pokemon_images/endingRIVAL.png",
+        img: "pokemon_images/CharRival.png",
         options: [
             {
                 text: "Fight",
@@ -2758,18 +2747,21 @@ const scenes = {
     },
 
     Friendfightwin: {
-        dialogue: `It’s a shame that I lost but man, that was fun! We need to battle again soon!`,
-        background: "Pokemon images/endingRIVAL.png",
-        img: "Pokemon images/CharRival.png",
+        dialogue: `${playerData.classmate}: "It’s a shame that I lost but man, that was fun! We need to battle again soon!"`,
+        background: "pokemon_images/endingRIVAL.png",
+        img: "pokemon_images/CharRival.png",
         next: "end",
     },
 
     Friendfightloss: {
-        dialogue: `I must’ve been lucky, what a tough fight!`,
-        background: "Pokemon images/endingRIVAL.png",
-        img: "Pokemon images/CharRival.png",
+        dialogue: `${playerData.classmate}: "I must’ve been lucky, what a tough fight!"`,
+        background: "pokemon_images/endingRIVAL.png",
+        img: "pokemon_images/CharRival.png",
         next: "end",
     },
+
+
+
 
     //ending3//
 
@@ -2781,34 +2773,38 @@ const scenes = {
 
     motherencounter: {
         dialogue: `What is my mom doing here?`,
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         next: "motherencounter1",
 
     },
     motherencounter1: {
         dialogue: `It looks like your mother is challenging you... to a battle!?!`,
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         next: "motherencounter2",
     },
 
     motherencounter2: {
-        dialogue: `If you win you can choose dinner tonight!`,
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        dialogue: `Your Mom: "If you win you can choose dinner tonight!"`,
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         next: "Fightmom",
     },
 
 
     Fightmom: {
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         options: [
             {
                 text: "Fight",
                 action: () => {
-                    startBattle("Hoopa", "motherencounterwin", "motherencounterloss");
+                    startBattle(
+                        "mom",
+                        "motherencounterwin",
+                        "motherencounterloss"
+                    );
                 }
             },
         ]
@@ -2816,16 +2812,16 @@ const scenes = {
 
 
     motherencounterwin: {
-        dialogue: `Well I’m a woman of my word, what do you want for dinner?`,
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        dialogue: `Your Mom: "Well I’m a woman of my word, what do you want for dinner?"`,
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         next: "end",
     },
 
     motherencounterloss: {
-        dialogue: `Well now I get to choose what’s for dinner, loser!`,
-        background: "Pokemon images/endingMOM.png",
-        img: "Pokemon images/CharMom.png",
+        dialogue: `Your Mom: "Well now I get to choose what’s for dinner, loser!"`,
+        background: "pokemon_images/endingMOM.png",
+        img: "pokemon_images/CharMom.png",
         next: "end",
     },
 
@@ -2835,53 +2831,53 @@ const scenes = {
 
     badEnding1: {
         dialogue: `Now you're on your way back to your hometown...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "runtencounter1",
     },
     runtencounter1: {
         dialogue: `What the? Who's this guy?`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter2",
     },
     runtencounter2: {
         dialogue: `???: "Oh look! A little kid had just arrived from the mountains!"`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter3",
     },
     runtencounter3: {
         dialogue: `???: "Cut the dialogue you don't need to know who I am!"`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter4",
     },
     runtencounter4: {
         dialogue: `???: "I'm just a bad guy to make your day BAD >:)"`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter5",
     },
     runtencounter5: {
         dialogue: `???: "Anyway I kidnapped ${playerData.classmate}, ${playerData.teacher}, and your Mom."`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter6",
     },
     runtencounter6: {
         dialogue: `???: "Mwhahaha! You can't beat me and you can't battle me in this ending! Goodbye!!"`,
-        background: "Pokemon images/endingBAD.png",
-        img: "Pokemon images/CharRunt.png",
+        background: "pokemon_images/endingBAD.png",
+        img: "pokemon_images/CharRunt.png",
         next: "runtencounter7",
     },
     runtencounter7: {
         dialogue: `Uhm... what? Did this guy just... Kidnap everyone I knew? 😭`,
-        background: "Pokemon images/endingBAD.png",
+        background: "pokemon_images/endingBAD.png",
         next: "runtencounter8",
     },
     runtencounter8: {
         dialogue: `Aw man you got the bad ending...`,
-        background: "Pokemon images/blackscreen.jpg",
+        background: "pokemon_images/blackscreen.jpg",
         next: "end",
     },
 
